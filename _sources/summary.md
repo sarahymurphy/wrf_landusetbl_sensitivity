@@ -55,7 +55,7 @@
 ## Values in `SOILPARM.TBL`
 ** Not used in the idealized simulation, for land-ice **
 
-| Section | B Parameter | Dry Soil Moisture Threshold | Soil Thermal Diffusivity/Conducticity Coefficient | Saturation Soil Moisture Content | Reference Soil Moisture | Saturday Soil Matric Potential | Saturation Soil Conductivity | Saturation Soil Diffusivity | Wilting Point Soil Moisture | Soil Quartz Content |
+| Section | B Parameter | Dry Soil Moisture Threshold | Soil Thermal Diffusivity/Conducticity Coefficient | Saturation Soil Moisture Content | Reference Soil Moisture | Saturation Soil Matric Potential | Saturation Soil Conductivity | Saturation Soil Diffusivity | Wilting Point Soil Moisture | Soil Quartz Content |
 | -------- | ---- | ----- | ------ | ----- | ----- | ----- | ------- | -------- | -------- | ----- |       
 | STAS     | 4.26 | 0.028 | -1.044 | 0.421 | 0.283 | 0.036 | 1.41E-5 | 0.514E-5 | 0.028    | 0.25  |
 | STAS-RUC | 4.90 | 0.065 | 2.10   | 0.435 | 0.249 | 0.218 | 3.47E-5 | 0.514E-5 | 0.114    | 0.05 |
@@ -64,7 +64,7 @@
 
 ## What do I recommend?
 
-| Section | Season | Albedo (%) | Suface Moisture Availability (*100%) | Surface Emissivity (%) | Surface Roughness | Thermal Inertia Constant | Snow Cover Effect | Surface Heat Capacity (j/m3 K) | 
+| Section | Season | Albedo (%) | Surface Moisture Availability (*100%) | Surface Emissivity (%) | Surface Roughness | Thermal Inertia Constant | Snow Cover Effect | Surface Heat Capacity (j/m3 K) | 
 | ------- | ------ | ---------- | ------------------------------------ | ---------------------- | ----------------- | ------------------------ | ----------------- | ------------------------------ | 
 | NICE    | Winter | 86.        | .95                                  | .98                    | 0.001             | 5.                       | 0.                | 5.4e10                        |
 | NICE    | Summer | 81.        | .95                                  | .98                    | 0.001             | 5.                       | 0.                | 4.6e10                        |
@@ -73,3 +73,8 @@
 2. Increase surface emissivity from 0.95 to 0.98
 3. Decrease surface roughness from 0.1 to 0.001
 4. Decreased surface heat capacity and use a different value for winter and summer.
+
+---
+
+```{bibliography}
+```
