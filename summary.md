@@ -73,3 +73,8 @@
 2. Increase surface emissivity from 0.95 to 0.98
 3. Decrease surface roughness from 0.1 to 0.001
 4. Decreased surface heat capacity and use a different value for winter and summer.
+
+---
+
+```{bibliography}
+```
