@@ -1,0 +1,1698 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>REVIEWING VALUES IN LANDUSE.TBL &#8212; Land Surface Model Table Review</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="REVIEWING VALUES IN LANDUSE.TBL" href="intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Land Surface Model Table Review</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   REVIEWING VALUES IN LANDUSE.TBL
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   REVIEWING VALUES IN
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     LANDUSE.TBL
+    </span>
+   </code>
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/landuse_tbl.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Flanduse_tbl.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/landuse_tbl.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   REVIEWING VALUES IN
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     LANDUSE.TBL
+    </span>
+   </code>
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-are-using-the-following-in-the-idealized-model">
+     We are using the following in the idealized model
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#currently-for-snow-and-ice">
+     Currently for snow and ice:
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#preliminary-observations">
+       Preliminary observations
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-do-the-measurements-measure-up">
+     How do the measurements measure up?
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#what-variables-do-we-need-where-can-we-get-them">
+       What variables do we need? Where can we get them?
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#have">
+         Have
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#calculate">
+         Calculate
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#can-improve-estimations">
+         Can improve estimations
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculations">
+     Calculations
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#calculating-surface-roughness-length">
+       Calculating: Surface Roughness Length
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#calculating-surface-heat-capacity">
+       Calculating: Surface Heat Capacity
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#what-value-of-temperature-should-i-use">
+         What value of temperature should I use?
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#what-value-of-salinity-should-i-use">
+         What value of salinity should I use?
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#calculating-thermal-interia-constant">
+       Calculating: Thermal Interia Constant
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#what-value-of-density-should-i-use">
+         What value of density should I use?
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-does-this-stack-up-to-polar-wrf-and-values-used-by-other-schemes-for-snow-and-ice">
+     How does this stack up to Polar WRF and values used by other schemes for snow and ice?
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#other-sections-from-landuse-tbl">
+       Other sections from
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         LANDUSE.TBL
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#other-values-in-vegparm-tbl">
+       Other values in
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         VEGPARM.TBL
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#other-values-in-soilparm-tbl">
+       Other values in
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         SOILPARM.TBL
+        </span>
+       </code>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-do-i-recommend">
+     What do I recommend?
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>REVIEWING VALUES IN LANDUSE.TBL</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   REVIEWING VALUES IN
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     LANDUSE.TBL
+    </span>
+   </code>
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-are-using-the-following-in-the-idealized-model">
+     We are using the following in the idealized model
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#currently-for-snow-and-ice">
+     Currently for snow and ice:
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#preliminary-observations">
+       Preliminary observations
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-do-the-measurements-measure-up">
+     How do the measurements measure up?
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#what-variables-do-we-need-where-can-we-get-them">
+       What variables do we need? Where can we get them?
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#have">
+         Have
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#calculate">
+         Calculate
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#can-improve-estimations">
+         Can improve estimations
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculations">
+     Calculations
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#calculating-surface-roughness-length">
+       Calculating: Surface Roughness Length
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#calculating-surface-heat-capacity">
+       Calculating: Surface Heat Capacity
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#what-value-of-temperature-should-i-use">
+         What value of temperature should I use?
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#what-value-of-salinity-should-i-use">
+         What value of salinity should I use?
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#calculating-thermal-interia-constant">
+       Calculating: Thermal Interia Constant
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#what-value-of-density-should-i-use">
+         What value of density should I use?
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-does-this-stack-up-to-polar-wrf-and-values-used-by-other-schemes-for-snow-and-ice">
+     How does this stack up to Polar WRF and values used by other schemes for snow and ice?
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#other-sections-from-landuse-tbl">
+       Other sections from
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         LANDUSE.TBL
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#other-values-in-vegparm-tbl">
+       Other values in
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         VEGPARM.TBL
+        </span>
+       </code>
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#other-values-in-soilparm-tbl">
+       Other values in
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         SOILPARM.TBL
+        </span>
+       </code>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-do-i-recommend">
+     What do I recommend?
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="reviewing-values-in-landuse-tbl">
+<h1>REVIEWING VALUES IN <code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code><a class="headerlink" href="#reviewing-values-in-landuse-tbl" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code> is used by the land surface model to specify some variables depending on the land surface type. According to the Dudhia WRF Overview presentation, the following are used:</p>
+<blockquote>
+<div><p>VEGPARM.TBL used by Noah and RUC for vegetaion category properies</p>
+</div></blockquote>
+<blockquote>
+<div><p>SOILPARM.TBL used by Noah and RUC for soil properies</p>
+</div></blockquote>
+<blockquote>
+<div><p>LANDUSE.TBL used by 5-layer model</p>
+</div></blockquote>
+<div class="section" id="we-are-using-the-following-in-the-idealized-model">
+<h2>We are using the following in the idealized model<a class="headerlink" href="#we-are-using-the-following-in-the-idealized-model" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>the 5-layer model (<code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code>)</p></li>
+<li><p>USGS section (specified in <code class="docutils literal notranslate"><span class="pre">namelist.input</span></code>)</p></li>
+<li><p>The entire time we have land use category number 24 - snow and ice</p></li>
+</ul>
+</div>
+<div class="section" id="currently-for-snow-and-ice">
+<h2>Currently for snow and ice:<a class="headerlink" href="#currently-for-snow-and-ice" title="Permalink to this headline">¶</a></h2>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Season</p></th>
+<th class="head"><p>Albedo (<span class="math notranslate nohighlight">\(\%\)</span>)</p></th>
+<th class="head"><p>Suface Moisture Availability (<span class="math notranslate nohighlight">\(*100\%\)</span>)</p></th>
+<th class="head"><p>Surface Emissivity (<span class="math notranslate nohighlight">\(\%\)</span>)</p></th>
+<th class="head"><p>Surface Roughness</p></th>
+<th class="head"><p>Thermal Inertia Constant</p></th>
+<th class="head"><p>Snow Cover Effect</p></th>
+<th class="head"><p>Surface Heat Capacity (<span class="math notranslate nohighlight">\(J/(m^{3}K)\)</span>)</p></th>
+<th class="head"><p>Label</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Summer</p></td>
+<td><p>55.</p></td>
+<td><p>.95</p></td>
+<td><p>.95</p></td>
+<td><p>0.1</p></td>
+<td><p>5.</p></td>
+<td><p>0.</p></td>
+<td><p>9.0e25</p></td>
+<td><p>Snow or Ice</p></td>
+</tr>
+<tr class="row-odd"><td><p>Winter</p></td>
+<td><p>70.</p></td>
+<td><p>.95</p></td>
+<td><p>.95</p></td>
+<td><p>0.1</p></td>
+<td><p>5.</p></td>
+<td><p>0.</p></td>
+<td><p>9.0e25</p></td>
+<td><p>Snow or Ice</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="preliminary-observations">
+<h3>Preliminary observations<a class="headerlink" href="#preliminary-observations" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><p><strong>Albedo</strong> is far too low - <em><strong>BUT we have defined this in the namelist</strong></em> so this value is not used.</p></li>
+<li><p><strong>Surface moisture availability</strong> and <strong>emissivity</strong> could both probably be increased.</p></li>
+<li><p><strong>Surface roughness</strong> could probably be decreased.</p></li>
+<li><p><strong>Snow cover effects</strong> seem to be constant regardless of surface</p></li>
+<li><p>The <strong>thermal inertial constant</strong> could probably be improved, but I’m not sure what this is.</p></li>
+<li><p><strong>Surface heat capacity</strong> could be improved.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="how-do-the-measurements-measure-up">
+<h2>How do the measurements measure up?<a class="headerlink" href="#how-do-the-measurements-measure-up" title="Permalink to this headline">¶</a></h2>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Season</p></th>
+<th class="head"><p>Albedo (<span class="math notranslate nohighlight">\(\%\)</span>)</p></th>
+<th class="head"><p>Surface Moisture Availability (<span class="math notranslate nohighlight">\(*100\%\)</span>)</p></th>
+<th class="head"><p>Surface Emissivity (<span class="math notranslate nohighlight">\(\%\)</span>)</p></th>
+<th class="head"><p>Surface Roughness</p></th>
+<th class="head"><p>Thermal Inertia Constant</p></th>
+<th class="head"><p>Snow Cover Effect</p></th>
+<th class="head"><p>Surface Heat Capacity (<span class="math notranslate nohighlight">\(J/(m^{3}K)\)</span>)</p></th>
+<th class="head"><p>Surface</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Summer</p></td>
+<td><p>55.</p></td>
+<td><p>.95</p></td>
+<td><p>.95</p></td>
+<td><p>0.1</p></td>
+<td><p>5.</p></td>
+<td><p>0.</p></td>
+<td><p>9.0e25</p></td>
+<td><p>Snow or Ice</p></td>
+</tr>
+<tr class="row-odd"><td><p>Winter</p></td>
+<td><p>70.</p></td>
+<td><p>.95</p></td>
+<td><p>.95</p></td>
+<td><p>0.1</p></td>
+<td><p>5.</p></td>
+<td><p>0.</p></td>
+<td><p>9.0e25</p></td>
+<td><p>Snow or Ice</p></td>
+</tr>
+<tr class="row-even"><td><p>Measurements</p></td>
+<td><p>80. *</p></td>
+<td><p>~.95</p></td>
+<td><p>~.95</p></td>
+<td><p>0.001</p></td>
+<td><p>?.</p></td>
+<td><p>0. **</p></td>
+<td><p>8.1e12</p></td>
+<td><p>Sea Ice</p></td>
+</tr>
+</tbody>
+</table>
+<p>* This is defined in the namelist and already taken care of.</p>
+<p>** No snow cover effects because we are over snow/ice already</p>
+<p>~ indicates an estimation</p>
+<div class="section" id="what-variables-do-we-need-where-can-we-get-them">
+<h3>What variables do we need? Where can we get them?<a class="headerlink" href="#what-variables-do-we-need-where-can-we-get-them" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="have">
+<h4>Have<a class="headerlink" href="#have" title="Permalink to this headline">¶</a></h4>
+<ol class="simple">
+<li><p>Albedo</p>
+<ul class="simple">
+<li><p>This is already incorporated into the model</p></li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="calculate">
+<h4>Calculate<a class="headerlink" href="#calculate" title="Permalink to this headline">¶</a></h4>
+<ol class="simple">
+<li><p>Surface roughness length</p>
+<ul class="simple">
+<li><p>This is calculated below and is much lower than that in the table</p></li>
+<li><p>This could be a good value to adjust</p></li>
+</ul>
+</li>
+<li><p>Surface heat capacity</p>
+<ul class="simple">
+<li><p>This is calculated below and is much higher than that in the table</p></li>
+<li><p>I’d like to discuss this variable with Von</p></li>
+</ul>
+</li>
+<li><p>Thermal inertia constant</p>
+<ul class="simple">
+<li><p>I am struggling with calculating this, I need to do more reading to understand it</p></li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="can-improve-estimations">
+<h4>Can improve estimations<a class="headerlink" href="#can-improve-estimations" title="Permalink to this headline">¶</a></h4>
+<ol class="simple">
+<li><p>Surface moisture availability</p>
+<ul class="simple">
+<li><p>This is higher only in the values above water</p></li>
+<li><p>The difference is small so it probably would not be a large difference</p></li>
+</ul>
+</li>
+<li><p>Emissivity</p>
+<ul class="simple">
+<li><p>Also a small difference so likely not a big change</p></li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="calculations">
+<h2>Calculations<a class="headerlink" href="#calculations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="calculating-surface-roughness-length">
+<h3>Calculating: Surface Roughness Length<a class="headerlink" href="#calculating-surface-roughness-length" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[ z_{0} = \frac{(z_{2}-z_{1})}{[exp(\frac{kU_{2}}{u*}) - exp(\frac{kU_{1}}{u*})]} \]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(z_{0}\)</span> is the roughness length</p></li>
+<li><p><span class="math notranslate nohighlight">\(z_{1}\)</span> height of <span class="math notranslate nohighlight">\(U_{1}\)</span> (<span class="math notranslate nohighlight">\(2 m\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(z_{2}\)</span> height of <span class="math notranslate nohighlight">\(U_{2}\)</span> (<span class="math notranslate nohighlight">\(4 m\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(k\)</span> is the Von Karmon constant (<span class="math notranslate nohighlight">\(0.4\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(u*\)</span> is friction velocity (measured, in flux dataset)</p></li>
+<li><p><span class="math notranslate nohighlight">\(U_{1}\)</span> wind speed at <span class="math notranslate nohighlight">\(z_{1}\)</span> (measued, in meteorology dataset)</p></li>
+<li><p><span class="math notranslate nohighlight">\(U_{2}\)</span> wind speed at <span class="math notranslate nohighlight">\(z_{2}\)</span> (measued, in meteorology dataset)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span> 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Wind speed at 2 m</span>
+<span class="n">u1</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;/Users/smurphy/all_datasets/nice_published_datasets/N-ICE_metData_v2.nc&#39;</span><span class="p">,</span> 
+                     <span class="n">decode_times</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;wind_speed_2m&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Wind speed at 10 m</span>
+<span class="n">u2</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;/Users/smurphy/all_datasets/nice_published_datasets/N-ICE_metData_v2.nc&#39;</span><span class="p">,</span> 
+                     <span class="n">decode_times</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;wind_speed_10m&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Friction velocity</span>
+<span class="n">ustar</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;/Users/smurphy/all_datasets/nice_published_datasets/N-ICE_sebData_v1.nc&#39;</span><span class="p">,</span> 
+                        <span class="n">decode_times</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)[</span><span class="s1">&#39;friction_velocity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Heights </span>
+<span class="n">z1</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># m</span>
+<span class="n">z2</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># m</span>
+
+<span class="c1"># Von Karmon Constant</span>
+<span class="n">k</span>  <span class="o">=</span> <span class="mf">0.4</span> 
+
+<span class="c1"># Calculation</span>
+<span class="n">term1</span> <span class="o">=</span> <span class="p">(</span><span class="n">z2</span> <span class="o">-</span> <span class="n">z1</span><span class="p">)</span>
+<span class="n">term2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">k</span> <span class="o">*</span> <span class="n">u2</span><span class="p">)</span> <span class="o">/</span> <span class="n">ustar</span><span class="p">)</span>
+<span class="n">term3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">k</span> <span class="o">*</span> <span class="n">u1</span><span class="p">)</span> <span class="o">/</span> <span class="n">ustar</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">term1</span> <span class="o">/</span> <span class="p">(</span><span class="n">term2</span> <span class="o">-</span> <span class="n">term3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Surface Roughness Length (m):&#39;</span><span class="p">)</span>
+<span class="n">z</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Surface Roughness Length (m):
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0012378941216551337
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="calculating-surface-heat-capacity">
+<h3>Calculating: Surface Heat Capacity<a class="headerlink" href="#calculating-surface-heat-capacity" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://ncar.github.io/CAM/doc/build/html/cam5_scientific_guide/sea_ice.html">https://ncar.github.io/CAM/doc/build/html/cam5_scientific_guide/sea_ice.html</a></p>
+<div class="math notranslate nohighlight">
+\[ c(T,S) = c_{0} + \frac{L_{i}\mu S}{T^{2}} \]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(c(T,S)\)</span> is the heat capacity, J / kg K</p></li>
+<li><p><span class="math notranslate nohighlight">\(c_{0}\)</span> is the heat capacity of fresh ice 2054 J kg^{-1} K^{-1}, J / kg K</p></li>
+<li><p><span class="math notranslate nohighlight">\(L_{i}\)</span> is the latent heat of fusion 3.340 x 10^5 J / kg, J / kg</p></li>
+<li><p><span class="math notranslate nohighlight">\(S\)</span> is the salinity (we have salinity from the ice measurements), g/g</p></li>
+<li><p><span class="math notranslate nohighlight">\(T\)</span> is temperature (we have ice surface temperature from the ice measurements), K</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu = T_{f}=-\mu S =  0.054 degC ppt^{-1}\)</span> is the ocean freezing temperature constant</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importing variables from the Sea Ice Physics dataset</span>
+<span class="c1"># Sea ice salinity and surface temperature to be used in the surface heat capacity calculations</span>
+<span class="c1"># Density to be used in this calculation for the thermal inertia constant</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/Users/smurphy/all_datasets/nice_published_datasets/n-ice2015-ice-core-physics.json&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">keys</span><span class="p">,</span> <span class="n">vals</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+
+<span class="n">density_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">&#39;density&#39;</span> <span class="ow">in</span> <span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">mean_level</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;sample_top_cm&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;density&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">))]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;sample_bottom_cm&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;density&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">))])</span><span class="o">/</span><span class="mi">2</span>
+        <span class="n">den_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;density&#39;</span><span class="p">],</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;density&#39;</span><span class="p">],</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">))]</span>
+        <span class="n">density_temp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">den_vals</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">den_vals</span><span class="p">)),</span> 
+                                       <span class="n">columns</span> <span class="o">=</span> <span class="n">mean_level</span><span class="p">,</span>
+                                       <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="s1">&#39;time&#39;</span><span class="p">],</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%SZ&quot;</span><span class="p">)])</span>
+        <span class="n">density_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">density_df</span><span class="p">,</span> <span class="n">density_temp_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        
+<span class="n">salinity_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">&#39;sea_ice_salinity&#39;</span> <span class="ow">in</span> <span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">den_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;sea_ice_salinity&#39;</span><span class="p">],</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;sea_ice_salinity&#39;</span><span class="p">],</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">))])</span>
+        <span class="n">salinity_temp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">den_vals</span><span class="p">],</span> 
+                                       <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="s1">&#39;time&#39;</span><span class="p">],</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%SZ&quot;</span><span class="p">)])</span>
+        <span class="n">salinity_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">salinity_df</span><span class="p">,</span> <span class="n">salinity_temp_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        
+<span class="n">surft_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">&#39;surface_temperature&#39;</span> <span class="ow">in</span> <span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">den_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="s1">&#39;surface_temperature&#39;</span><span class="p">],</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="s1">&#39;surface_temperature&#39;</span><span class="p">],</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">))]</span>
+        <span class="n">surftemp_temp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">den_vals</span><span class="p">],</span> 
+                                       <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="s1">&#39;time&#39;</span><span class="p">],</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%SZ&quot;</span><span class="p">)])</span>
+        <span class="n">surft_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">surft_df</span><span class="p">,</span> <span class="n">surftemp_temp_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        
+                
+        
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="what-value-of-temperature-should-i-use">
+<h4>What value of temperature should I use?<a class="headerlink" href="#what-value-of-temperature-should-i-use" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f1</span> <span class="o">=</span> <span class="n">surft_df</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-02-21&#39;</span><span class="p">]</span>
+<span class="n">f2</span> <span class="o">=</span> <span class="n">surft_df</span><span class="p">[</span><span class="s1">&#39;2015-02-23&#39;</span><span class="p">:</span><span class="s1">&#39;2015-03-21&#39;</span><span class="p">]</span>
+<span class="n">f3</span> <span class="o">=</span> <span class="n">surft_df</span><span class="p">[</span><span class="s1">&#39;2015-04-18&#39;</span><span class="p">:</span><span class="s1">&#39;2015-06-05&#39;</span><span class="p">]</span>
+<span class="n">f4</span> <span class="o">=</span> <span class="n">surft_df</span><span class="p">[</span><span class="s1">&#39;2015-06-07&#39;</span><span class="p">:</span><span class="s1">&#39;2015-06-21&#39;</span><span class="p">]</span>
+
+<span class="n">wint</span> <span class="o">=</span> <span class="n">surft_df</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-04-01&#39;</span><span class="p">]</span>
+<span class="n">summ</span> <span class="o">=</span> <span class="n">surft_df</span><span class="p">[</span><span class="s1">&#39;2015-04-07&#39;</span><span class="p">:</span><span class="s1">&#39;2015-06-21&#39;</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">surft_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">surft_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-01-01&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-02-21&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">f2</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-02-23&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-03-21&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">f3</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-04-18&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-06-05&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;purple&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">f4</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-06-07&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-06-21&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">wint</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-01-01&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-04-01&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;pink&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">summ</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-04-07&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-06-21&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;cyan&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Ice Surface Temperature (c)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Ice Surface Temperature&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Measurements&#39;</span><span class="p">,</span> <span class="s1">&#39;Experiment Mean: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">surft_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; c&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;Floe 1 Mean:          &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; c&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;Floe 2 Mean:          &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">f2</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; c&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;Floe 3 Mean:            &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">f3</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; c&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;Floe 4 Mean:             &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">f4</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; c&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;Winter Mean:          &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">wint</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; c&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;Summer Mean:         &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">summ</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; c&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd0387eff10&gt;
+</pre></div>
+</div>
+<img alt="_images/landuse_tbl_6_1.png" src="_images/landuse_tbl_6_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ice surface temperature&#39;</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">surft_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ice surface temperature
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-12.44
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Winter surface temperature&#39;</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">surft_df</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-04-01&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Winter surface temperature
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-22.75
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Summer surface temperature&#39;</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">surft_df</span><span class="p">[</span><span class="s1">&#39;2015-04-07&#39;</span><span class="p">:</span><span class="s1">&#39;2015-06-21&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Summer surface temperature
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-4.09
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="what-value-of-salinity-should-i-use">
+<h4>What value of salinity should I use?<a class="headerlink" href="#what-value-of-salinity-should-i-use" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f1</span> <span class="o">=</span> <span class="n">salinity_df</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-02-21&#39;</span><span class="p">]</span>
+<span class="n">f2</span> <span class="o">=</span> <span class="n">salinity_df</span><span class="p">[</span><span class="s1">&#39;2015-02-23&#39;</span><span class="p">:</span><span class="s1">&#39;2015-03-21&#39;</span><span class="p">]</span>
+<span class="n">f3</span> <span class="o">=</span> <span class="n">salinity_df</span><span class="p">[</span><span class="s1">&#39;2015-04-18&#39;</span><span class="p">:</span><span class="s1">&#39;2015-06-05&#39;</span><span class="p">]</span>
+<span class="n">f4</span> <span class="o">=</span> <span class="n">salinity_df</span><span class="p">[</span><span class="s1">&#39;2015-06-07&#39;</span><span class="p">:</span><span class="s1">&#39;2015-06-21&#39;</span><span class="p">]</span>
+
+<span class="n">wint</span> <span class="o">=</span> <span class="n">salinity_df</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-04-01&#39;</span><span class="p">]</span>
+<span class="n">summ</span> <span class="o">=</span> <span class="n">salinity_df</span><span class="p">[</span><span class="s1">&#39;2015-04-07&#39;</span><span class="p">:</span><span class="s1">&#39;2015-06-21&#39;</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">salinity_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">salinity_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-01-01&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-02-21&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">f2</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-02-23&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-03-21&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">f3</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-04-18&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-06-05&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;purple&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">f4</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-06-07&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-06-21&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">wint</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-01-01&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-04-01&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;pink&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">summ</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-04-07&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-06-21&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;cyan&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Mean Ice Core Salinity&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Ice Core Salinity&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Measurements&#39;</span><span class="p">,</span> <span class="s1">&#39;Experiment Mean:    &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">salinity_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; g/kg&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;Floe 1 Mean:               &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)),</span> 
+            <span class="s1">&#39;Floe 2 Mean:             &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">f2</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; g/kg&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;Floe 3 Mean:             &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">f3</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; g/kg&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;Floe 4 Mean:             &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">f4</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; g/kg&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Winter Mean:            &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">wint</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; g/kg&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;Summer Mean:         &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">summ</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; g/kg&#39;</span><span class="p">],</span> <span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/smurphy/opt/anaconda3/lib/python3.8/site-packages/numpy/core/_asarray.py:83: UserWarning: Warning: converting a masked element to nan.
+  return array(a, dtype, copy=False, order=order)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd068c850a0&gt;
+</pre></div>
+</div>
+<img alt="_images/landuse_tbl_11_2.png" src="_images/landuse_tbl_11_2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean Ice Core Salinity:&#39;</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">salinity_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Ice Core Salinity:
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.07
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ocean freezing temperature constant</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mf">0.054</span> <span class="c1"># c / ppt                 ** this needs to be in K </span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span> <span class="o">+</span> <span class="mf">273.15</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">12</span><span class="p">)</span> <span class="c1"># K </span>
+
+<span class="c1"># Heat capacity of fresh ice</span>
+<span class="n">c0</span> <span class="o">=</span> <span class="mi">2054</span> <span class="c1"># J / kg K </span>
+
+<span class="c1"># Salinity</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">salinity_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># g / kg    ** I think this needs to be in g/g or kg/kg</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">/</span> <span class="mi">1000</span> <span class="c1"># g / g </span>
+
+<span class="c1"># Ice surface temperature</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">surft_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># c                  ** This needs to be in K </span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="mf">273.15</span> <span class="c1"># K</span>
+
+<span class="c1"># Ice surface temperature - Summer</span>
+<span class="n">t_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">surft_df</span><span class="p">[</span><span class="s1">&#39;2015-04-07&#39;</span><span class="p">:</span><span class="s1">&#39;2015-06-21&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># c                  ** This needs to be in K </span>
+<span class="n">t_s</span> <span class="o">=</span> <span class="n">t_s</span> <span class="o">+</span> <span class="mf">273.15</span> <span class="c1"># K</span>
+
+<span class="c1"># Ice surface temperature - Winter</span>
+<span class="n">t_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">surft_df</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-04-01&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># c                  ** This needs to be in K </span>
+<span class="n">t_w</span> <span class="o">=</span> <span class="n">t_w</span> <span class="o">+</span> <span class="mf">273.15</span> <span class="c1"># K</span>
+
+<span class="c1"># Latent heat of fusion</span>
+<span class="n">li</span> <span class="o">=</span> <span class="mf">3.340</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">5</span> <span class="c1"># J / kg </span>
+
+<span class="c1"># Calculating</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">c0</span> <span class="o">+</span> <span class="p">((</span><span class="n">li</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">*</span> <span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> 
+<span class="n">c_w</span> <span class="o">=</span> <span class="n">c0</span> <span class="o">+</span> <span class="p">((</span><span class="n">li</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">*</span> <span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">t_w</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> 
+<span class="n">c_s</span> <span class="o">=</span> <span class="n">c0</span> <span class="o">+</span> <span class="p">((</span><span class="n">li</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">*</span> <span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">t_s</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Surface Heat Capacity (J/kg k):&#39;</span><span class="p">)</span>
+<span class="n">c</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Surface Heat Capacity (J/kg k):
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8147436486186.056
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Winter Surface Heat Capacity (J/kg k):&#39;</span><span class="p">)</span>
+<span class="n">c_w</span> <span class="c1"># 8.8 * 10^12</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Winter Surface Heat Capacity (J/kg k):
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8832175980552.303
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Summer Surface Heat Capacity (J/kg k):&#39;</span><span class="p">)</span>
+<span class="n">c_s</span> <span class="c1">#7.6 * 10 ^12</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Summer Surface Heat Capacity (J/kg k):
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7649588740973.975
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="calculating-thermal-interia-constant">
+<h3>Calculating: Thermal Interia Constant<a class="headerlink" href="#calculating-thermal-interia-constant" title="Permalink to this headline">¶</a></h3>
+<p><em><strong>This is for soil, but it appears applicable for this, too</strong></em></p>
+<p><a class="reference external" href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2014JE004618">https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2014JE004618</a></p>
+<div class="math notranslate nohighlight">
+\[ I = \sqrt{\lambda \rho c} \]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(I\)</span> is the thermal inertia constant</p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda\)</span> is thermal conductivity (W m-1 k-1)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\rho\)</span> is density (kg m-3)</p></li>
+<li><p><span class="math notranslate nohighlight">\(c\)</span> is specific heat capacity (J kg-2 k-1)</p></li>
+</ul>
+<blockquote>
+<div><p>Results indicate that increasing the mean salinity induces a higher thermal inertia reducing summer melt and finally increasing ice thickness (<a class="reference external" href="https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.909.889&amp;rep=rep1&amp;type=pdf">https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.909.889&amp;rep=rep1&amp;type=pdf</a>)</p>
+</div></blockquote>
+<div class="section" id="what-value-of-density-should-i-use">
+<h4>What value of density should I use?<a class="headerlink" href="#what-value-of-density-should-i-use" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f1</span> <span class="o">=</span> <span class="n">density_df</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-02-21&#39;</span><span class="p">]</span>
+<span class="n">f2</span> <span class="o">=</span> <span class="n">density_df</span><span class="p">[</span><span class="s1">&#39;2015-02-23&#39;</span><span class="p">:</span><span class="s1">&#39;2015-03-21&#39;</span><span class="p">]</span>
+<span class="n">f3</span> <span class="o">=</span> <span class="n">density_df</span><span class="p">[</span><span class="s1">&#39;2015-04-18&#39;</span><span class="p">:</span><span class="s1">&#39;2015-06-05&#39;</span><span class="p">]</span>
+<span class="n">f4</span> <span class="o">=</span> <span class="n">density_df</span><span class="p">[</span><span class="s1">&#39;2015-06-07&#39;</span><span class="p">:</span><span class="s1">&#39;2015-06-21&#39;</span><span class="p">]</span>
+
+<span class="n">wint</span> <span class="o">=</span> <span class="n">density_df</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-04-01&#39;</span><span class="p">]</span>
+<span class="n">summ</span> <span class="o">=</span> <span class="n">density_df</span><span class="p">[</span><span class="s1">&#39;2015-04-07&#39;</span><span class="p">:</span><span class="s1">&#39;2015-06-21&#39;</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">density_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">density_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-01-01&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-02-21&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">f2</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-02-23&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-03-21&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">f3</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-04-18&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-06-05&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;purple&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">f4</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-06-07&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-06-21&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">wint</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-01-01&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-04-01&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;pink&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">summ</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-04-07&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-06-21&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;cyan&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Ice Density (kg/m3)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Ice Density&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">950</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Measurements&#39;</span><span class="p">,</span> <span class="s1">&#39;Experiment Mean: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">density_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; kg/m3&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;Floe 1 Mean:          &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; kg/m3&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;Floe 2 Mean:          &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">f2</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; kg/m3&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;Floe 3 Mean:          &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">f3</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; kg/m3&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;Floe 4 Mean:             &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">f4</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)),</span>
+            <span class="s1">&#39;Winter Mean:         &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">wint</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; kg/m3&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;Summer Mean:      &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">summ</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; kg/m3&#39;</span><span class="p">],</span> <span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;lower center&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd068cd2f70&gt;
+</pre></div>
+</div>
+<img alt="_images/landuse_tbl_18_1.png" src="_images/landuse_tbl_18_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Thermal Conductivity</span>
+<span class="c1">## Thermal conductivity from SHEBA https://agupubs.onlinelibrary.wiley.com/doi/epdf/10.1029/2000JC000409</span>
+<span class="c1">### This suggests that we should use 0.3 from measurements at SHEBA</span>
+<span class="c1">### I can&#39;t find any further measurements of this from N-ICE so I&#39;m going to use this constant derived from SHEBA.</span>
+<span class="n">tc</span> <span class="o">=</span> <span class="mf">0.3</span> <span class="c1"># W / m K</span>
+
+<span class="c1"># Density</span>
+<span class="n">den</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">density_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># kg / m3</span>
+
+<span class="c1"># Specific heat capacity</span>
+<span class="c1">## I think this is the same as the surface heat capacity for this application</span>
+<span class="n">shc</span> <span class="o">=</span> <span class="n">c</span> <span class="c1"># J / kg2 k</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Thermal Inertia Constant is:&#39;</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">tc</span> <span class="o">*</span> <span class="n">den</span> <span class="o">*</span> <span class="n">shc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Thermal Inertia Constant is:
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46600444.484522454
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="summary">
+<h1>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>The <strong>surface roughness</strong> and <strong>surface heat capacity</strong> can likely be improved in <code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code></p>
+<ul>
+<li><p>Surface roughness can be decreased to 0.001 or 0.01. The former is more accurate, but I’m not sure how many orders of magnitude WRF can obtain from <code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code>.</p></li>
+<li><p>Specific heat capacity may be too high, but I’m concerned my calculations could be wrong.</p></li>
+</ul>
+</li>
+<li><p><strong>Thermal inertia constant</strong> could also likely be improved, but I know my calculations are incorrect.</p></li>
+</ul>
+<div class="section" id="how-does-this-stack-up-to-polar-wrf-and-values-used-by-other-schemes-for-snow-and-ice">
+<h2>How does this stack up to Polar WRF and values used by other schemes for snow and ice?<a class="headerlink" href="#how-does-this-stack-up-to-polar-wrf-and-values-used-by-other-schemes-for-snow-and-ice" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="other-sections-from-landuse-tbl">
+<h3>Other sections from <code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code><a class="headerlink" href="#other-sections-from-landuse-tbl" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Section</p></th>
+<th class="head"><p>Season</p></th>
+<th class="head"><p>Albedo (%)</p></th>
+<th class="head"><p>Suface Moisture Availability (*100%)</p></th>
+<th class="head"><p>Surface Emissivity (%)</p></th>
+<th class="head"><p>Surface Roughness</p></th>
+<th class="head"><p>Thermal Inertia Constant</p></th>
+<th class="head"><p>Snow Cover Effect</p></th>
+<th class="head"><p>Surface Heat Capacity (j/m3 K)</p></th>
+<th class="head"><p>Label</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OLD</p></td>
+<td><p>Summer</p></td>
+<td><p>55.</p></td>
+<td><p>.95</p></td>
+<td><p>.95</p></td>
+<td><p>5.</p></td>
+<td><p>5.</p></td>
+<td><p>0.</p></td>
+<td><p>9.0e25</p></td>
+<td><p>Permanent Ice</p></td>
+</tr>
+<tr class="row-odd"><td><p>OLD</p></td>
+<td><p>Winter</p></td>
+<td><p>70.</p></td>
+<td><p>.95</p></td>
+<td><p>.95</p></td>
+<td><p>5.</p></td>
+<td><p>5.</p></td>
+<td><p>0.</p></td>
+<td><p>9.0e25</p></td>
+<td><p>Permanent Ice</p></td>
+</tr>
+<tr class="row-even"><td><p>USGS</p></td>
+<td><p>Summer</p></td>
+<td><p>55.</p></td>
+<td><p>.95</p></td>
+<td><p>.95</p></td>
+<td><p>0.1</p></td>
+<td><p>5.</p></td>
+<td><p>0.</p></td>
+<td><p>9.0e25</p></td>
+<td><p>Snow or Ice</p></td>
+</tr>
+<tr class="row-odd"><td><p>USGS</p></td>
+<td><p>Winter</p></td>
+<td><p>70.</p></td>
+<td><p>.95</p></td>
+<td><p>.95</p></td>
+<td><p>0.1</p></td>
+<td><p>5.</p></td>
+<td><p>0.</p></td>
+<td><p>9.0e25</p></td>
+<td><p>Snow or Ice</p></td>
+</tr>
+<tr class="row-even"><td><p>MODIFIED_IGBP_MODIS_NOAH</p></td>
+<td><p>Summer</p></td>
+<td><p>55.</p></td>
+<td><p>.95</p></td>
+<td><p>.95</p></td>
+<td><p>0.1</p></td>
+<td><p>5.</p></td>
+<td><p>0</p></td>
+<td><p>9.0e25</p></td>
+<td><p>Snow or Ice</p></td>
+</tr>
+<tr class="row-odd"><td><p>MODIFIED_IGBP_MODIS_NOAH</p></td>
+<td><p>Winter</p></td>
+<td><p>70.</p></td>
+<td><p>.95</p></td>
+<td><p>.95</p></td>
+<td><p>0.1</p></td>
+<td><p>5.</p></td>
+<td><p>0</p></td>
+<td><p>9.0e25</p></td>
+<td><p>Snow or Ice</p></td>
+</tr>
+<tr class="row-even"><td><p>SiB</p></td>
+<td><p>Summer</p></td>
+<td><p>55.</p></td>
+<td><p>.95</p></td>
+<td><p>.95</p></td>
+<td><p>5.</p></td>
+<td><p>5.</p></td>
+<td><p>0.</p></td>
+<td><p>9.0e25</p></td>
+<td><p>Ice Cap and Glacier</p></td>
+</tr>
+<tr class="row-odd"><td><p>SiB</p></td>
+<td><p>Winter</p></td>
+<td><p>70.</p></td>
+<td><p>.95</p></td>
+<td><p>.95</p></td>
+<td><p>5.</p></td>
+<td><p>5.</p></td>
+<td><p>0.</p></td>
+<td><p>9.0e25</p></td>
+<td><p>Ice Cap and Glacier</p></td>
+</tr>
+<tr class="row-even"><td><p>LW12</p></td>
+<td><p>All</p></td>
+<td><p>70.</p></td>
+<td><p>.95</p></td>
+<td><p>.95</p></td>
+<td><p>5.</p></td>
+<td><p>5.</p></td>
+<td><p>0.</p></td>
+<td><p>9.0e25</p></td>
+<td><p>Snow and Ice</p></td>
+</tr>
+<tr class="row-odd"><td><p>MODIS</p></td>
+<td><p>Summer</p></td>
+<td><p>55.</p></td>
+<td><p>.95</p></td>
+<td><p>.95</p></td>
+<td><p>1.</p></td>
+<td><p>5.</p></td>
+<td><p>0.</p></td>
+<td><p>9.0e25</p></td>
+<td><p>Snow and Ice</p></td>
+</tr>
+<tr class="row-even"><td><p>MODIS</p></td>
+<td><p>Winter</p></td>
+<td><p>55.</p></td>
+<td><p>.95</p></td>
+<td><p>.98</p></td>
+<td><p>1.0</p></td>
+<td><p>5.</p></td>
+<td><p>0.</p></td>
+<td><p>9.0e25</p></td>
+<td><p>Snow and Ice</p></td>
+</tr>
+<tr class="row-odd"><td><p>SSIB</p></td>
+<td><p>Summer</p></td>
+<td><p>55.</p></td>
+<td><p>.95</p></td>
+<td><p>.95</p></td>
+<td><p>0.1</p></td>
+<td><p>5.</p></td>
+<td><p>0.</p></td>
+<td><p>9.0e25</p></td>
+<td><p>Snow or Ice</p></td>
+</tr>
+<tr class="row-even"><td><p>SSIB</p></td>
+<td><p>Winter</p></td>
+<td><p>70.</p></td>
+<td><p>.95</p></td>
+<td><p>.95</p></td>
+<td><p>0.1</p></td>
+<td><p>5.</p></td>
+<td><p>0.</p></td>
+<td><p>9.0e25</p></td>
+<td><p>Snow or Ice</p></td>
+</tr>
+<tr class="row-odd"><td><p>NLCD40</p></td>
+<td><p>Summer</p></td>
+<td><p>60.</p></td>
+<td><p>.95</p></td>
+<td><p>.95</p></td>
+<td><p>1.2</p></td>
+<td><p>5.</p></td>
+<td><p>0.</p></td>
+<td><p>9.0e25</p></td>
+<td><p>Permanent Snow and Ice</p></td>
+</tr>
+<tr class="row-even"><td><p>NLCD40</p></td>
+<td><p>Winter</p></td>
+<td><p>60.</p></td>
+<td><p>.95</p></td>
+<td><p>.95</p></td>
+<td><p>1.2</p></td>
+<td><p>5.</p></td>
+<td><p>0.</p></td>
+<td><p>9.0e25</p></td>
+<td><p>Permanent Snow and Ice</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Albedos overall are lower than those observed at N-ICE</p></li>
+<li><p>Soil moisture availability is 0.95 in all the simulations</p></li>
+<li><p>Emissivity is higher in some situations, N-ICE simulations could potentially benefit from using the 0.98 instead of 0.95</p></li>
+<li><p>Surface roughness is the lowest in the section used, but it is still higher than that calculated fro N-ICE</p></li>
+<li><p>Thermal interia constant, snow cover effects, and the surface heat capacity are the same in all simualtions</p>
+<ul>
+<li><p>If my calculations of the surface heat capacity are correct, simulations could likely be improved by lowering this value.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="other-values-in-vegparm-tbl">
+<h3>Other values in <code class="docutils literal notranslate"><span class="pre">VEGPARM.TBL</span></code><a class="headerlink" href="#other-values-in-vegparm-tbl" title="Permalink to this headline">¶</a></h3>
+<p>** Not used in the idealized simulations **</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Section</p></th>
+<th class="head"><p>Vegetation Fraction</p></th>
+<th class="head"><p>Rooting Depth</p></th>
+<th class="head"><p>Stomatal Resistance</p></th>
+<th class="head"><p>Radiation Stress</p></th>
+<th class="head"><p>Vapor Pressure Deficit Function Parameter</p></th>
+<th class="head"><p>Soil Water Equivalent Snow Depth</p></th>
+<th class="head"><p>Maximum Albedo Over Deep Snow</p></th>
+<th class="head"><p>Minimum LAI</p></th>
+<th class="head"><p>Maximum LAI</p></th>
+<th class="head"><p>Minimum Emissivity</p></th>
+<th class="head"><p>Maximum Emissivity</p></th>
+<th class="head"><p>Minimum Albedo</p></th>
+<th class="head"><p>Maximum Albedo</p></th>
+<th class="head"><p>Minimum Roughness Length</p></th>
+<th class="head"><p>Maximum Roughness Length</p></th>
+<th class="head"><p>Category</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>USGS</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>999</p></td>
+<td><p>999</p></td>
+<td><p>999</p></td>
+<td><p>0.02</p></td>
+<td><p>82</p></td>
+<td><p>0.01</p></td>
+<td><p>0.01</p></td>
+<td><p>0.95</p></td>
+<td><p>0.95</p></td>
+<td><p>0.55</p></td>
+<td><p>0.70</p></td>
+<td><p>0.001</p></td>
+<td><p>0.001</p></td>
+<td><p>Snow or Ice</p></td>
+</tr>
+<tr class="row-odd"><td><p>MODIFIED_IGBP_MODIS_NOAH</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>999</p></td>
+<td><p>999</p></td>
+<td><p>999</p></td>
+<td><p>0.02</p></td>
+<td><p>82</p></td>
+<td><p>0.01</p></td>
+<td><p>0.01</p></td>
+<td><p>0.95</p></td>
+<td><p>0.95</p></td>
+<td><p>.55</p></td>
+<td><p>.7</p></td>
+<td><p>0.001</p></td>
+<td><p>0.001</p></td>
+<td><p>Snow and Ice</p></td>
+</tr>
+<tr class="row-even"><td><p>NLDC</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>999</p></td>
+<td><p>999</p></td>
+<td><p>999</p></td>
+<td><p>0.02</p></td>
+<td><p>82</p></td>
+<td><p>0.01</p></td>
+<td><p>0.01</p></td>
+<td><p>0.95</p></td>
+<td><p>0.95</p></td>
+<td><p>0.55</p></td>
+<td><p>0.70</p></td>
+<td><p>0.001</p></td>
+<td><p>0.001</p></td>
+<td><p>Permanent Snow</p></td>
+</tr>
+<tr class="row-odd"><td><p>NLDC</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>999</p></td>
+<td><p>999</p></td>
+<td><p>999</p></td>
+<td><p>0.02</p></td>
+<td><p>82</p></td>
+<td><p>0.01</p></td>
+<td><p>0.01</p></td>
+<td><p>0.95</p></td>
+<td><p>0.95</p></td>
+<td><p>0.55</p></td>
+<td><p>0.70</p></td>
+<td><p>0.001</p></td>
+<td><p>0.001</p></td>
+<td><p>Perennial Ice/Snow</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Section</p></th>
+<th class="head"><p>Albedo</p></th>
+<th class="head"><p>Roughness Length</p></th>
+<th class="head"><p>LEMI*</p></th>
+<th class="head"><p>PC*</p></th>
+<th class="head"><p>Vegetation Factor</p></th>
+<th class="head"><p>IFOR*</p></th>
+<th class="head"><p>Stomatal Resistance</p></th>
+<th class="head"><p>Radiation Stress</p></th>
+<th class="head"><p>Vapor Pressure Deficit Function Parameter</p></th>
+<th class="head"><p>Soil Water Equivalent Snow Depth</p></th>
+<th class="head"><p>LAI</p></th>
+<th class="head"><p>Maximum Albedo</p></th>
+<th class="head"><p>Category</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>USGS-RUC</p></td>
+<td><p>0.55</p></td>
+<td><p>0.0024</p></td>
+<td><p>0.98</p></td>
+<td><p>0.00</p></td>
+<td><p>0.00</p></td>
+<td><p>9</p></td>
+<td><p>999.</p></td>
+<td><p>999.</p></td>
+<td><p>999.</p></td>
+<td><p>0.02</p></td>
+<td><p>0.01</p></td>
+<td><p>75</p></td>
+<td><p>Snow or Ice</p></td>
+</tr>
+<tr class="row-odd"><td><p>MODIS-RUC</p></td>
+<td><p>0.55</p></td>
+<td><p>0.011</p></td>
+<td><p>0.98</p></td>
+<td><p>0.00</p></td>
+<td><p>0.00</p></td>
+<td><p>9</p></td>
+<td><p>999.</p></td>
+<td><p>999.</p></td>
+<td><p>999.</p></td>
+<td><p>0.02</p></td>
+<td><p>0.01</p></td>
+<td><p>82</p></td>
+<td><p>Snow and Ice</p></td>
+</tr>
+</tbody>
+</table>
+<p>* I Don’t know what some of these are</p>
+<ul class="simple">
+<li><p>The maximum albedo is higher here than in <code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code>, closer to that seen at N-ICE and the value used in the simulations.</p></li>
+<li><p>Roughness lengths are closer to what I’ve calculated for N-ICE</p></li>
+<li><p>Emissivities are similar to those seen in <code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="other-values-in-soilparm-tbl">
+<h3>Other values in <code class="docutils literal notranslate"><span class="pre">SOILPARM.TBL</span></code><a class="headerlink" href="#other-values-in-soilparm-tbl" title="Permalink to this headline">¶</a></h3>
+<p>** Not used in the idealized simulation, for land-ice **</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Section</p></th>
+<th class="head"><p>B Parameter</p></th>
+<th class="head"><p>Dry Soil Moisture Threshold</p></th>
+<th class="head"><p>Soil Thermal Diffusivity/Conducticity Coefficient</p></th>
+<th class="head"><p>Saturation Soil Moisture Content</p></th>
+<th class="head"><p>Reference Soil Moisture</p></th>
+<th class="head"><p>Saturday Soil Matric Potential</p></th>
+<th class="head"><p>Saturation Soil Conductivity</p></th>
+<th class="head"><p>Saturation Soil Diffusivity</p></th>
+<th class="head"><p>Wilting Point Soil Moisture</p></th>
+<th class="head"><p>Soil Quartz Content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>STAS</p></td>
+<td><p>4.26</p></td>
+<td><p>0.028</p></td>
+<td><p>-1.044</p></td>
+<td><p>0.421</p></td>
+<td><p>0.283</p></td>
+<td><p>0.036</p></td>
+<td><p>1.41E-5</p></td>
+<td><p>0.514E-5</p></td>
+<td><p>0.028</p></td>
+<td><p>0.25</p></td>
+</tr>
+<tr class="row-odd"><td><p>STAS-RUC</p></td>
+<td><p>4.90</p></td>
+<td><p>0.065</p></td>
+<td><p>2.10</p></td>
+<td><p>0.435</p></td>
+<td><p>0.249</p></td>
+<td><p>0.218</p></td>
+<td><p>3.47E-5</p></td>
+<td><p>0.514E-5</p></td>
+<td><p>0.114</p></td>
+<td><p>0.05</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>None of these should impact the ice surface</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="what-do-i-recommend">
+<h2>What do I recommend?<a class="headerlink" href="#what-do-i-recommend" title="Permalink to this headline">¶</a></h2>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Section</p></th>
+<th class="head"><p>Season</p></th>
+<th class="head"><p>Albedo (%)</p></th>
+<th class="head"><p>Suface Moisture Availability (*100%)</p></th>
+<th class="head"><p>Surface Emissivity (%)</p></th>
+<th class="head"><p>Surface Roughness</p></th>
+<th class="head"><p>Thermal Inertia Constant</p></th>
+<th class="head"><p>Snow Cover Effect</p></th>
+<th class="head"><p>Surface Heat Capacity (j/m3 K)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NICE</p></td>
+<td><p>Winter</p></td>
+<td><p>80.</p></td>
+<td><p>.95</p></td>
+<td><p>.98</p></td>
+<td><p>0.001</p></td>
+<td><p>5.</p></td>
+<td><p>0.</p></td>
+<td><p>8.8e12</p></td>
+</tr>
+<tr class="row-odd"><td><p>NICE</p></td>
+<td><p>Summer</p></td>
+<td><p>80.</p></td>
+<td><p>.95</p></td>
+<td><p>.98</p></td>
+<td><p>0.001</p></td>
+<td><p>5.</p></td>
+<td><p>0.</p></td>
+<td><p>7.6e12</p></td>
+</tr>
+</tbody>
+</table>
+<ol class="simple">
+<li><p>Increase albedo to 80 (already in simulations)</p></li>
+<li><p>Increase surface emissivity from 0.95 to 0.98</p></li>
+<li><p>Decrease surface roughness from 0.1 to 0.001</p></li>
+<li><p>Decreased surface heat capacity and use a different value for winter and summer.</p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">REVIEWING VALUES IN <code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code></p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Sarah Y. Murphy<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
