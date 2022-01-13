@@ -66,7 +66,7 @@ z
 
 # We have roughness length from EddyPro, how does this match up to my calculated roughness length?
 # 
-# EddyPro calculates roughness length using the canopy height: $z_{0} = 0.15 * canopy\space height$, which is defined as $0$ in our EddyPro runs.
+# EddyPro calculates roughness length using the canopy height: $z_{0} = 0.15 * canopy\space height$, which is defined as $0$ in our EddyPro runs {cite}`eproman`.
 
 # In[3]:
 
@@ -89,7 +89,7 @@ print(roughness_length)
 # ---
 # ## Surface Heat Capacity 
 # 
-# https://ncar.github.io/CAM/doc/build/html/cam5_scientific_guide/sea_ice.html, equation 12
+# Sea Ice Thermodynamics {cite}`camdoc` equation 12
 # 
 # $$ c(T,S) = c_{0} + \frac{L_{i}\mu S}{T^{2}} $$
 # 
@@ -470,7 +470,7 @@ plt.legend(['Surface Heat Capacity',
 
 # The correction term is clearly dominating the surface heat capacity. What happens if we use the other equation in that document to calculate heat capacity?
 # 
-# https://ncar.github.io/CAM/doc/build/html/cam5_scientific_guide/sea_ice.html, equation 13
+# Sea Ice Thermodynamics {cite}`camdoc` equation 13
 # 
 # $$ Q(S, T, T') = \rho_{i} c_{0} ( - \mu S - T) + \rho_{i} L_{0} ( 1 + \frac{\mu S}{T} ) $$
 # 
