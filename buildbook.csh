@@ -1,6 +1,6 @@
 
 echo -n "What changes did you make?    "
-set changes=$<
+set changes = $<
 
 jupyter-book build ../wrf_analysis_book
 
