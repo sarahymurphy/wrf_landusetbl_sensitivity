@@ -1,4 +1,4 @@
-echo -n "Changes made"
+echo -n "What changes did you make?    "
 set changes = $<
 jupyter-book build ../wrf_analysis_book
 git add *
