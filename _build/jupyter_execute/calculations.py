@@ -11,7 +11,7 @@
 # 
 # - $z_{0}$ is the roughness length
 # - $z_{1}$ height of $U_{1}$ ($2 m$)
-# - $z_{2}$ height of $U_{2}$ ($4 m$)
+# - $z_{2}$ height of $U_{2}$ ($10 m$)
 # - $k$ is the Von Karmon constant ($0.4$)
 # - $u*$ is friction velocity (measured, in flux dataset)
 # - $U_{1}$ wind speed at $z_{1}$ (measued, in meteorology dataset)
@@ -66,6 +66,8 @@ print('Surface Roughness Length (m):')
 z
 
 
+# I calculated the above surface roughness length using $z_{2} = 4m$ and $z_{2} = 10m$ (and modified $U_{2}$ accordingly) and found both heights gave similar results.
+# 
 # We have roughness length from EddyPro, how does this match up to my calculated roughness length?
 # 
 # EddyPro calculates roughness length using the canopy height: $z_{0} = 0.15 * canopy\space height$, which is defined as $0$ in our EddyPro runs {cite}`eproman`.
