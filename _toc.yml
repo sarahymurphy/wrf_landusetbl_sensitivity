@@ -10,3 +10,4 @@ parts:
     chapters:
     - file: calculations.ipynb
     - file: summary.md
+    - file: references.md
