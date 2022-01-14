@@ -169,7 +169,7 @@ plt.hlines(f4.mean(axis = 1).mean(), xmin = '2015-06-07', xmax = '2015-06-21', l
 plt.hlines(wint.mean(axis = 1).mean(), xmin = '2015-01-01', xmax = '2015-04-01', linestyle = '--', color = 'pink')
 plt.hlines(summ.mean(axis = 1).mean(), xmin = '2015-04-07', xmax = '2015-06-21', linestyle = '--', color = 'cyan')
 
-plt.ylabel('Ice Surface Temperature $(^{/circ}c)$')
+plt.ylabel('Ice Surface Temperature $(^{\circ}c)$')
 plt.title('Ice Surface Temperature')
 plt.grid()
 plt.legend(['Measurements', 'Experiment Mean: ' + str(np.round(surft_df.mean(axis = 1).mean(),2)) + ' c', 
