@@ -169,7 +169,7 @@ plt.hlines(f4.mean(axis = 1).mean(), xmin = '2015-06-07', xmax = '2015-06-21', l
 plt.hlines(wint.mean(axis = 1).mean(), xmin = '2015-01-01', xmax = '2015-04-01', linestyle = '--', color = 'pink')
 plt.hlines(summ.mean(axis = 1).mean(), xmin = '2015-04-07', xmax = '2015-06-21', linestyle = '--', color = 'cyan')
 
-plt.ylabel('Ice Surface Temperature (c)')
+plt.ylabel('Ice Surface Temperature $(^{/circ}c)$')
 plt.title('Ice Surface Temperature')
 plt.grid()
 plt.legend(['Measurements', 'Experiment Mean: ' + str(np.round(surft_df.mean(axis = 1).mean(),2)) + ' c', 
@@ -236,7 +236,7 @@ plt.hlines(wint.mean(axis = 1).mean(), xmin = '2015-01-01', xmax = '2015-04-01',
 plt.hlines(summ.mean(axis = 1).mean(), xmin = '2015-04-07', xmax = '2015-06-21', linestyle = '--', color = 'cyan')
 
 
-plt.ylabel('Ice Surface Temperature (c)')
+plt.ylabel('Ice Surface Temperature $(^{\circ}c)$')
 plt.title('Ice Surface Temperature')
 plt.grid()
 plt.legend(['Ice Measurements', 
@@ -294,7 +294,7 @@ plt.hlines(f4.mean(axis = 1).mean(), xmin = '2015-06-07', xmax = '2015-06-21', l
 plt.hlines(wint.mean(axis = 1).mean(), xmin = '2015-01-01', xmax = '2015-04-01', linestyle = '--', color = 'pink')
 plt.hlines(summ.mean(axis = 1).mean(), xmin = '2015-04-07', xmax = '2015-06-21', linestyle = '--', color = 'cyan')
 
-plt.ylabel('Mean Ice Core Salinity (g/kg)')
+plt.ylabel('Mean Ice Core Salinity $(g/kg)$')
 plt.title('Ice Core Salinity')
 plt.grid()
 
@@ -414,7 +414,7 @@ plt.hlines(summ.mean(), xmin = '2015-04-07', xmax = '2015-06-21', linestyle = '-
 
 plt.grid()
 plt.title('Correction Term in Surface Heat Capacity')
-plt.ylabel('Correction Term (J/(kg K))')
+plt.ylabel('Correction Term $(J/(kg \ K))$')
 plt.xlabel('Date');
 
 plt.legend(['Correction Term', 
@@ -456,7 +456,7 @@ plt.hlines(summ.mean(), xmin = '2015-04-07', xmax = '2015-06-21', linestyle = '-
 
 plt.grid()
 plt.title('Surface Heat Capacity')
-plt.ylabel('Heat Capacity (J/(kg K))')
+plt.ylabel('Heat Capacity $(J/(kg \ K))$')
 plt.xlabel('Date');
 
 plt.legend(['Surface Heat Capacity', 
@@ -496,7 +496,7 @@ plt.hlines(f4.mean(axis = 1).mean(), xmin = '2015-06-07', xmax = '2015-06-21', l
 plt.hlines(wint.mean(axis = 1).mean(), xmin = '2015-01-01', xmax = '2015-04-01', linestyle = '--', color = 'pink')
 plt.hlines(summ.mean(axis = 1).mean(), xmin = '2015-04-07', xmax = '2015-06-21', linestyle = '--', color = 'cyan')
 
-plt.ylabel('Density (kg/m3)')
+plt.ylabel('Density $(kg/m^{3})$')
 plt.title('Ice Density')
 plt.ylim(800, 950)
 plt.grid()
@@ -582,17 +582,17 @@ plt.hlines(f4.mean(), xmin = '2015-06-07', xmax = '2015-06-21', linestyle = '--'
 plt.hlines(wint.mean(), xmin = '2015-01-01', xmax = '2015-04-01', linestyle = '--', color = 'pink')
 plt.hlines(summ.mean(), xmin = '2015-04-07', xmax = '2015-06-21', linestyle = '--', color = 'cyan')
 
-plt.ylabel('Albedo (%)')
+plt.ylabel('Albedo $(\%)$')
 plt.title('Surface Albedo')
 
 plt.grid()
-plt.legend(['Measurements', 'Experiment Mean: ' + str(np.round(albedo_dataframe.mean(),2)) + ' kg/m3', 
+plt.legend(['Measurements', 'Experiment Mean: ' + str(np.round(albedo_dataframe.mean(),2)), 
             'Floe 1 Mean:                ' + str(np.round(f1.mean(),2)), 
-            'Floe 2 Mean:          ' + str(np.round(f2.mean(),2)) + ' kg/m3', 
-            'Floe 3 Mean:          ' + str(np.round(f3.mean(),2)) + ' kg/m3', 
-            'Floe 4 Mean:          ' + str(np.round(f4.mean(),2)) + ' kg/m3',
-            'Winter Mean:         ' + str(np.round(wint.mean(),2)) + ' kg/m3', 
-            'Summer Mean:      ' + str(np.round(summ.mean(),2)) + ' kg/m3'], loc = 'lower left');
+            'Floe 2 Mean:          ' + str(np.round(f2.mean(),2)), 
+            'Floe 3 Mean:          ' + str(np.round(f3.mean(),2)), 
+            'Floe 4 Mean:          ' + str(np.round(f4.mean(),2)),
+            'Winter Mean:         ' + str(np.round(wint.mean(),2)), 
+            'Summer Mean:      ' + str(np.round(summ.mean(),2))], loc = 'lower left');
 
 
 # So we could increase the surface albedo to **0.86 in winter** and **0.81 in summer** 

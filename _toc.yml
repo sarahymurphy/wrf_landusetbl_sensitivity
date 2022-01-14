@@ -3,6 +3,10 @@
 
 format: jb-book
 root: intro
-chapters:
-- file: calculations.ipynb
-- file: summary.md
+
+
+parts:
+  - caption: 
+    chapters:
+    - file: calculations.ipynb
+    - file: summary.md
