@@ -105,6 +105,11 @@
    Summary and Recommendations
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -326,7 +331,7 @@
 <h2>Surface Roughness Length<a class="headerlink" href="#surface-roughness-length" title="Permalink to this headline">¶</a></h2>
 <div class="math notranslate nohighlight">
 \[ z_{0} = \frac{(z_{2}-z_{1})}{[exp(\frac{kU_{2}}{u*}) - exp(\frac{kU_{1}}{u*})]} \]</div>
-<p>Equation from <span id="id1">[<a class="reference internal" href="summary.html#id6">UCAR, 2022</a>]</span></p>
+<p>Equation from <span id="id1">[<a class="reference internal" href="references.html#id6">UCAR, 2022</a>]</span></p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(z_{0}\)</span> is the roughness length</p></li>
 <li><p><span class="math notranslate nohighlight">\(z_{1}\)</span> height of <span class="math notranslate nohighlight">\(U_{1}\)</span> (<span class="math notranslate nohighlight">\(2 m\)</span>)</p></li>
@@ -396,7 +401,7 @@
 </div>
 </div>
 <p>We have roughness length from EddyPro, how does this match up to my calculated roughness length?</p>
-<p>EddyPro calculates roughness length using the canopy height: <span class="math notranslate nohighlight">\(z_{0} = 0.15 * canopy\space height\)</span>, which is defined as <span class="math notranslate nohighlight">\(0\)</span> in our EddyPro runs <span id="id2">[<a class="reference internal" href="summary.html#id4">LI-COR, 2021</a>]</span>.</p>
+<p>EddyPro calculates roughness length using the canopy height: <span class="math notranslate nohighlight">\(z_{0} = 0.15 * canopy\space height\)</span>, which is defined as <span class="math notranslate nohighlight">\(0\)</span> in our EddyPro runs <span id="id2">[<a class="reference internal" href="references.html#id4">LI-COR, 2021</a>]</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">roughness_length</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Jan&#39;</span><span class="p">,</span><span class="s1">&#39;Feb&#39;</span><span class="p">,</span><span class="s1">&#39;Mar&#39;</span><span class="p">,</span><span class="s1">&#39;Apr&#39;</span><span class="p">,</span><span class="s1">&#39;May&#39;</span><span class="p">,</span><span class="s1">&#39;Jun&#39;</span><span class="p">])</span>
@@ -430,16 +435,16 @@ Jun  0.001
 <hr class="docutils" />
 <div class="section" id="surface-heat-capacity">
 <h2>Surface Heat Capacity<a class="headerlink" href="#surface-heat-capacity" title="Permalink to this headline">¶</a></h2>
-<p>Sea Ice Thermodynamics <span id="id3">[<a class="reference internal" href="summary.html#id5">UCAR, 2017</a>]</span> equation 12</p>
+<p>Sea Ice Thermodynamics <span id="id3">[<a class="reference internal" href="references.html#id5">UCAR, 2017</a>]</span> equation 12</p>
 <div class="math notranslate nohighlight">
 \[ c(T,S) = c_{0} + \frac{L_{i}\mu S}{T^{2}} \]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(c(T,S)\)</span> is the heat capacity, <span class="math notranslate nohighlight">\(\frac{J}{kg K}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(c_{0}\)</span> is the heat capacity of fresh ice <span class="math notranslate nohighlight">\(2054 \frac{J}{kg K}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(L_{i}\)</span> is the latent heat of fusion <span class="math notranslate nohighlight">\(3.340 * 10^{5} \frac{J}{kg}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(S\)</span> is the salinity (we have salinity from the ice measurements) <span class="math notranslate nohighlight">\(\frac{g}{g}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(c_{0}\)</span> is the heat capacity of fresh ice, <span class="math notranslate nohighlight">\(2054 \frac{J}{kg K}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(L_{i}\)</span> is the latent heat of fusion, <span class="math notranslate nohighlight">\(3.340 * 10^{5} \frac{J}{kg}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(S\)</span> is the salinity (we have salinity from the ice measurements), <span class="math notranslate nohighlight">\(ppt\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(T\)</span> is temperature (we have ice surface temperature from the ice measurements), <span class="math notranslate nohighlight">\(K\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\mu\)</span> is the ocean freezing temperature constant and is directly related to salinity. Estimation: <span class="math notranslate nohighlight">\(0.054 \frac{^{\circ} C}{ppt}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span> is the ocean freezing temperature constant and is directly related to salinity, <span class="math notranslate nohighlight">\(0.054 \frac{^{\circ} C}{ppt}\)</span></p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
