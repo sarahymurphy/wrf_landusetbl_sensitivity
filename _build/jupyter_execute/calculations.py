@@ -178,7 +178,7 @@ plt.legend(['Measurements', 'Experiment Mean: ' + str(np.round(surft_df.mean(axi
             'Floe 3 Mean:            ' + str(np.round(f3.mean(axis = 1).mean(),2)) + ' c', 
             'Floe 4 Mean:             ' + str(np.round(f4.mean(axis = 1).mean(),2)) + ' c', 
             'Winter Mean:          ' + str(np.round(wint.mean(axis = 1).mean(),2)) + ' c', 
-            'Summer Mean:         ' + str(np.round(summ.mean(axis = 1).mean(),2)) + ' c'])
+            'Summer Mean:         ' + str(np.round(summ.mean(axis = 1).mean(),2)) + ' c']);
 
 
 # In[6]:
@@ -247,7 +247,7 @@ plt.legend(['Ice Measurements',
             'Floe 3 Mean:            ' + str(np.round(f3.mean(axis = 1).mean(),2)) + ' c', 
             'Floe 4 Mean:             ' + str(np.round(f4.mean(axis = 1).mean(),2)) + ' c', 
             'Winter Mean:          ' + str(np.round(wint.mean(axis = 1).mean(),2)) + ' c', 
-            'Summer Mean:         ' + str(np.round(summ.mean(axis = 1).mean(),2)) + ' c',])
+            'Summer Mean:         ' + str(np.round(summ.mean(axis = 1).mean(),2)) + ' c',]);
 
 
 # The dashed line means in this figure represent means of the orange line
@@ -304,7 +304,7 @@ plt.legend(['Measurements', 'Experiment Mean:    ' + str(np.round(salinity_df.me
             'Floe 3 Mean:             ' + str(np.round(f3.mean(axis = 1).mean(),2)) + ' g/kg', 
             'Floe 4 Mean:             ' + str(np.round(f4.mean(axis = 1).mean(),2)) + ' g/kg',
             'Winter Mean:            ' + str(np.round(wint.mean(axis = 1).mean(),2)) + ' g/kg', 
-            'Summer Mean:         ' + str(np.round(summ.mean(axis = 1).mean(),2)) + ' g/kg'], loc = 'upper left')
+            'Summer Mean:         ' + str(np.round(summ.mean(axis = 1).mean(),2)) + ' g/kg'], loc = 'upper left');
 
 
 # In[14]:
@@ -425,7 +425,7 @@ plt.legend(['Correction Term',
             'Floe 4 Mean:        ' + "{:.2e}".format(f4.mean()) + ' J/(kg K)', 
             'Winter Mean:       ' + "{:.2e}".format(wint.mean()) + ' J/(kg K)', 
             'Summer Mean:    ' + "{:.2e}".format(summ.mean()) + ' J/(kg K)'],
-           loc = 'upper right')
+           loc = 'upper right');
 
 
 # The value of $\mu$ is the determining factor for how large this value is
@@ -467,7 +467,7 @@ plt.legend(['Surface Heat Capacity',
             'Floe 4 Mean:              ' + "{:.2e}".format(f4.mean()) + ' J/(kg K)', 
             'Winter Mean:             ' + "{:.2e}".format(wint.mean()) + ' J/(kg K)', 
             'Summer Mean:          ' + "{:.2e}".format(summ.mean()) + ' J/(kg K)'],
-           loc = 'upper right')
+           loc = 'upper right');
 
 
 # The correction term is clearly dominating the surface heat capacity. To get it into the correct units, we need to multiply this by the ice density.
@@ -506,7 +506,7 @@ plt.legend(['Measurements', 'Experiment Mean: ' + str(np.round(density_df.mean(a
             'Floe 3 Mean:          ' + str(np.round(f3.mean(axis = 1).mean(),2)) + ' kg/m3', 
             'Floe 4 Mean:             ' + str(np.round(f4.mean(axis = 1).mean(),2)),
             'Winter Mean:         ' + str(np.round(wint.mean(axis = 1).mean(),2)) + ' kg/m3', 
-            'Summer Mean:      ' + str(np.round(summ.mean(axis = 1).mean(),2)) + ' kg/m3'], loc = 'lower center')
+            'Summer Mean:      ' + str(np.round(summ.mean(axis = 1).mean(),2)) + ' kg/m3'], loc = 'lower center');
 
 
 # In[21]:
@@ -519,9 +519,9 @@ np.round(density_df.mean(axis = 1).mean(),2)
 # In[22]:
 
 
-c = c + np.round(density_df.mean(axis = 1).mean(),2)   # J/(kg K) * kg/m3 = J/(m3 K)
-c_w = c_w + np.round(density_df.mean(axis = 1).mean(),2)   # J/(kg K) * kg/m3 = J/(m3 K)
-c_s = c_s + np.round(density_df.mean(axis = 1).mean(),2)   # J/(kg K) * kg/m3 = J/(m3 K)
+c = c * density_df.mean(axis = 1).mean()   # J/(kg K) * kg/m3 = J/(m3 K)
+c_w = c_w * density_df.mean(axis = 1).mean()   # J/(kg K) * kg/m3 = J/(m3 K)
+c_s = c_s * density_df.mean(axis = 1).mean()   # J/(kg K) * kg/m3 = J/(m3 K)
 print('Surface Heat Capacity (J/(m3 K))')
 print("{:e}".format(c[0]))
 
@@ -533,11 +533,18 @@ print('Winter - Surface Heat Capacity (J/(m3 K))')
 print("{:e}".format(c_w[0]))
 
 
+# In[24]:
+
+
+print('Summer - Surface Heat Capacity (J/(m3 K))')
+print("{:e}".format(c_s[0]))
+
+
 # ## Albedo
 # 
 # What is the exact albedo throughout the experiment? We used a value of .8 for the simulations, but what is the actual value for each season? We have these measurements from N-ICE.
 
-# In[24]:
+# In[25]:
 
 
 # Importing and formatting the albedo dataset
@@ -551,7 +558,7 @@ albedo_dataframe.index = pd.to_datetime(albedo_dataframe.index)
 albedo_dataframe = albedo_dataframe['albedo']
 
 
-# In[25]:
+# In[26]:
 
 
 f1 = albedo_dataframe['2015-01-01':'2015-02-21']
@@ -585,7 +592,7 @@ plt.legend(['Measurements', 'Experiment Mean: ' + str(np.round(albedo_dataframe.
             'Floe 3 Mean:          ' + str(np.round(f3.mean(),2)) + ' kg/m3', 
             'Floe 4 Mean:          ' + str(np.round(f4.mean(),2)) + ' kg/m3',
             'Winter Mean:         ' + str(np.round(wint.mean(),2)) + ' kg/m3', 
-            'Summer Mean:      ' + str(np.round(summ.mean(),2)) + ' kg/m3'], loc = 'lower left')
+            'Summer Mean:      ' + str(np.round(summ.mean(),2)) + ' kg/m3'], loc = 'lower left');
 
 
 # So we could increase the surface albedo to **0.86 in winter** and **0.81 in summer** 
