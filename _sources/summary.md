@@ -7,14 +7,14 @@
 
 ## Other ice and snow sections from `LANDUSE.TBL`
 
-| Section | Season | Albedo (%) | Suface Moisture Availability (*100%) | Surface Emissivity (%) | Surface Roughness | Thermal Inertia Constant | Snow Cover Effect | Surface Heat Capacity (j/m3 K) | Label       |
-| ------- | ------ | ------ | ---- | ---- | ---- | ------ | -----| ------ | ------------- |
+| <div style="width:125px">Section | <div style="width:125px">Season | <div style="width:125px">Albedo<br>$(\%)$ | <div style="width:125px">Suface Moisture Availability<br>$(*100\%)$ | <div style="width:125px">Surface Emissivity<br>$(\%)$ | <div style="width:125px">Surface Roughness | <div style="width:125px">Thermal Inertia Constant | <div style="width:125px">Snow Cover Effect | <div style="width:125px">Surface Heat Capacity<br>$(J/(m^{3} K))$ | <div style="width:200px">Category       |
+| :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: |
 | OLD     | Summer | 55.    | .95  | .95  | 5.   | 5.     | 0.   | 9.0e25 | Permanent Ice |
 | OLD     | Winter | 70.    | .95  | .95  | 5.   | 5.     | 0.   | 9.0e25 | Permanent Ice |
 | USGS    | Summer | 55.    | .95  | .95  | 0.1  | 5.     | 0.   | 9.0e25 | Snow or Ice   |
 | USGS    | Winter | 70.    | .95  | .95  | 0.1  | 5.     | 0.   | 9.0e25 | Snow or Ice   |
-| MODIFIED_IGBP_MODIS_NOAH | Summer | 55. | .95 | .95 | 0.1 | 5. | 0 | 9.0e25 | Snow or Ice |
-| MODIFIED_IGBP_MODIS_NOAH | Winter | 70. | .95 | .95 | 0.1 | 5. | 0 | 9.0e25 | Snow or Ice |
+| MODIFIED_IGBP<br>_MODIS_NOAH | Summer | 55. | .95 | .95 | 0.1 | 5. | 0 | 9.0e25 | Snow or Ice |
+| MODIFIED_IGBP<br>_MODIS_NOAH | Winter | 70. | .95 | .95 | 0.1 | 5. | 0 | 9.0e25 | Snow or Ice |
 | SiB     | Summer | 55.    | .95  | .95  | 5.   | 5.     | 0.   | 9.0e25 | Ice Cap and Glacier |
 | SiB     | Winter | 70.    | .95  | .95  | 5.   | 5.     | 0.   | 9.0e25 | Ice Cap and Glacier |
 | LW12    | All    | 70.    | .95  | .95  | 5.   | 5.     | 0.   | 9.0e25 | Snow and Ice |
@@ -35,15 +35,15 @@
 ## Values in `VEGPARM.TBL`
 ** Not used in the idealized simulations **
 
-| Section | Vegetation Fraction | Rooting Depth | Stomatal Resistance | Radiation Stress | Vapor Pressure Deficit Function Parameter | Soil Water Equivalent Snow Depth | Maximum Albedo Over Deep Snow | Minimum LAI | Maximum LAI | Minimum Emissivity | Maximum Emissivity | Minimum Albedo | Maximum Albedo | Minimum Roughness Length | Maximum Roughness Length | Category |
-| ---- | - | - | --- | --- | --- | ---- | -- | ---- | ---- | ---- | ---- | ---- | ---- | ----- | ----- | ----------- |
+| <div style="width:125px">Section | <div style="width:125px">Vegetation Fraction | <div style="width:125px">Rooting Depth | <div style="width:125px">Stomatal Resistance | <div style="width:125px">Radiation Stress | <div style="width:125px">Vapor Pressure Deficit Function Parameter | <div style="width:125px">Soil Water Equivalent Snow Depth | <div style="width:125px">Maximum Albedo Over Deep Snow | <div style="width:125px">Minimum LAI | <div style="width:125px">Maximum LAI | <div style="width:125px">Minimum Emissivity | <div style="width:125px">Maximum Emissivity | <div style="width:125px">Minimum Albedo | <div style="width:125px">Maximum Albedo | <div style="width:125px">Minimum Roughness Length | <div style="width:125px">Maximum Roughness Length | <div style="width:200px">Category |
+| :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: |
 | USGS | 0 | 1 | 999 | 999 | 999 | 0.02 | 82 | 0.01 | 0.01 | 0.95 | 0.95 | 0.55 | 0.70 | 0.001 | 0.001 | Snow or Ice |
-| MODIFIED_IGBP_MODIS_NOAH | 0 | 1 | 999 | 999 | 999 | 0.02 | 82 | 0.01 | 0.01 | 0.95 | 0.95 | .55 | .7 | 0.001 | 0.001 | Snow and Ice |
+| MODIFIED_IGBP<br>_MODIS_NOAH | 0 | 1 | 999 | 999 | 999 | 0.02 | 82 | 0.01 | 0.01 | 0.95 | 0.95 | .55 | .7 | 0.001 | 0.001 | Snow and Ice |
 | NLDC | 0 | 1 | 999 | 999 | 999 | 0.02 | 82 | 0.01 | 0.01 | 0.95 | 0.95 | 0.55 | 0.70 | 0.001 | 0.001 | Permanent Snow |
 | NLDC | 0 | 1 | 999 | 999 | 999 | 0.02 | 82 | 0.01 | 0.01 | 0.95 | 0.95 | 0.55 | 0.70 | 0.001 | 0.001 | Perennial Ice/Snow |
 
-| Section | Albedo | Roughness Length | LEMI\* | PC\* | Vegetation Factor | IFOR\* | Stomatal Resistance | Radiation Stress | Vapor Pressure Deficit Function Parameter | Soil Water Equivalent Snow Depth | LAI | Maximum Albedo | Category|
-| -------- | ---- | ------ | ---- | ---- | ---- | - | ---- | ---- | ---- | ---- | ---- | -- | ------------- |
+| <div style="width:125px">Section | <div style="width:125px">Albedo | <div style="width:125px">Roughness Length | <div style="width:125px">LEMI\* | <div style="width:125px">PC\* | <div style="width:125px">Vegetation Factor | <div style="width:125px">IFOR\* | <div style="width:125px">Stomatal Resistance | <div style="width:125px">Radiation Stress | <div style="width:125px">Vapor Pressure Deficit Function Parameter | <div style="width:125px">Soil Water Equivalent Snow Depth | <div style="width:125px">LAI | <div style="width:125px">Maximum Albedo | <div style="width:200px">Category |
+| :-------: | :-------: | :-------: | :-------: | :-------: | :-------: |:-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: |
 | USGS-RUC | 0.55 | 0.0024 | 0.98 | 0.00 | 0.00 | 9 | 999. | 999. | 999. | 0.02 | 0.01 | 75 | Snow or Ice   | 
 | MODIS-RUC | 0.55 | 0.011 | 0.98 | 0.00 | 0.00 | 9 | 999. | 999. | 999. | 0.02 | 0.01 | 82 | Snow and Ice  |
 
@@ -55,8 +55,8 @@
 ## Values in `SOILPARM.TBL`
 ** Not used in the idealized simulation, for land-ice **
 
-| Section | B Parameter | Dry Soil Moisture Threshold | Soil Thermal Diffusivity/Conducticity Coefficient | Saturation Soil Moisture Content | Reference Soil Moisture | Saturation Soil Matric Potential | Saturation Soil Conductivity | Saturation Soil Diffusivity | Wilting Point Soil Moisture | Soil Quartz Content |
-| -------- | ---- | ----- | ------ | ----- | ----- | ----- | ------- | -------- | -------- | ----- |       
+| <div style="width:125px">Section | <div style="width:125px">B Parameter | <div style="width:125px">Dry Soil Moisture Threshold | <div style="width:200px">Soil Thermal Diffusivity/Conducticity Coefficient | <div style="width:125px">Saturation Soil Moisture Content | <div style="width:125px">Reference Soil Moisture | <div style="width:125px">Saturation Soil Matric Potential | <div style="width:125px">Saturation Soil Conductivity | <div style="width:125px">Saturation Soil Diffusivity | <div style="width:125px">Wilting Point Soil Moisture | <div style="width:125px">Soil Quartz Content |
+| :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: |       
 | STAS     | 4.26 | 0.028 | -1.044 | 0.421 | 0.283 | 0.036 | 1.41E-5 | 0.514E-5 | 0.028    | 0.25  |
 | STAS-RUC | 4.90 | 0.065 | 2.10   | 0.435 | 0.249 | 0.218 | 3.47E-5 | 0.514E-5 | 0.114    | 0.05 |
 
@@ -64,8 +64,8 @@
 
 ## What do I recommend?
 
-| Section | Season | Albedo (%) | Surface Moisture Availability (*100%) | Surface Emissivity (%) | Surface Roughness | Thermal Inertia Constant | Snow Cover Effect | Surface Heat Capacity (j/m3 K) | 
-| ------- | ------ | ---------- | ------------------------------------ | ---------------------- | ----------------- | ------------------------ | ----------------- | ------------------------------ | 
+| <div style="width:125px">Section | <div style="width:125px">Season | <div style="width:125px">Albedo<br>$(\%)$ | <div style="width:125px">Surface Moisture Availability<br>$(*100\%)$ | <div style="width:125px">Surface Emissivity<br>$(\%)$ | <div style="width:125px">Surface Roughness | <div style="width:125px">Thermal Inertia Constant | <div style="width:125px">Snow Cover Effect | <div style="width:125px">Surface Heat Capacity<br>$(J/(m^{3} K))$ | 
+| :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | 
 | NICE    | Winter | 86.        | .95                                  | .98                    | 0.001             | 5.                       | 0.                | 5.4e10                        |
 | NICE    | Summer | 81.        | .95                                  | .98                    | 0.001             | 5.                       | 0.                | 4.6e10                        |
 
@@ -77,4 +77,5 @@
 ---
 
 ```{bibliography}
+:style: plain
 ```

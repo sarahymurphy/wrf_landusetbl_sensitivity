@@ -52,6 +52,13 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Calculations" href="calculations.html" />
@@ -284,7 +291,7 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="reviewing-values-in-landuse-tbl">
 <h1>Reviewing Values in <code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code><a class="headerlink" href="#reviewing-values-in-landuse-tbl" title="Permalink to this headline">¶</a></h1>
-<p><code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code> is used by the land surface model to specify some variables depending on the land surface type. According to the Dudhia WRF Overview presentation <span id="id1">[<a class="reference internal" href="summary.html#id3">Jimy, 1996</a>, <a class="reference internal" href="summary.html#id2">Jimy, 2014</a>]</span>, the following are used:</p>
+<p><code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code> is used by the land surface model to specify some variables depending on the land surface type. According to the Dudhia WRF Overview presentation <span id="id1">[<a class="reference internal" href="summary.html#id3">Dudhia, 1996</a>, <a class="reference internal" href="summary.html#id2">Dudhia, 2014</a>]</span>, the following are used:</p>
 <ul class="simple">
 <li><p>VEGPARM.TB - Vegetation properties in <strong>Noah and RUC</strong></p></li>
 <li><p>SOILPARM.TBL - Soil peoperties in <strong>Noah and RUC</strong></p></li>
@@ -302,37 +309,37 @@
 <h2>Currently for snow and ice in my idealized simulations:<a class="headerlink" href="#currently-for-snow-and-ice-in-my-idealized-simulations" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Season</p></th>
-<th class="head"><p>Albedo (<span class="math notranslate nohighlight">\(\%\)</span>)</p></th>
-<th class="head"><p>Suface Moisture Availability (<span class="math notranslate nohighlight">\(*100\%\)</span>)</p></th>
-<th class="head"><p>Surface Emissivity (<span class="math notranslate nohighlight">\(\%\)</span>)</p></th>
-<th class="head"><p>Surface Roughness</p></th>
-<th class="head"><p>Thermal Inertia Constant</p></th>
-<th class="head"><p>Snow Cover Effect</p></th>
-<th class="head"><p>Surface Heat Capacity (<span class="math notranslate nohighlight">\(J/(m^{3}K)\)</span>)</p></th>
-<th class="head"><p>Label</p></th>
+<tr class="row-odd"><th class="text-align:center head"><p><div style="width:75px">Season</div></p></th>
+<th class="text-align:center head"><p><div style="width:75px">Albedo<br><span class="math notranslate nohighlight">\((\%)\)</span></div></p></th>
+<th class="text-align:center head"><p><div style="width:100px">Suface Moisture Availability<br><span class="math notranslate nohighlight">\((*100\%)\)</span></div></p></th>
+<th class="text-align:center head"><p><div style="width:100px">Surface Emissivity<br><span class="math notranslate nohighlight">\((\%)\)</span></div></p></th>
+<th class="text-align:center head"><p><div style="width:100px">Surface Roughness</div></p></th>
+<th class="text-align:center head"><p><div style="width:100px">Thermal Inertia Constant</div></p></th>
+<th class="text-align:center head"><p><div style="width:100px">Snow Cover Effect</div></p></th>
+<th class="text-align:center head"><p><div style="width:100px">Surface Heat Capacity<br><span class="math notranslate nohighlight">\((J / (m^{3} K))\)</span></div></p></th>
+<th class="text-align:center head"><p><div style="width:75px">Label</div></center></p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Summer</p></td>
-<td><p>55.</p></td>
-<td><p>.95</p></td>
-<td><p>.95</p></td>
-<td><p>0.1</p></td>
-<td><p>5.</p></td>
-<td><p>0.</p></td>
-<td><p>9.0e25</p></td>
-<td><p>Snow or Ice</p></td>
+<tr class="row-even"><td class="text-align:center"><p>Summer</p></td>
+<td class="text-align:center"><p>55.</p></td>
+<td class="text-align:center"><p>.95</p></td>
+<td class="text-align:center"><p>.95</p></td>
+<td class="text-align:center"><p>0.1</p></td>
+<td class="text-align:center"><p>5.</p></td>
+<td class="text-align:center"><p>0.</p></td>
+<td class="text-align:center"><p>9.0e25</p></td>
+<td class="text-align:center"><p>Snow or Ice</p></td>
 </tr>
-<tr class="row-odd"><td><p>Winter</p></td>
-<td><p>70.</p></td>
-<td><p>.95</p></td>
-<td><p>.95</p></td>
-<td><p>0.1</p></td>
-<td><p>5.</p></td>
-<td><p>0.</p></td>
-<td><p>9.0e25</p></td>
-<td><p>Snow or Ice</p></td>
+<tr class="row-odd"><td class="text-align:center"><p>Winter</p></td>
+<td class="text-align:center"><p>70.</p></td>
+<td class="text-align:center"><p>.95</p></td>
+<td class="text-align:center"><p>.95</p></td>
+<td class="text-align:center"><p>0.1</p></td>
+<td class="text-align:center"><p>5.</p></td>
+<td class="text-align:center"><p>0.</p></td>
+<td class="text-align:center"><p>9.0e25</p></td>
+<td class="text-align:center"><p>Snow or Ice</p></td>
 </tr>
 </tbody>
 </table>

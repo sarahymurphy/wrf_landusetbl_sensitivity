@@ -12,8 +12,8 @@
 
 ## Currently for snow and ice in my idealized simulations:
 
-| Season | Albedo ($\%$) | Suface Moisture Availability ($*100\%$) | Surface Emissivity ($\%$) | Surface Roughness | Thermal Inertia Constant | Snow Cover Effect | Surface Heat Capacity ($J/(m^{3}K)$) | Label       |
-| ------ | ------ | ---- | ---- | ---- | ------ | -----| ------ | ----------- |
+| <div style="width:75px">Season</div> | <div style="width:75px">Albedo<br>$(\%)$</div> | <div style="width:100px">Suface Moisture Availability<br>$(*100\%)$</div> | <div style="width:100px">Surface Emissivity<br>$(\%)$</div> | <div style="width:100px">Surface Roughness</div> | <div style="width:100px">Thermal Inertia Constant</div> | <div style="width:100px">Snow Cover Effect</div> | <div style="width:100px">Surface Heat Capacity<br>$(J / (m^{3} K))$</div> | <div style="width:75px">Label</div></center>       |
+| :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: |
 | Summer | 55.    | .95  | .95  | 0.1  | 5.     | 0.   | 9.0e25 | Snow or Ice |
 | Winter | 70.    | .95  | .95  | 0.1  | 5.     | 0.   | 9.0e25 | Snow or Ice |
 
