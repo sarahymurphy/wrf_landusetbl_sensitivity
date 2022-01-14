@@ -96,11 +96,11 @@ print(roughness_length)
 # $$ c(T,S) = c_{0} + \frac{L_{i}\mu S}{T^{2}} $$
 # 
 # - $c(T,S)$ is the heat capacity, $\frac{J}{kg K}$
-# - $c_{0}$ is the heat capacity of fresh ice $2054 \frac{J}{kg K}$
-# - $L_{i}$ is the latent heat of fusion $3.340 * 10^{5} \frac{J}{kg}$
-# - $S$ is the salinity (we have salinity from the ice measurements) $\frac{g}{g}$
+# - $c_{0}$ is the heat capacity of fresh ice, $2054 \frac{J}{kg K}$
+# - $L_{i}$ is the latent heat of fusion, $3.340 * 10^{5} \frac{J}{kg}$
+# - $S$ is the salinity (we have salinity from the ice measurements), $ppt$
 # - $T$ is temperature (we have ice surface temperature from the ice measurements), $K$
-# - $\mu$ is the ocean freezing temperature constant and is directly related to salinity. Estimation: $0.054 \frac{^{\circ} C}{ppt}$ 
+# - $\mu$ is the ocean freezing temperature constant and is directly related to salinity, $0.054 \frac{^{\circ} C}{ppt}$ 
 
 # In[4]:
 
