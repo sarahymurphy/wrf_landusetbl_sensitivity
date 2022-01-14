@@ -66,8 +66,8 @@
 
 | <div style="width:125px">Section | <div style="width:125px">Season | <div style="width:125px">Albedo<br>$(\%)$ | <div style="width:125px">Surface Moisture Availability<br>$(*100\%)$ | <div style="width:125px">Surface Emissivity<br>$(\%)$ | <div style="width:125px">Surface Roughness | <div style="width:125px">Thermal Inertia Constant | <div style="width:125px">Snow Cover Effect | <div style="width:125px">Surface Heat Capacity<br>$(J/(m^{3} K))$ | 
 | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | 
-| NICE    | Winter | 86.        | .95                                  | .98                    | 0.001             | 5.                       | 0.                | 4.8e12                        |
-| NICE    | Summer | 81.        | .95                                  | .98                    | 0.001             | 5.                       | 0.                | 4.2e12                        |
+| NICE    | Winter | 86.        | .95                                  | .98                    | 0.001             | 5.                       | 0.                | 2.05e03                        |
+| NICE    | Summer | 81.        | .95                                  | .98                    | 0.001             | 5.                       | 0.                | 2.05e03                        |
 
 1. Increase albedo in both the winter and summer
 2. Increase surface emissivity from 0.95 to 0.98
