@@ -321,42 +321,37 @@ np.round(salinity_df.mean(axis = 1).mean(),2)
 # $$ c(T,S) = c_{0} + \frac{L_{i}\mu S}{T^{2}} $$
 # 
 # - $c(T,S)$ is the heat capacity, $\frac{J}{kg K}$
-# - $c_{0}$ is the heat capacity of fresh ice $2054 \frac{J}{kg K}$
-# - $L_{i}$ is the latent heat of fusion $3.340 * 10^{5} \frac{J}{kg}$
-# - $S$ is the salinity (we have salinity from the ice measurements) $\frac{kg}{kg}$
+# - $c_{0}$ is the heat capacity of fresh ice, $2054 \frac{J}{kg K}$
+# - $L_{i}$ is the latent heat of fusion, $3.340 * 10^{5} \frac{J}{kg}$
+# - $S$ is the salinity (we have salinity from the ice measurements), $ppt$ (parts per thousand)
 # - $T$ is temperature (we have ice surface temperature from the ice measurements), $K$
-# - $\mu$ is the ocean freezing temperature constant and is directly related to salinity. Estimation: $0.054 \frac{^{\circ} C}{ppt}$ 
+# - $\mu$ is the ocean freezing temperature constant and is directly related to salinity, $0.054 \frac{^{\circ} C}{ppt}$ 
 # 
 
 # In[15]:
 
 
-#                                                                                    ** Desired units for each value
+#                                                                                      ** Desired units for each value
 # Salinity
-s = np.round(salinity_df.mean(axis = 1).mean(),2) # g / kg                           ** kg/kg
-s = s / 1000 # kg / kg 
+s = np.round(salinity_df.mean(axis = 1).mean(),2) # g / kg = ppt                       ** ppt (parts per THOUSAND)
 
 # Ocean freezing temperature constant    
-mu = 0.054 # c / ppt                                                                 ** K 
-mu = mu + 273.15 # K / ppt
-#  I believe that ppt refers to the salinity
-ppt = s * 10 ** 12  # ppt
-mu = mu * ppt # k 
+mu = 0.054 # c / ppt                                                                   ** K 
 
-# Heat capacity of fresh ice
-c0 = 2054 # J / (kg K)                                                               ** J/(kg K)
+# Heat capacity of fresh ice 
+c0 = 2054 # J / (kg K)                                                                 ** J/(kg K)
 
 # Ice surface temperature
-t = np.round(atmospheric_surface_temperature.mean(),2) # K                           ** K 
+t = np.round(atmospheric_surface_temperature.mean(),2) # K                             ** K 
 
 # Ice surface temperature - Summer
-t_s = np.round(atmospheric_surface_temperature['2015-04-07':'2015-06-21'].mean(),2) # c    
+t_s = np.round(atmospheric_surface_temperature['2015-04-07':'2015-06-21'].mean(),2) #  ** K   
 
 # Ice surface temperature - Winter
-t_w = np.round(atmospheric_surface_temperature['2015-01-01':'2015-04-01'].mean(),2) # c   
+t_w = np.round(atmospheric_surface_temperature['2015-01-01':'2015-04-01'].mean(),2) #  ** K   
 
 # Latent heat of fusion
-li = 3.340 * 10 ** 5 # J / kg                                                        ** J/kg
+li = 3.340 * 10 ** 5 # J / kg                                                          ** J/kg
 
 # Calculating
 c = c0 + ((li * mu * s) / (t**2))       # using mean temperature of entire experiment
@@ -386,51 +381,9 @@ print("{:e}".format(c_s[0]))
 # 
 # #### Units?
 # 
-# $\frac{\frac{J}{kg}K \frac{kg}{kg}}{K^{2}} = \frac{\frac{J}{kg}}{K} $
+# $\frac{\frac{J}{kg} \frac{K}{ppt} ppt}{K^{2}} = \frac{\frac{J}{kg}}{K} $
 
 # In[18]:
-
-
-plt.figure(figsize = (10,5))
-
-f1 = c0 + ((li * mu * s) / ((surft_df.mean(axis = 1)+273.15)**2))['2015-01-01':'2015-02-21']
-f2 = c0 + ((li * mu * s) / ((surft_df.mean(axis = 1)+273.15)**2))['2015-02-23':'2015-03-21']
-f3 = c0 + ((li * mu * s) / ((surft_df.mean(axis = 1)+273.15)**2))['2015-04-18':'2015-06-05']
-f4 = c0 + ((li * mu * s) / ((surft_df.mean(axis = 1)+273.15)**2))['2015-06-07':'2015-06-21']
-
-wint = c0 + ((li * mu * s) / ((surft_df.mean(axis = 1)+273.15)**2))['2015-01-01':'2015-04-01']
-summ = c0 + ((li * mu * s) / ((surft_df.mean(axis = 1)+273.15)**2))['2015-04-07':'2015-06-21']
-
-plt.plot(c0 + ((li * mu * s) / ((surft_df.mean(axis = 1)+273.15)**2)), 'o')
-plt.axhline(c0 + ((li * mu * s) / ((surft_df.mean(axis = 1)+273.15)**2)).mean(), linestyle = ':', linewidth = 2)
-
-plt.hlines(f1.mean(), xmin = '2015-01-01', xmax = '2015-02-21', linestyle = '--', color = 'g')
-plt.hlines(f2.mean(), xmin = '2015-02-23', xmax = '2015-03-21', linestyle = '--', color = 'r')
-plt.hlines(f3.mean(), xmin = '2015-04-18', xmax = '2015-06-05', linestyle = '--', color = 'purple')
-plt.hlines(f4.mean(), xmin = '2015-06-07', xmax = '2015-06-21', linestyle = '--', color = 'blue')
-
-plt.hlines(wint.mean(), xmin = '2015-01-01', xmax = '2015-04-01', linestyle = '--', color = 'pink')
-plt.hlines(summ.mean(), xmin = '2015-04-07', xmax = '2015-06-21', linestyle = '--', color = 'cyan')
-
-plt.grid()
-plt.title('Correction Term in Surface Heat Capacity')
-plt.ylabel('Correction Term $(J/(kg \ K))$')
-plt.xlabel('Date');
-
-plt.legend(['Correction Term', 
-            'Mean Correction: ' + "{:.2e}".format(c0 + ((li * mu * s) / ((surft_df.mean(axis = 1)+273.15)**2)).mean()) + ' J/(kg K)',
-            'Floe 1 Mean:        ' + "{:.2e}".format(f1.mean()) + ' J/(kg K)', 
-            'Floe 2 Mean:        ' + "{:.2e}".format(f2.mean()) + ' J/(kg K)', 
-            'Floe 3 Mean:        ' + "{:.2e}".format(f3.mean()) + ' J/(kg K)', 
-            'Floe 4 Mean:        ' + "{:.2e}".format(f4.mean()) + ' J/(kg K)', 
-            'Winter Mean:       ' + "{:.2e}".format(wint.mean()) + ' J/(kg K)', 
-            'Summer Mean:    ' + "{:.2e}".format(summ.mean()) + ' J/(kg K)'],
-           loc = 'upper right');
-
-
-# The value of $\mu$ is the determining factor for how large this value is
-
-# In[19]:
 
 
 plt.figure(figsize = (10,5))
@@ -455,18 +408,60 @@ plt.hlines(wint.mean(), xmin = '2015-01-01', xmax = '2015-04-01', linestyle = '-
 plt.hlines(summ.mean(), xmin = '2015-04-07', xmax = '2015-06-21', linestyle = '--', color = 'cyan')
 
 plt.grid()
+plt.title('Correction Term in Surface Heat Capacity')
+plt.ylabel('Correction Term $(J/(kg \ K))$')
+plt.xlabel('Date');
+
+plt.legend(['Correction Term', 
+            'Mean Correction: ' + "{:.2}".format(((li * mu * s) / ((surft_df.mean(axis = 1)+273.15)**2)).mean()) + ' J/(kg K)',
+            'Floe 1 Mean:        ' + "{:.2}".format(f1.mean()) + ' J/(kg K)', 
+            'Floe 2 Mean:        ' + "{:.2}".format(f2.mean()) + ' J/(kg K)', 
+            'Floe 3 Mean:        ' + "{:.2}".format(f3.mean()) + ' J/(kg K)', 
+            'Floe 4 Mean:        ' + "{:.2}".format(f4.mean()) + ' J/(kg K)', 
+            'Winter Mean:       ' + "{:.2}".format(wint.mean()) + ' J/(kg K)', 
+            'Summer Mean:    ' + "{:.2}".format(summ.mean()) + ' J/(kg K)'],
+           loc = 'upper right');
+
+
+# The value of $\mu$ is the determining factor for how large this value is
+
+# In[19]:
+
+
+plt.figure(figsize = (10,5))
+
+f1 = c0 + ((li * mu * s) / ((surft_df.mean(axis = 1)+273.15)**2))['2015-01-01':'2015-02-21']
+f2 = c0 + ((li * mu * s) / ((surft_df.mean(axis = 1)+273.15)**2))['2015-02-23':'2015-03-21']
+f3 = c0 + ((li * mu * s) / ((surft_df.mean(axis = 1)+273.15)**2))['2015-04-18':'2015-06-05']
+f4 = c0 + ((li * mu * s) / ((surft_df.mean(axis = 1)+273.15)**2))['2015-06-07':'2015-06-21']
+
+wint = c0 + ((li * mu * s) / ((surft_df.mean(axis = 1)+273.15)**2))['2015-01-01':'2015-04-01']
+summ = c0 + ((li * mu * s) / ((surft_df.mean(axis = 1)+273.15)**2))['2015-04-07':'2015-06-21']
+
+plt.plot(c0 + ((li * mu * s) / ((surft_df.mean(axis = 1)+273.15)**2)), 'o')
+plt.axhline(c0 + ((li * mu * s) / ((surft_df.mean(axis = 1)+273.15)**2)).mean(), linestyle = ':', linewidth = 2)
+
+plt.hlines(f1.mean(), xmin = '2015-01-01', xmax = '2015-02-21', linestyle = '--', color = 'g')
+plt.hlines(f2.mean(), xmin = '2015-02-23', xmax = '2015-03-21', linestyle = '--', color = 'r')
+plt.hlines(f3.mean(), xmin = '2015-04-18', xmax = '2015-06-05', linestyle = '--', color = 'purple')
+plt.hlines(f4.mean(), xmin = '2015-06-07', xmax = '2015-06-21', linestyle = '--', color = 'blue')
+
+plt.hlines(wint.mean(), xmin = '2015-01-01', xmax = '2015-04-01', linestyle = '--', color = 'pink')
+plt.hlines(summ.mean(), xmin = '2015-04-07', xmax = '2015-06-21', linestyle = '--', color = 'cyan')
+
+plt.grid()
 plt.title('Surface Heat Capacity')
 plt.ylabel('Heat Capacity $(J/(kg \ K))$')
 plt.xlabel('Date');
 
 plt.legend(['Surface Heat Capacity', 
-            'Mean Heat Capacity: ' + "{:.2e}".format(((li * mu * s) / ((surft_df.mean(axis = 1)+273.15)**2)).mean()) + ' J/(kg K)',
-            'Floe 1 Mean:              ' + "{:.2e}".format(f1.mean()) + ' J/(kg K)', 
-            'Floe 2 Mean:              ' + "{:.2e}".format(f2.mean()) + ' J/(kg K)', 
-            'Floe 3 Mean:              ' + "{:.2e}".format(f3.mean()) + ' J/(kg K)', 
-            'Floe 4 Mean:              ' + "{:.2e}".format(f4.mean()) + ' J/(kg K)', 
-            'Winter Mean:             ' + "{:.2e}".format(wint.mean()) + ' J/(kg K)', 
-            'Summer Mean:          ' + "{:.2e}".format(summ.mean()) + ' J/(kg K)'],
+            'Mean Heat Capacity: ' + "{:.2}".format(c0 + ((li * mu * s) / ((surft_df.mean(axis = 1)+273.15)**2)).mean()) + ' J/(kg K)',
+            'Floe 1 Mean:              ' + "{:.2}".format(f1.mean()) + ' J/(kg K)', 
+            'Floe 2 Mean:              ' + "{:.2}".format(f2.mean()) + ' J/(kg K)', 
+            'Floe 3 Mean:              ' + "{:.2}".format(f3.mean()) + ' J/(kg K)', 
+            'Floe 4 Mean:              ' + "{:.2}".format(f4.mean()) + ' J/(kg K)', 
+            'Winter Mean:             ' + "{:.2}".format(wint.mean()) + ' J/(kg K)', 
+            'Summer Mean:          ' + "{:.2}".format(summ.mean()) + ' J/(kg K)'],
            loc = 'upper right');
 
 
