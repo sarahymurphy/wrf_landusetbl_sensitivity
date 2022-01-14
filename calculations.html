@@ -54,7 +54,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Summary" href="summary.html" />
+    <link rel="next" title="Summary and Recommendations" href="summary.html" />
     <link rel="prev" title="Reviewing Values in LANDUSE.TBL" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -102,7 +102,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="summary.html">
-   Summary
+   Summary and Recommendations
   </a>
  </li>
 </ul>
@@ -326,6 +326,7 @@
 <h2>Surface Roughness Length<a class="headerlink" href="#surface-roughness-length" title="Permalink to this headline">¶</a></h2>
 <div class="math notranslate nohighlight">
 \[ z_{0} = \frac{(z_{2}-z_{1})}{[exp(\frac{kU_{2}}{u*}) - exp(\frac{kU_{1}}{u*})]} \]</div>
+<p>Equation from <span id="id1">[<a class="reference internal" href="summary.html#id6">UCAR, 2022</a>]</span></p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(z_{0}\)</span> is the roughness length</p></li>
 <li><p><span class="math notranslate nohighlight">\(z_{1}\)</span> height of <span class="math notranslate nohighlight">\(U_{1}\)</span> (<span class="math notranslate nohighlight">\(2 m\)</span>)</p></li>
@@ -395,7 +396,7 @@
 </div>
 </div>
 <p>We have roughness length from EddyPro, how does this match up to my calculated roughness length?</p>
-<p>EddyPro calculates roughness length using the canopy height: <span class="math notranslate nohighlight">\(z_{0} = 0.15 * canopy\space height\)</span>, which is defined as <span class="math notranslate nohighlight">\(0\)</span> in our EddyPro runs <span id="id1">[<a class="reference internal" href="summary.html#id4">LI-COR, 2021</a>]</span>.</p>
+<p>EddyPro calculates roughness length using the canopy height: <span class="math notranslate nohighlight">\(z_{0} = 0.15 * canopy\space height\)</span>, which is defined as <span class="math notranslate nohighlight">\(0\)</span> in our EddyPro runs <span id="id2">[<a class="reference internal" href="summary.html#id4">LI-COR, 2021</a>]</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">roughness_length</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Jan&#39;</span><span class="p">,</span><span class="s1">&#39;Feb&#39;</span><span class="p">,</span><span class="s1">&#39;Mar&#39;</span><span class="p">,</span><span class="s1">&#39;Apr&#39;</span><span class="p">,</span><span class="s1">&#39;May&#39;</span><span class="p">,</span><span class="s1">&#39;Jun&#39;</span><span class="p">])</span>
@@ -429,7 +430,7 @@ Jun  0.001
 <hr class="docutils" />
 <div class="section" id="surface-heat-capacity">
 <h2>Surface Heat Capacity<a class="headerlink" href="#surface-heat-capacity" title="Permalink to this headline">¶</a></h2>
-<p>Sea Ice Thermodynamics <span id="id2">[<a class="reference internal" href="summary.html#id5">UCAR, 2017</a>]</span> equation 12</p>
+<p>Sea Ice Thermodynamics <span id="id3">[<a class="reference internal" href="summary.html#id5">UCAR, 2017</a>]</span> equation 12</p>
 <div class="math notranslate nohighlight">
 \[ c(T,S) = c_{0} + \frac{L_{i}\mu S}{T^{2}} \]</div>
 <ul class="simple">
@@ -521,7 +522,7 @@ Jun  0.001
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7feac9784fd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f7c403edfd0&gt;
 </pre></div>
 </div>
 <img alt="_images/calculations_8_1.png" src="_images/calculations_8_1.png" />
@@ -626,7 +627,7 @@ Jun  0.001
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7feaeb08bd60&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f7c4905bd60&gt;
 </pre></div>
 </div>
 <img alt="_images/calculations_14_1.png" src="_images/calculations_14_1.png" />
@@ -710,7 +711,7 @@ Jun  0.001
   return array(a, dtype, copy=False, order=order)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fead8a7ef10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f7c484d6490&gt;
 </pre></div>
 </div>
 <img alt="_images/calculations_19_2.png" src="_images/calculations_19_2.png" />
@@ -757,8 +758,8 @@ Jun  0.001
 <span class="n">mu</span> <span class="o">=</span> <span class="mf">0.054</span> <span class="c1"># c / ppt                                                                 ** K </span>
 <span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span> <span class="o">+</span> <span class="mf">273.15</span> <span class="c1"># K / ppt</span>
 <span class="c1">#  I believe that ppt refers to the salinity</span>
-<span class="c1">#ppt = s * 10 ** 12  # ppt</span>
-<span class="c1">#mu = mu * ppt # k </span>
+<span class="n">ppt</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">12</span>  <span class="c1"># ppt</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span> <span class="o">*</span> <span class="n">ppt</span> <span class="c1"># k </span>
 
 <span class="c1"># Heat capacity of fresh ice</span>
 <span class="n">c0</span> <span class="o">=</span> <span class="mi">2054</span> <span class="c1"># J / (kg K)                                                               ** J/(kg K)</span>
@@ -787,7 +788,7 @@ Jun  0.001
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Surface Heat Capacity (J/(kg k)):
-2.062296e+03
+5.035696e+10
 </pre></div>
 </div>
 </div>
@@ -801,7 +802,7 @@ Jun  0.001
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Winter Surface Heat Capacity (J/(kg k)):
-2.062892e+03
+5.397484e+10
 </pre></div>
 </div>
 </div>
@@ -815,7 +816,7 @@ Jun  0.001
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Summer Surface Heat Capacity (J/(kg k)):
-2.061857e+03
+4.769240e+10
 </pre></div>
 </div>
 </div>
@@ -868,7 +869,7 @@ Jun  0.001
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7feb095f50d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f7c399da0d0&gt;
 </pre></div>
 </div>
 <img alt="_images/calculations_26_1.png" src="_images/calculations_26_1.png" />
@@ -916,26 +917,104 @@ Jun  0.001
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7feaea797700&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f7c79987670&gt;
 </pre></div>
 </div>
 <img alt="_images/calculations_28_1.png" src="_images/calculations_28_1.png" />
 </div>
 </div>
-<p>The correction term is clearly dominating the surface heat capacity. What happens if we use the other equation in that document to calculate heat capacity?</p>
-<p>Sea Ice Thermodynamics <span id="id3">[<a class="reference internal" href="summary.html#id5">UCAR, 2017</a>]</span> equation 13</p>
-<div class="math notranslate nohighlight">
-\[ Q(S, T, T') = \rho_{i} c_{0} ( - \mu S - T) + \rho_{i} L_{0} ( 1 + \frac{\mu S}{T} ) \]</div>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(Q(S, T, T')\)</span> is the heat capacity</p></li>
-<li><p><span class="math notranslate nohighlight">\(c_{0}\)</span> is the heat capacity of fresh ice <span class="math notranslate nohighlight">\(2054 \frac{J}{kg K}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\rho{i}\)</span> is the density of ice <span class="math notranslate nohighlight">\(917 \frac{kg}{m^{2}}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(T\)</span> is temperature (we have ice surface temperature from the ice measurements), <span class="math notranslate nohighlight">\(K\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(S\)</span> is the salinity (we have salinity from the ice measurements) <span class="math notranslate nohighlight">\(\frac{kg}{kg}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\mu\)</span> is the ocean freezing temperature constant and is directly related to salinity. Estimation: <span class="math notranslate nohighlight">\(0.054 \frac{^{\circ} C}{ppt}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(T'\)</span> is the melting temperature of ice with a salinity <span class="math notranslate nohighlight">\(S\)</span>, I am currently unsure how to calculate this</p></li>
-<li><p><span class="math notranslate nohighlight">\(L_{0}\)</span> I’m unsure what this value is</p></li>
-</ul>
+<p>The correction term is clearly dominating the surface heat capacity. To get it into the correct units, we need to multiply this by the ice density.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f1</span> <span class="o">=</span> <span class="n">density_df</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-02-21&#39;</span><span class="p">]</span>
+<span class="n">f2</span> <span class="o">=</span> <span class="n">density_df</span><span class="p">[</span><span class="s1">&#39;2015-02-23&#39;</span><span class="p">:</span><span class="s1">&#39;2015-03-21&#39;</span><span class="p">]</span>
+<span class="n">f3</span> <span class="o">=</span> <span class="n">density_df</span><span class="p">[</span><span class="s1">&#39;2015-04-18&#39;</span><span class="p">:</span><span class="s1">&#39;2015-06-05&#39;</span><span class="p">]</span>
+<span class="n">f4</span> <span class="o">=</span> <span class="n">density_df</span><span class="p">[</span><span class="s1">&#39;2015-06-07&#39;</span><span class="p">:</span><span class="s1">&#39;2015-06-21&#39;</span><span class="p">]</span>
+
+<span class="n">wint</span> <span class="o">=</span> <span class="n">density_df</span><span class="p">[</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">:</span><span class="s1">&#39;2015-04-01&#39;</span><span class="p">]</span>
+<span class="n">summ</span> <span class="o">=</span> <span class="n">density_df</span><span class="p">[</span><span class="s1">&#39;2015-04-07&#39;</span><span class="p">:</span><span class="s1">&#39;2015-06-21&#39;</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">density_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">density_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-01-01&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-02-21&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">f2</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-02-23&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-03-21&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">f3</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-04-18&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-06-05&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;purple&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">f4</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-06-07&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-06-21&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">wint</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-01-01&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-04-01&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;pink&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">summ</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">xmin</span> <span class="o">=</span> <span class="s1">&#39;2015-04-07&#39;</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-06-21&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;cyan&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Density (kg/m3)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Ice Density&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">950</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Measurements&#39;</span><span class="p">,</span> <span class="s1">&#39;Experiment Mean: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">density_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; kg/m3&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;Floe 1 Mean:          &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; kg/m3&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;Floe 2 Mean:          &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">f2</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; kg/m3&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;Floe 3 Mean:          &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">f3</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; kg/m3&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;Floe 4 Mean:             &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">f4</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)),</span>
+            <span class="s1">&#39;Winter Mean:         &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">wint</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; kg/m3&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;Summer Mean:      &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">summ</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; kg/m3&#39;</span><span class="p">],</span> <span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;lower center&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f7c78ec3c70&gt;
+</pre></div>
+</div>
+<img alt="_images/calculations_30_1.png" src="_images/calculations_30_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ice density (kg/m3)&#39;</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">density_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ice density (kg/m3)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>888.46
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">density_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span>   <span class="c1"># J/(kg K) * kg/m3 = J/(m3 K)</span>
+<span class="n">c_w</span> <span class="o">=</span> <span class="n">c_w</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">density_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span>   <span class="c1"># J/(kg K) * kg/m3 = J/(m3 K)</span>
+<span class="n">c_s</span> <span class="o">=</span> <span class="n">c_s</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">density_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span>   <span class="c1"># J/(kg K) * kg/m3 = J/(m3 K)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Surface Heat Capacity (J/(m3 K))&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:e}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Surface Heat Capacity (J/(m3 K))
+5.035696e+10
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Winter - Surface Heat Capacity (J/(m3 K))&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:e}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c_w</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Winter - Surface Heat Capacity (J/(m3 K))
+5.397484e+10
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -995,10 +1074,10 @@ Jun  0.001
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fead98d77f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f7c38ed3d30&gt;
 </pre></div>
 </div>
-<img alt="_images/calculations_32_1.png" src="_images/calculations_32_1.png" />
+<img alt="_images/calculations_36_1.png" src="_images/calculations_36_1.png" />
 </div>
 </div>
 <p>So we could increase the surface albedo to <strong>0.86 in winter</strong> and <strong>0.81 in summer</strong></p>
@@ -1040,7 +1119,7 @@ Jun  0.001
     <a class='right-next' id="next-link" href="summary.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Summary</p>
+        <p class="prev-next-title">Summary and Recommendations</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
