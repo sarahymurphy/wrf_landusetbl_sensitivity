@@ -2,8 +2,7 @@
 # Learn more at https://jupyterbook.org/customize/config.html
 
 title: Land Surface Model Table Review
-author: Sarah Y. Murphy
-logo: 
+author: Sarah Y. Murphy 
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
