@@ -71,7 +71,7 @@ z
 # We have roughness length from EddyPro, how does this match up to my calculated roughness length?
 # 
 # EddyPro calculates roughness length using the canopy height:
-# c$$z_{0} = 0.15 * canopy\ height$$
+# $$z_{0} = 0.15 * canopy\ height$$
 # Canopy height is defined as $0$ in our EddyPro runs {cite}`eproman`.
 
 # In[3]:
