@@ -31,6 +31,9 @@ import time
 import datetime
 import glob
 
+import warnings
+warnings.filterwarnings('ignore')
+
 plt.style.use('default')
 
 
