@@ -1,6 +1,6 @@
 # Reviewing Values in `LANDUSE.TBL`
 
-`LANDUSE.TBL` is used by the land surface model to specify some variables depending on the land surface type. According to the Dudhia WRF Overview presentation {cite}`dudhia2014overview`, the following are used:
+`LANDUSE.TBL` is used by the land surface model to specify some variables depending on the land surface type. According to the Dudhia WRF Overview presentation {cite}`dudhia2014overview, dudhia1996multi`, the following are used:
 - VEGPARM.TB - Vegetation properties in **Noah and RUC**
 - SOILPARM.TBL - Soil peoperties in **Noah and RUC**
 - LANDUSE.TBL - Surface properties in **5-layer model**
