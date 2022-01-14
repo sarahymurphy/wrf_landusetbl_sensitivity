@@ -7,6 +7,8 @@
 # 
 # $$ z_{0} = \frac{(z_{2}-z_{1})}{[exp(\frac{kU_{2}}{u*}) - exp(\frac{kU_{1}}{u*})]} $$
 # 
+# Equation from {cite}`eol`
+# 
 # - $z_{0}$ is the roughness length
 # - $z_{1}$ height of $U_{1}$ ($2 m$)
 # - $z_{2}$ height of $U_{2}$ ($4 m$)
@@ -338,8 +340,8 @@ s = s / 1000 # kg / kg
 mu = 0.054 # c / ppt                                                                 ** K 
 mu = mu + 273.15 # K / ppt
 #  I believe that ppt refers to the salinity
-#ppt = s * 10 ** 12  # ppt
-#mu = mu * ppt # k 
+ppt = s * 10 ** 12  # ppt
+mu = mu * ppt # k 
 
 # Heat capacity of fresh ice
 c0 = 2054 # J / (kg K)                                                               ** J/(kg K)
@@ -468,26 +470,74 @@ plt.legend(['Surface Heat Capacity',
            loc = 'upper right')
 
 
-# The correction term is clearly dominating the surface heat capacity. What happens if we use the other equation in that document to calculate heat capacity?
-# 
-# Sea Ice Thermodynamics {cite}`camdoc` equation 13
-# 
-# $$ Q(S, T, T') = \rho_{i} c_{0} ( - \mu S - T) + \rho_{i} L_{0} ( 1 + \frac{\mu S}{T} ) $$
-# 
-# - $Q(S, T, T')$ is the heat capacity 
-# - $c_{0}$ is the heat capacity of fresh ice $2054 \frac{J}{kg K}$
-# - $\rho{i}$ is the density of ice $917 \frac{kg}{m^{2}}$
-# - $T$ is temperature (we have ice surface temperature from the ice measurements), $K$
-# - $S$ is the salinity (we have salinity from the ice measurements) $\frac{kg}{kg}$
-# - $\mu$ is the ocean freezing temperature constant and is directly related to salinity. Estimation: $0.054 \frac{^{\circ} C}{ppt}$ 
-# - $T'$ is the melting temperature of ice with a salinity $S$, I am currently unsure how to calculate this
-# - $L_{0}$ I'm unsure what this value is
+# The correction term is clearly dominating the surface heat capacity. To get it into the correct units, we need to multiply this by the ice density.
+
+# In[20]:
+
+
+f1 = density_df['2015-01-01':'2015-02-21']
+f2 = density_df['2015-02-23':'2015-03-21']
+f3 = density_df['2015-04-18':'2015-06-05']
+f4 = density_df['2015-06-07':'2015-06-21']
+
+wint = density_df['2015-01-01':'2015-04-01']
+summ = density_df['2015-04-07':'2015-06-21']
+
+plt.figure(figsize = (10,5))
+plt.plot(density_df.mean(axis = 1), 'o', alpha = 0.75)
+
+plt.axhline(density_df.mean(axis = 1).mean(), linestyle = ':', linewidth = 2)
+
+plt.hlines(f1.mean(axis = 1).mean(), xmin = '2015-01-01', xmax = '2015-02-21', linestyle = '--', color = 'g')
+plt.hlines(f2.mean(axis = 1).mean(), xmin = '2015-02-23', xmax = '2015-03-21', linestyle = '--', color = 'r')
+plt.hlines(f3.mean(axis = 1).mean(), xmin = '2015-04-18', xmax = '2015-06-05', linestyle = '--', color = 'purple')
+plt.hlines(f4.mean(axis = 1).mean(), xmin = '2015-06-07', xmax = '2015-06-21', linestyle = '--', color = 'blue')
+
+plt.hlines(wint.mean(axis = 1).mean(), xmin = '2015-01-01', xmax = '2015-04-01', linestyle = '--', color = 'pink')
+plt.hlines(summ.mean(axis = 1).mean(), xmin = '2015-04-07', xmax = '2015-06-21', linestyle = '--', color = 'cyan')
+
+plt.ylabel('Density (kg/m3)')
+plt.title('Ice Density')
+plt.ylim(800, 950)
+plt.grid()
+plt.legend(['Measurements', 'Experiment Mean: ' + str(np.round(density_df.mean(axis = 1).mean(),2)) + ' kg/m3', 
+            'Floe 1 Mean:          ' + str(np.round(f1.mean(axis = 1).mean(),2)) + ' kg/m3', 
+            'Floe 2 Mean:          ' + str(np.round(f2.mean(axis = 1).mean(),2)) + ' kg/m3', 
+            'Floe 3 Mean:          ' + str(np.round(f3.mean(axis = 1).mean(),2)) + ' kg/m3', 
+            'Floe 4 Mean:             ' + str(np.round(f4.mean(axis = 1).mean(),2)),
+            'Winter Mean:         ' + str(np.round(wint.mean(axis = 1).mean(),2)) + ' kg/m3', 
+            'Summer Mean:      ' + str(np.round(summ.mean(axis = 1).mean(),2)) + ' kg/m3'], loc = 'lower center')
+
+
+# In[21]:
+
+
+print('Ice density (kg/m3)')
+np.round(density_df.mean(axis = 1).mean(),2)
+
+
+# In[22]:
+
+
+c = c + np.round(density_df.mean(axis = 1).mean(),2)   # J/(kg K) * kg/m3 = J/(m3 K)
+c_w = c_w + np.round(density_df.mean(axis = 1).mean(),2)   # J/(kg K) * kg/m3 = J/(m3 K)
+c_s = c_s + np.round(density_df.mean(axis = 1).mean(),2)   # J/(kg K) * kg/m3 = J/(m3 K)
+print('Surface Heat Capacity (J/(m3 K))')
+print("{:e}".format(c[0]))
+
+
+# In[23]:
+
+
+print('Winter - Surface Heat Capacity (J/(m3 K))')
+print("{:e}".format(c_w[0]))
+
 
 # ## Albedo
 # 
 # What is the exact albedo throughout the experiment? We used a value of .8 for the simulations, but what is the actual value for each season? We have these measurements from N-ICE.
 
-# In[20]:
+# In[24]:
 
 
 # Importing and formatting the albedo dataset
@@ -501,7 +551,7 @@ albedo_dataframe.index = pd.to_datetime(albedo_dataframe.index)
 albedo_dataframe = albedo_dataframe['albedo']
 
 
-# In[21]:
+# In[25]:
 
 
 f1 = albedo_dataframe['2015-01-01':'2015-02-21']
