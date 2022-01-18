@@ -86,7 +86,7 @@ The following is the physics and crm sections of the `namelist.input` files bein
 ```
 ### Model setup
 
-```{admonition} Do I need to recompile the model when modifying `LANDUSE.TBL`?
+```{admonition} Do I need to recompile the model?
 ??
 ```
 
