@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reviewing Values in LANDUSE.TBL &#8212; Land Surface Model Table Review</title>
+    <title>Sensitivity Study Setup &#8212; Land Surface Model Table Review</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -52,9 +52,15 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Calculations" href="calculations.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -87,8 +93,8 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
- <li class="toctree-l1 current">
-  <a class="reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
    Reviewing Values in LANDUSE.TBL
   </a>
  </li>
@@ -150,7 +156,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/intro.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/sensitivity.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -181,40 +187,28 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#we-are-using-the-following-in-the-idealized-model">
-   We are using the following in the idealized model
+  <a class="reference internal nav-link" href="#current-plan">
+   Current Plan
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#currently-for-snow-and-ice-in-my-idealized-simulations">
-   Currently for snow and ice in my idealized simulations:
+  <a class="reference internal nav-link" href="#idealized">
+   Idealized
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#preliminary-observations">
-     Preliminary observations
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-variables-do-we-need-where-can-we-get-them">
-   What variables do we need? Where can we get them?
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#have">
-     Have
+    <a class="reference internal nav-link" href="#cases-to-run">
+     Cases to run
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#can-calculate">
-     Can Calculate
+    <a class="reference internal nav-link" href="#namelist-settings">
+     Namelist settings
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#can-improve-estimations">
-     Can improve estimations
+    <a class="reference internal nav-link" href="#model-setup">
+     Model setup
     </a>
    </li>
   </ul>
@@ -229,7 +223,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Reviewing Values in LANDUSE.TBL</h1>
+                <h1>Sensitivity Study Setup</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -240,40 +234,28 @@
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#we-are-using-the-following-in-the-idealized-model">
-   We are using the following in the idealized model
+  <a class="reference internal nav-link" href="#current-plan">
+   Current Plan
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#currently-for-snow-and-ice-in-my-idealized-simulations">
-   Currently for snow and ice in my idealized simulations:
+  <a class="reference internal nav-link" href="#idealized">
+   Idealized
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#preliminary-observations">
-     Preliminary observations
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-variables-do-we-need-where-can-we-get-them">
-   What variables do we need? Where can we get them?
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#have">
-     Have
+    <a class="reference internal nav-link" href="#cases-to-run">
+     Cases to run
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#can-calculate">
-     Can Calculate
+    <a class="reference internal nav-link" href="#namelist-settings">
+     Namelist settings
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#can-improve-estimations">
-     Can improve estimations
+    <a class="reference internal nav-link" href="#model-setup">
+     Model setup
     </a>
    </li>
   </ul>
@@ -287,124 +269,67 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="reviewing-values-in-landuse-tbl">
-<h1>Reviewing Values in <code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code><a class="headerlink" href="#reviewing-values-in-landuse-tbl" title="Permalink to this headline">¶</a></h1>
-<p><code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code> is used by the land surface model to specify some variables depending on the land surface type. According to the Dudhia WRF Overview presentation <span id="id1">[<a class="reference internal" href="references.html#id2">Dudhia, 2014</a>]</span> , the following are used:</p>
-<ul class="simple">
-<li><p>VEGPARM.TB - Vegetation properties in <strong>Noah and RUC</strong></p></li>
-<li><p>SOILPARM.TBL - Soil peoperties in <strong>Noah and RUC</strong></p></li>
-<li><p>LANDUSE.TBL - Surface properties in <strong>5-layer model</strong> <span id="id2">[<a class="reference internal" href="references.html#id3">Dudhia, 1996</a>]</span></p></li>
-</ul>
-<div class="section" id="we-are-using-the-following-in-the-idealized-model">
-<h2>We are using the following in the idealized model<a class="headerlink" href="#we-are-using-the-following-in-the-idealized-model" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>5-layer model (use <code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code>)</p></li>
-<li><p>USGS section (specified in <code class="docutils literal notranslate"><span class="pre">namelist.input</span></code>)</p></li>
-<li><p>The entire time we have land use category number 24 - snow and ice</p></li>
-</ul>
-</div>
-<div class="section" id="currently-for-snow-and-ice-in-my-idealized-simulations">
-<h2>Currently for snow and ice in my idealized simulations:<a class="headerlink" href="#currently-for-snow-and-ice-in-my-idealized-simulations" title="Permalink to this headline">¶</a></h2>
-<table class="colwidths-auto table">
-<thead>
-<tr class="row-odd"><th class="text-align:center head"><p><div style="width:75px">Season</div></p></th>
-<th class="text-align:center head"><p><div style="width:75px">Albedo<br><span class="math notranslate nohighlight">\((\%)\)</span></div></p></th>
-<th class="text-align:center head"><p><div style="width:100px">Suface Moisture Availability<br><span class="math notranslate nohighlight">\((*100\%)\)</span></div></p></th>
-<th class="text-align:center head"><p><div style="width:100px">Surface Emissivity<br><span class="math notranslate nohighlight">\((\%)\)</span></div></p></th>
-<th class="text-align:center head"><p><div style="width:100px">Surface Roughness</div></p></th>
-<th class="text-align:center head"><p><div style="width:100px">Thermal Inertia Constant</div></p></th>
-<th class="text-align:center head"><p><div style="width:100px">Snow Cover Effect</div></p></th>
-<th class="text-align:center head"><p><div style="width:100px">Surface Heat Capacity<br><span class="math notranslate nohighlight">\((J / (m^{3} K))\)</span></div></p></th>
-<th class="text-align:center head"><p><div style="width:75px">Label</div></center></p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-align:center"><p>Summer</p></td>
-<td class="text-align:center"><p>55.</p></td>
-<td class="text-align:center"><p>.95</p></td>
-<td class="text-align:center"><p>.95</p></td>
-<td class="text-align:center"><p>0.1</p></td>
-<td class="text-align:center"><p>5.</p></td>
-<td class="text-align:center"><p>0.</p></td>
-<td class="text-align:center"><p>9.0e25</p></td>
-<td class="text-align:center"><p>Snow or Ice</p></td>
-</tr>
-<tr class="row-odd"><td class="text-align:center"><p>Winter</p></td>
-<td class="text-align:center"><p>70.</p></td>
-<td class="text-align:center"><p>.95</p></td>
-<td class="text-align:center"><p>.95</p></td>
-<td class="text-align:center"><p>0.1</p></td>
-<td class="text-align:center"><p>5.</p></td>
-<td class="text-align:center"><p>0.</p></td>
-<td class="text-align:center"><p>9.0e25</p></td>
-<td class="text-align:center"><p>Snow or Ice</p></td>
-</tr>
-</tbody>
-</table>
-<div class="section" id="preliminary-observations">
-<h3>Preliminary observations<a class="headerlink" href="#preliminary-observations" title="Permalink to this headline">¶</a></h3>
+  <div class="tex2jax_ignore mathjax_ignore section" id="sensitivity-study-setup">
+<h1>Sensitivity Study Setup<a class="headerlink" href="#sensitivity-study-setup" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="current-plan">
+<h2>Current Plan<a class="headerlink" href="#current-plan" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
-<li><p><strong>Albedo</strong> is far too low - <em><strong>BUT we have defined this in the namelist</strong></em> so this value is not used.</p></li>
-<li><p><strong>Surface moisture availability</strong> and <strong>emissivity</strong> could both probably be increased.</p></li>
-<li><p><strong>Surface roughness</strong> could probably be decreased.</p></li>
-<li><p><strong>Snow cover effects</strong> seem to be constant regardless of surface</p></li>
-<li><p>The <strong>thermal inertial constant</strong> could probably be improved, but I’m not sure what this is.</p></li>
-<li><p><strong>Surface heat capacity</strong> could be improved.</p></li>
+<li><p>Run an idealized case with the best idealized setup for all cases</p></li>
+<li><p>If I see an improvement for these cases, see if implementing this into polar WRF would work</p></li>
 </ol>
 </div>
-</div>
-<div class="section" id="what-variables-do-we-need-where-can-we-get-them">
-<h2>What variables do we need? Where can we get them?<a class="headerlink" href="#what-variables-do-we-need-where-can-we-get-them" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="have">
-<h3>Have<a class="headerlink" href="#have" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="idealized">
+<h2>Idealized<a class="headerlink" href="#idealized" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cases-to-run">
+<h3>Cases to run<a class="headerlink" href="#cases-to-run" title="Permalink to this headline">¶</a></h3>
 <ol class="simple">
-<li><p>Albedo</p>
-<ul class="simple">
-<li><p>This is already incorporated into the model</p></li>
-</ul>
-</li>
+<li><p>Winter 1 - February 4, 5, and 6</p></li>
 </ol>
-</div>
-<div class="section" id="can-calculate">
-<h3>Can Calculate<a class="headerlink" href="#can-calculate" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Clear winter with some cloudy patches</p></li>
+</ul>
 <ol class="simple">
-<li><p>Surface roughness length</p>
-<ul class="simple">
-<li><p>This is calculated below and is much lower than that in the table</p></li>
-<li><p>This could be a good value to adjust</p></li>
-</ul>
-</li>
-<li><p>Surface heat capacity</p>
-<ul class="simple">
-<li><p>This is calculated below and is much higher than that in the table</p></li>
-<li><p>I’d like to discuss this variable with Von</p></li>
-</ul>
-</li>
-<li><p>Thermal inertia constant</p>
-<ul class="simple">
-<li><p>I am struggling with calculating this, I need to do more reading to understand it</p></li>
-</ul>
-</li>
+<li><p>Spring 1 - May 2, 3, and 4</p></li>
 </ol>
-</div>
-<div class="section" id="can-improve-estimations">
-<h3>Can improve estimations<a class="headerlink" href="#can-improve-estimations" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Cloudy spring case</p></li>
+</ul>
 <ol class="simple">
-<li><p>Surface moisture availability</p>
-<ul class="simple">
-<li><p>This is higher only in the values above water</p></li>
-<li><p>The difference is small so it probably would not be a large difference</p></li>
-</ul>
-</li>
-<li><p>Emissivity</p>
-<ul class="simple">
-<li><p>Also a small difference so likely not a big change</p></li>
-</ul>
-</li>
+<li><p>Spring 2 - May 22, 23, and 24</p></li>
 </ol>
+<ul class="simple">
+<li><p>One clear spring day</p></li>
+</ul>
+</div>
+<div class="section" id="namelist-settings">
+<h3>Namelist settings<a class="headerlink" href="#namelist-settings" title="Permalink to this headline">¶</a></h3>
+<p>The following is the physics and crm sections of the <code class="docutils literal notranslate"><span class="pre">namelist.input</span></code> files being used for the sensitivity study.</p>
+</div>
+<div class="section" id="model-setup">
+<h3>Model setup<a class="headerlink" href="#model-setup" title="Permalink to this headline">¶</a></h3>
+<p>```{admonition} Do I need to recompile the model when modifying <code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code>?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+1. Change the values of the USGS section of `LANDUSE.TBL` from the following:
+
+&gt;SUMMER \
+&gt;24,     55.,   .95,   .95,   0.1,    5.,    0., 9.0e25, &#39;Snow or Ice&#39;\
+&gt;WINTER \
+&gt;24,     70.,   .95,   .95,   0.1,    5.,    0., 9.0e25, &#39;Snow or Ice&#39;
+
+&amp;emsp;&amp;emsp;to
+
+&gt;SUMMER \
+&gt;24,     81.,   .95,   .98,   0.001,    5.,    0., 1.8e06, &#39;Snow or Ice&#39;\
+&gt;WINTER \
+&gt;24,     86.,   .95,   .98,   0.001,    5.,    0., 1.8e06, &#39;Snow or Ice&#39;
+
+
+
+---
+## Real
+</pre></div>
 </div>
 </div>
-<div class="toctree-wrapper compound">
 </div>
 </div>
 
@@ -433,13 +358,6 @@
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="calculations.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Calculations</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
             
         </div>
