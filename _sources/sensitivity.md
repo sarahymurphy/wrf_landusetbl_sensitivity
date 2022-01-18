@@ -8,16 +8,16 @@
 
 ### Cases to run
 1. Winter 1 - February 4, 5, and 6
-  - Clear winter with some cloudy patches
+    - Clear winter with some cloudy patches
 2. Spring 1 - May 2, 3, and 4
-  - Cloudy spring case
+    - Cloudy spring case
 3. Spring 2 - May 22, 23, and 24
-  - One clear spring day
+    - One clear spring day
 
 ### Namelist settings
 The following is the physics and crm sections of the `namelist.input` files being used for the sensitivity study.
 
-```{bash}
+```bash
 &physics
  seaice_threshold                    = 100,
  mp_physics                          = 50,  50, 50,
@@ -87,7 +87,7 @@ The following is the physics and crm sections of the `namelist.input` files bein
 ### Model setup
 
 ```{admonition} Do I need to recompile the model when modifying `LANDUSE.TBL`?
-
+??
 ```
 
 1. Change the values of the USGS section of `LANDUSE.TBL` from the following:

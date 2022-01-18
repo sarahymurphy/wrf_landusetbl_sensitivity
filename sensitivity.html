@@ -290,31 +290,97 @@
 <div class="section" id="cases-to-run">
 <h3>Cases to run<a class="headerlink" href="#cases-to-run" title="Permalink to this headline">¶</a></h3>
 <ol class="simple">
-<li><p>Winter 1 - February 4, 5, and 6</p></li>
-</ol>
+<li><p>Winter 1 - February 4, 5, and 6</p>
 <ul class="simple">
 <li><p>Clear winter with some cloudy patches</p></li>
 </ul>
-<ol class="simple">
-<li><p>Spring 1 - May 2, 3, and 4</p></li>
-</ol>
+</li>
+<li><p>Spring 1 - May 2, 3, and 4</p>
 <ul class="simple">
 <li><p>Cloudy spring case</p></li>
 </ul>
-<ol class="simple">
-<li><p>Spring 2 - May 22, 23, and 24</p></li>
-</ol>
+</li>
+<li><p>Spring 2 - May 22, 23, and 24</p>
 <ul class="simple">
 <li><p>One clear spring day</p></li>
 </ul>
+</li>
+</ol>
 </div>
 <div class="section" id="namelist-settings">
 <h3>Namelist settings<a class="headerlink" href="#namelist-settings" title="Permalink to this headline">¶</a></h3>
 <p>The following is the physics and crm sections of the <code class="docutils literal notranslate"><span class="pre">namelist.input</span></code> files being used for the sensitivity study.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="p">&amp;</span>physics
+ <span class="nv">seaice_threshold</span>                    <span class="o">=</span> <span class="m">100</span>,
+ <span class="nv">mp_physics</span>                          <span class="o">=</span> <span class="m">50</span>,  <span class="m">50</span>, <span class="m">50</span>,
+ <span class="nv">ra_lw_physics</span>                       <span class="o">=</span> <span class="m">3</span>,  <span class="m">3</span>, <span class="m">3</span>,
+ <span class="nv">ra_sw_physics</span>                       <span class="o">=</span> <span class="m">3</span>,  <span class="m">3</span>, <span class="m">3</span>,
+ <span class="nv">radt</span>                                <span class="o">=</span> <span class="m">1</span>,  <span class="m">2</span>, <span class="m">5</span>,
+ <span class="nv">sf_sfclay_physics</span>                   <span class="o">=</span> <span class="m">1</span>,  <span class="m">91</span>, <span class="m">91</span>,
+ <span class="nv">sf_surface_physics</span>                  <span class="o">=</span> <span class="m">1</span>,  <span class="m">0</span>, <span class="m">0</span>,
+ <span class="nv">bl_pbl_physics</span>                      <span class="o">=</span> <span class="m">0</span>,  <span class="m">0</span>, <span class="m">0</span>,
+ <span class="nv">bldt</span>                                <span class="o">=</span> <span class="m">0</span>,  <span class="m">0</span>, <span class="m">0</span>,
+ <span class="nv">cu_physics</span>                          <span class="o">=</span> <span class="m">0</span>,  <span class="m">0</span>, <span class="m">0</span>,
+ <span class="nv">cudt</span>                                <span class="o">=</span> <span class="m">5</span>,  <span class="m">5</span>, <span class="m">5</span>,
+ <span class="nv">isfflx</span>                              <span class="o">=</span> <span class="m">1</span>,
+ <span class="nv">ifsnow</span>                              <span class="o">=</span> <span class="m">1</span>,
+ <span class="nv">icloud</span>                              <span class="o">=</span> <span class="m">1</span>,
+ <span class="nv">num_soil_layers</span>                     <span class="o">=</span> <span class="m">5</span>,
+ <span class="nv">mp_zero_out</span>                         <span class="o">=</span> <span class="m">0</span>,
+ <span class="nv">ideal_xland</span>                         <span class="o">=</span> <span class="m">2</span>,
+ <span class="nv">fractional_seaice</span>                   <span class="o">=</span> <span class="m">0</span>,
+ /
+
+<span class="p">&amp;</span>crm
+ <span class="nv">crm_zsfc</span>                            <span class="o">=</span> <span class="m">0</span>.0,
+ <span class="nv">crm_lat</span>                             <span class="o">=</span> <span class="m">81</span>,
+ <span class="nv">crm_lon</span>                             <span class="o">=</span> <span class="m">8</span>.5,
+ <span class="nv">crm_stretch</span>                         <span class="o">=</span> <span class="m">0</span>,
+ <span class="nv">crm_num_pert_layers</span>                 <span class="o">=</span> <span class="m">33</span>,
+ <span class="nv">crm_pert_amp</span>                        <span class="o">=</span> <span class="m">0</span>.1,
+ <span class="nv">crm_init_ccn</span>                        <span class="o">=</span> <span class="m">100</span>,
+ <span class="nv">crm_lupar_opt</span>                       <span class="o">=</span> <span class="m">0</span>,
+ <span class="nv">crm_znt</span>                             <span class="o">=</span> <span class="m">0</span>.04,
+ <span class="nv">crm_emiss</span>                           <span class="o">=</span> <span class="m">1</span>.0,
+ <span class="nv">crm_thc</span>                             <span class="o">=</span> <span class="m">3</span>.,
+ <span class="nv">crm_mavail</span>                          <span class="o">=</span> <span class="m">0</span>.30,
+ <span class="nv">crm_force_opt</span>                       <span class="o">=</span> <span class="m">1</span>,
+ <span class="nv">crm_th_adv_opt</span>                      <span class="o">=</span> <span class="m">1</span>,
+ <span class="nv">crm_qv_adv_opt</span>                      <span class="o">=</span> <span class="m">1</span>,
+ <span class="nv">crm_th_rlx_opt</span>                      <span class="o">=</span> <span class="m">0</span>,
+ <span class="nv">crm_qv_rlx_opt</span>                      <span class="o">=</span> <span class="m">0</span>,
+ <span class="nv">crm_uv_rlx_opt</span>                      <span class="o">=</span> <span class="m">1</span>,
+ <span class="nv">crm_vert_adv_opt</span>                    <span class="o">=</span> <span class="m">1</span>,
+ <span class="nv">crm_wcpa_opt</span>                        <span class="o">=</span> <span class="m">1</span>,
+ <span class="nv">crm_num_force_layers</span>                <span class="o">=</span> <span class="m">153</span>,
+ <span class="nv">crm_tau_s</span>                           <span class="o">=</span> <span class="m">1800</span>,
+ <span class="nv">crm_tau_m</span>                           <span class="o">=</span> <span class="m">1800</span>,
+ <span class="nv">crm_flx_opt</span>                         <span class="o">=</span> <span class="m">0</span>,
+ <span class="nv">crm_sh_flx</span>                          <span class="o">=</span> <span class="m">10</span>,
+ <span class="nv">crm_lh_flx</span>                          <span class="o">=</span> <span class="m">0</span>,
+ <span class="nv">crm_albedo_opt</span>                      <span class="o">=</span> <span class="m">1</span>,
+ <span class="nv">crm_albedo</span>                          <span class="o">=</span> <span class="m">0</span>.8,
+ <span class="nv">crm_tsk_opt</span>                         <span class="o">=</span> <span class="m">2</span>,
+ <span class="nv">crm_tsk</span>                             <span class="o">=</span> <span class="m">263</span>,
+ <span class="nv">crm_ust_opt</span>                         <span class="o">=</span> <span class="m">1</span>,
+ <span class="nv">crm_ust</span>                             <span class="o">=</span> <span class="m">0</span>.01,
+ <span class="nv">crm_init_tke_opt</span>                    <span class="o">=</span> <span class="m">0</span>,
+ <span class="nv">crm_init_tke</span>                        <span class="o">=</span> <span class="m">1</span>.0,
+ <span class="nv">crm_morr_act_opt</span>                    <span class="o">=</span> <span class="m">1</span>,
+ <span class="nv">crm_morr_hygro_opt</span>                  <span class="o">=</span> <span class="m">0</span>,
+ <span class="nv">crm_morr_hygro</span>                      <span class="o">=</span> <span class="m">0</span>.12,
+ <span class="nv">crm_mp_nc</span>                           <span class="o">=</span> <span class="m">448</span>.62,
+ <span class="nv">crm_num_aer_layers</span>                  <span class="o">=</span> <span class="m">153</span>,
+ <span class="nv">crm_stat_opt</span>                        <span class="o">=</span> <span class="m">1</span>,
+ <span class="nv">crm_stat_sample_interval_s</span>          <span class="o">=</span> <span class="m">1800</span>.,
+/
+</pre></div>
+</div>
 </div>
 <div class="section" id="model-setup">
 <h3>Model setup<a class="headerlink" href="#model-setup" title="Permalink to this headline">¶</a></h3>
-<p>```{admonition} Do I need to recompile the model when modifying <code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code>?</p>
+<p>```{admonition} Do I need to recompile the model when modifying <code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code>?
+??</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
 1. Change the values of the USGS section of `LANDUSE.TBL` from the following:
 
