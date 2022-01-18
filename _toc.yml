@@ -6,8 +6,9 @@ root: intro
 
 
 parts:
-  - caption: 
+  - caption:
     chapters:
     - file: calculations.ipynb
     - file: summary.md
+    - file: sensitivity.md
     - file: references.md
