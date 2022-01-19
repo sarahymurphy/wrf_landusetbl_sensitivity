@@ -391,7 +391,8 @@
 <h3>Model setup<a class="headerlink" href="#model-setup" title="Permalink to this headline">¶</a></h3>
 <div class="admonition-do-i-need-to-recompile-the-model admonition">
 <p class="admonition-title">Do I need to recompile the model?</p>
-<p>??</p>
+<p>Not for modifications to the <code class="docutils literal notranslate"><span class="pre">.TBL</span></code> files.</p>
+<p>I tested this by modifying the values in <code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code> to all zero for the ‘Snow and Ice’ entry. This made the model crash as soon as it began to run, indicating that these changes did modify the model without recompilation.</p>
 </div>
 <ol class="simple">
 <li><p>Change the values of the USGS section of <code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code> from the following:</p></li>
