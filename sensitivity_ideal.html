@@ -68,6 +68,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="References" href="references.html" />
+    <link rel="prev" title="Sensitivity Study Setup" href="sensitivity.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -106,7 +108,7 @@
   </a>
  </li>
 </ul>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="calculations.html">
    Calculations
@@ -120,6 +122,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="sensitivity.html">
    Sensitivity Study Setup
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Idealed Sensitivity Study
   </a>
  </li>
  <li class="toctree-l1">
@@ -397,6 +404,194 @@
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sdate</span> <span class="o">=</span> <span class="s1">&#39;2015-02-04&#39;</span>
+<span class="n">edate</span> <span class="o">=</span> <span class="s1">&#39;2015-02-06&#39;</span> 
+
+<span class="n">M_net</span> <span class="o">=</span> <span class="p">(</span><span class="n">M_downlw</span><span class="p">[</span><span class="s1">&#39;lw&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">M_uplw</span><span class="p">[</span><span class="s1">&#39;lw&#39;</span><span class="p">])</span>
+<span class="n">sebmask</span> <span class="o">=</span> <span class="p">(</span><span class="n">M_downlw</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;</span> <span class="n">sdate</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">M_downlw</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">edate</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fns</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="s1">&#39;/Volumes/seagate_desktop/idealized/case1/000101/wrfo*&#39;</span><span class="p">)</span>
+<span class="n">wrflist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">fns</span><span class="p">:</span>
+    <span class="n">wrflist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">))</span>
+
+<span class="n">dbz</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;dbz&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
+<span class="n">dbz_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dbz</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">dbz</span><span class="o">.</span><span class="n">Time</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lh</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;LH&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
+<span class="n">lh_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lh</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">lh</span><span class="o">.</span><span class="n">Time</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="n">sh</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;HFX&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
+<span class="n">sh_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">sh</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">sh</span><span class="o">.</span><span class="n">Time</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lh</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">M_sen</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="n">edate</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmin</span> <span class="o">=</span> <span class="n">sdate</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-05-05&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux $(W/m^</span><span class="si">{2}</span><span class="s1">)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sensible Heat Flux&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Idealized WRF, Pre-Modification&#39;</span><span class="p">,</span> <span class="s1">&#39;Measurements&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">sdate</span><span class="p">,</span><span class="s1">&#39;2015-02-05&#39;</span><span class="p">);</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sh</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">M_lat</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="n">edate</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmin</span> <span class="o">=</span> <span class="n">sdate</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-02-05&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux $(W/m^</span><span class="si">{2}</span><span class="s1">)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Latent Heat Flux&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Idealized WRF, Pre-Modification&#39;</span><span class="p">,</span> <span class="s1">&#39;Measurements&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">sdate</span><span class="p">,</span><span class="s1">&#39;2015-02-05&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/sensitivity_ideal_5_0.png" src="_images/sensitivity_ideal_5_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lwdnb</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;LWDNB&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
+<span class="n">lwdnb_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lwdnb</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">lwupb</span><span class="o">.</span><span class="n">Time</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="n">lwupb</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;LWUPB&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
+<span class="n">lwupb_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lwupb</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">lwupb</span><span class="o">.</span><span class="n">Time</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="n">swdnb</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;SWDNB&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
+<span class="n">swdnb_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">swdnb</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">swdnb</span><span class="o">.</span><span class="n">Time</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="n">swupb</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;SWUPB&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
+<span class="n">swupb_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">swupb</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">swupb</span><span class="o">.</span><span class="n">Time</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/core/internals/managers.py</span> in <span class="ni">create_block_manager_from_blocks</span><span class="nt">(blocks, axes)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1664</span> 
+<span class="ne">-&gt; </span><span class="mi">1665</span>         <span class="n">mgr</span> <span class="o">=</span> <span class="n">BlockManager</span><span class="p">(</span><span class="n">blocks</span><span class="p">,</span> <span class="n">axes</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1666</span>         <span class="n">mgr</span><span class="o">.</span><span class="n">_consolidate_inplace</span><span class="p">()</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/core/internals/managers.py</span> in <span class="ni">__init__</span><span class="nt">(self, blocks, axes, do_integrity_check)</span>
+<span class="g g-Whitespace">    </span><span class="mi">148</span>         <span class="k">if</span> <span class="n">do_integrity_check</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">149</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_verify_integrity</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">150</span> 
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/core/internals/managers.py</span> in <span class="ni">_verify_integrity</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">325</span>             <span class="k">if</span> <span class="n">block</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">!=</span> <span class="n">mgr_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+<span class="ne">--&gt; </span><span class="mi">326</span>                 <span class="k">raise</span> <span class="n">construction_error</span><span class="p">(</span><span class="n">tot_items</span><span class="p">,</span> <span class="n">block</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">327</span>         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span> <span class="o">!=</span> <span class="n">tot_items</span><span class="p">:</span>
+
+<span class="ne">ValueError</span>: Shape of passed values is (141, 1), indices imply (136, 1)
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">48</span><span class="o">-</span><span class="n">d2aac6cda702</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">lwdnb</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;LWDNB&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">lwdnb_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lwdnb</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">lwupb</span><span class="o">.</span><span class="n">Time</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">lwupb</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;LWUPB&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">lwupb_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lwupb</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">lwupb</span><span class="o">.</span><span class="n">Time</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/core/frame.py</span> in <span class="ni">__init__</span><span class="nt">(self, data, index, columns, dtype, copy)</span>
+<span class="g g-Whitespace">    </span><span class="mi">495</span>                 <span class="n">mgr</span> <span class="o">=</span> <span class="n">init_dict</span><span class="p">({</span><span class="n">data</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">data</span><span class="p">},</span> <span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">496</span>             <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">497</span>                 <span class="n">mgr</span> <span class="o">=</span> <span class="n">init_ndarray</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">498</span> 
+<span class="g g-Whitespace">    </span><span class="mi">499</span>         <span class="c1"># For data is list-like, or Iterable (will consume into list)</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/core/internals/construction.py</span> in <span class="ni">init_ndarray</span><span class="nt">(values, index, columns, dtype, copy)</span>
+<span class="g g-Whitespace">    </span><span class="mi">232</span>         <span class="n">block_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">values</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">233</span> 
+<span class="ne">--&gt; </span><span class="mi">234</span>     <span class="k">return</span> <span class="n">create_block_manager_from_blocks</span><span class="p">(</span><span class="n">block_values</span><span class="p">,</span> <span class="p">[</span><span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="p">])</span>
+<span class="g g-Whitespace">    </span><span class="mi">235</span> 
+<span class="g g-Whitespace">    </span><span class="mi">236</span> 
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/core/internals/managers.py</span> in <span class="ni">create_block_manager_from_blocks</span><span class="nt">(blocks, axes)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1670</span>         <span class="n">blocks</span> <span class="o">=</span> <span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="s2">&quot;values&quot;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1671</span>         <span class="n">tot_items</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1672</span>         <span class="k">raise</span> <span class="n">construction_error</span><span class="p">(</span><span class="n">tot_items</span><span class="p">,</span> <span class="n">blocks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">axes</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1673</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1674</span> 
+
+<span class="ne">ValueError</span>: Shape of passed values is (141, 1), indices imply (136, 1)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">221</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lwdnb_df</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">M_downlw</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="n">edate</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="c1">#plt.hlines(0, xmin = sdate, xmax = &#39;2015-05-05&#39;, linestyle = &#39;--&#39;, color = &#39;k&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux $(W/m^</span><span class="si">{2}</span><span class="s1">)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Downwelling Longwave Radiation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Idealized WRF&#39;</span><span class="p">,</span> <span class="s1">&#39;Measurements&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">180</span><span class="p">,</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">sdate</span><span class="p">,</span><span class="s1">&#39;2015-02-05&#39;</span><span class="p">);</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">223</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lwupb_df</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">M_uplw</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="n">edate</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="c1">#plt.hlines(0, xmin = sdate, xmax = &#39;2015-05-05&#39;, linestyle = &#39;--&#39;, color = &#39;k&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux $(W/m^</span><span class="si">{2}</span><span class="s1">)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Upwelling Longwave Radiation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">180</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Idealized WRF&#39;</span><span class="p">,</span> <span class="s1">&#39;Measurements&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">sdate</span><span class="p">,</span><span class="s1">&#39;2015-02-05&#39;</span><span class="p">);</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">222</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">swdnb_df</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">M_downsw</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="n">edate</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="c1">#plt.hlines(0, xmin = sdate, xmax = &#39;2015-05-05&#39;, linestyle = &#39;--&#39;, color = &#39;k&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux $(W/m^</span><span class="si">{2}</span><span class="s1">)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Downwelling Shortwave Radiation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Idealized WRF&#39;</span><span class="p">,</span> <span class="s1">&#39;Measurements&#39;</span><span class="p">])</span>
+<span class="c1">#plt.ylim(180,300)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">sdate</span><span class="p">,</span><span class="s1">&#39;2015-02-05&#39;</span><span class="p">);</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">224</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">swupb_df</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">M_upsw</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="n">edate</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="c1">#plt.hlines(0, xmin = sdate, xmax = &#39;2015-05-05&#39;, linestyle = &#39;--&#39;, color = &#39;k&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux $(W/m^</span><span class="si">{2}</span><span class="s1">)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Upwelling Shortwave Radiation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="c1">#plt.ylim(180, 300)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Idealized WRF&#39;</span><span class="p">,</span> <span class="s1">&#39;Measurements&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">sdate</span><span class="p">,</span><span class="s1">&#39;2015-02-05&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="case-2-spring-cloudy">
 <h2>Case 2 - Spring Cloudy<a class="headerlink" href="#case-2-spring-cloudy" title="Permalink to this headline">¶</a></h2>
@@ -438,7 +633,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/sensitivity_ideal_7_0.png" src="_images/sensitivity_ideal_7_0.png" />
+<img alt="_images/sensitivity_ideal_12_0.png" src="_images/sensitivity_ideal_12_0.png" />
 </div>
 </div>
 </div>
@@ -459,7 +654,7 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">case4_sh</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sh</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">M_sen</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="n">edate</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;orange&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmin</span> <span class="o">=</span> <span class="n">sdate</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-05-05&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux $(W/m^</span><span class="si">{2}</span><span class="s1">)$&#39;</span><span class="p">)</span>
@@ -470,7 +665,7 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">sdate</span><span class="p">,</span><span class="s1">&#39;2015-05-05&#39;</span><span class="p">);</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">case4_lh</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lh</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">M_lat</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="n">edate</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;orange&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmin</span> <span class="o">=</span> <span class="n">sdate</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="s1">&#39;2015-05-05&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux $(W/m^</span><span class="si">{2}</span><span class="s1">)$&#39;</span><span class="p">)</span>
@@ -482,7 +677,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/sensitivity_ideal_10_0.png" src="_images/sensitivity_ideal_10_0.png" />
+<img alt="_images/sensitivity_ideal_15_0.png" src="_images/sensitivity_ideal_15_0.png" />
 </div>
 </div>
 </div>
@@ -555,7 +750,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/sensitivity_ideal_13_0.png" src="_images/sensitivity_ideal_13_0.png" />
+<img alt="_images/sensitivity_ideal_18_0.png" src="_images/sensitivity_ideal_18_0.png" />
 </div>
 </div>
 </div>
@@ -599,6 +794,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/sensitivity_ideal_23_0.png" src="_images/sensitivity_ideal_23_0.png" />
+</div>
 </div>
 </div>
 <div class="section" id="id2">
@@ -626,7 +824,7 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Idealized WRF, Pre-Modification&#39;</span><span class="p">,</span> <span class="s1">&#39;Measurements&#39;</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">sdate</span><span class="p">,</span><span class="s1">&#39;2015-05-05&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">sdate</span><span class="p">,</span><span class="s1">&#39;2015-05-25&#39;</span><span class="p">);</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">case4_lh</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">)</span>
@@ -639,6 +837,9 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">sdate</span><span class="p">,</span><span class="s1">&#39;2015-05-25&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/sensitivity_ideal_26_0.png" src="_images/sensitivity_ideal_26_0.png" />
 </div>
 </div>
 </div>
@@ -657,6 +858,61 @@
 
 <span class="n">swupb</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;SWUPB&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
 <span class="n">swupb_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">swupb</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">swupb</span><span class="o">.</span><span class="n">Time</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/core/internals/managers.py</span> in <span class="ni">create_block_manager_from_blocks</span><span class="nt">(blocks, axes)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1664</span> 
+<span class="ne">-&gt; </span><span class="mi">1665</span>         <span class="n">mgr</span> <span class="o">=</span> <span class="n">BlockManager</span><span class="p">(</span><span class="n">blocks</span><span class="p">,</span> <span class="n">axes</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1666</span>         <span class="n">mgr</span><span class="o">.</span><span class="n">_consolidate_inplace</span><span class="p">()</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/core/internals/managers.py</span> in <span class="ni">__init__</span><span class="nt">(self, blocks, axes, do_integrity_check)</span>
+<span class="g g-Whitespace">    </span><span class="mi">148</span>         <span class="k">if</span> <span class="n">do_integrity_check</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">149</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_verify_integrity</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">150</span> 
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/core/internals/managers.py</span> in <span class="ni">_verify_integrity</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">325</span>             <span class="k">if</span> <span class="n">block</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">!=</span> <span class="n">mgr_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+<span class="ne">--&gt; </span><span class="mi">326</span>                 <span class="k">raise</span> <span class="n">construction_error</span><span class="p">(</span><span class="n">tot_items</span><span class="p">,</span> <span class="n">block</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">327</span>         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span> <span class="o">!=</span> <span class="n">tot_items</span><span class="p">:</span>
+
+<span class="ne">ValueError</span>: Shape of passed values is (142, 1), indices imply (136, 1)
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">42</span><span class="o">-</span><span class="n">d2aac6cda702</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">lwdnb</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;LWDNB&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">lwdnb_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lwdnb</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">lwupb</span><span class="o">.</span><span class="n">Time</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">lwupb</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;LWUPB&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">lwupb_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lwupb</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">lwupb</span><span class="o">.</span><span class="n">Time</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/core/frame.py</span> in <span class="ni">__init__</span><span class="nt">(self, data, index, columns, dtype, copy)</span>
+<span class="g g-Whitespace">    </span><span class="mi">495</span>                 <span class="n">mgr</span> <span class="o">=</span> <span class="n">init_dict</span><span class="p">({</span><span class="n">data</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">data</span><span class="p">},</span> <span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">496</span>             <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">497</span>                 <span class="n">mgr</span> <span class="o">=</span> <span class="n">init_ndarray</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">498</span> 
+<span class="g g-Whitespace">    </span><span class="mi">499</span>         <span class="c1"># For data is list-like, or Iterable (will consume into list)</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/core/internals/construction.py</span> in <span class="ni">init_ndarray</span><span class="nt">(values, index, columns, dtype, copy)</span>
+<span class="g g-Whitespace">    </span><span class="mi">232</span>         <span class="n">block_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">values</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">233</span> 
+<span class="ne">--&gt; </span><span class="mi">234</span>     <span class="k">return</span> <span class="n">create_block_manager_from_blocks</span><span class="p">(</span><span class="n">block_values</span><span class="p">,</span> <span class="p">[</span><span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="p">])</span>
+<span class="g g-Whitespace">    </span><span class="mi">235</span> 
+<span class="g g-Whitespace">    </span><span class="mi">236</span> 
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/core/internals/managers.py</span> in <span class="ni">create_block_manager_from_blocks</span><span class="nt">(blocks, axes)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1670</span>         <span class="n">blocks</span> <span class="o">=</span> <span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="s2">&quot;values&quot;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1671</span>         <span class="n">tot_items</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1672</span>         <span class="k">raise</span> <span class="n">construction_error</span><span class="p">(</span><span class="n">tot_items</span><span class="p">,</span> <span class="n">blocks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">axes</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1673</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1674</span> 
+
+<span class="ne">ValueError</span>: Shape of passed values is (142, 1), indices imply (136, 1)
 </pre></div>
 </div>
 </div>
@@ -742,7 +998,21 @@
               
             
                 <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="sensitivity.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Sensitivity Study Setup</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="references.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">References</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             
         </div>

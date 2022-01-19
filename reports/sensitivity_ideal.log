@@ -32,7 +32,7 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-fns = glob('/Volumes/seagate_desktop/idealized/case4/000101/wrfo*')
+fns = glob('/Volumes/seagate_desktop/idealized/case1/000101/wrfo*')
 wrflist = list()
 for fn in fns:
     wrflist.append(Dataset(fn))

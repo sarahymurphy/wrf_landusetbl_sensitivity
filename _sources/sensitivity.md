@@ -67,9 +67,9 @@ The following is the physics and crm sections of the `namelist.input` files bein
  crm_sh_flx                          = 10,
  crm_lh_flx                          = 0,
  crm_albedo_opt                      = 1,
- crm_albedo                          = 0.8,
+ crm_albedo                          = 0.81,
  crm_tsk_opt                         = 2,
- crm_tsk                             = 263,
+ crm_tsk                             = 262,
  crm_ust_opt                         = 1,
  crm_ust                             = 0.01,
  crm_init_tke_opt                    = 0,
@@ -85,14 +85,7 @@ The following is the physics and crm sections of the `namelist.input` files bein
 
 ```
 ### Model setup
-
-```{admonition} Do I need to recompile the model?
-Not for modifications to the `.TBL` files. 
-
-I tested this by modifying the values in `LANDUSE.TBL` to all zero for the 'Snow and Ice' entry. This made the model crash as soon as it began to run, indicating that these changes did modify the model without recompilation. 
-```
-
-1. Change the values of the USGS section of `LANDUSE.TBL` from the following:
+Change the values of the USGS section of `LANDUSE.TBL` from the following:
 
 >SUMMER \
 >24,     55.,   .95,   .95,   0.1,    5.,    0., 9.0e25, 'Snow or Ice'\
@@ -106,7 +99,11 @@ I tested this by modifying the values in `LANDUSE.TBL` to all zero for the 'Snow
 >WINTER \
 >24,     86.,   .95,   .98,   0.001,    5.,    0., 1.8e06, 'Snow or Ice'
 
+```{admonition} Do I need to recompile the model?
+Not for modifications to the `.TBL` files. 
 
+I tested this by modifying the values in `LANDUSE.TBL` to all zero for the 'Snow and Ice' entry. This made the model crash as soon as it began to run, indicating that these changes did modify the model without recompilation. 
+```
 
 ---
 ## Real
