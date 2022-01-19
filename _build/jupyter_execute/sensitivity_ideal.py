@@ -45,15 +45,133 @@ M_sen = -pd.DataFrame(Measurements_seb.variables['surface_downward_sensible_heat
 # sensible and latent heat flux negative to match WRF sign convention
 
 
+# In[2]:
+
+
+sdate = '2015-02-04'
+edate = '2015-02-06' 
+
+M_net = (M_downlw['lw'] - M_uplw['lw'])
+sebmask = (M_downlw.index > sdate) & (M_downlw.index < edate)
+
+
+# In[3]:
+
+
+fns = glob('/Volumes/seagate_desktop/idealized/case1/000101/wrfo*')
+wrflist = list()
+for fn in fns:
+    wrflist.append(Dataset(fn))
+
+dbz = getvar(wrflist, "dbz", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
+z = getvar(wrflist, "z").mean('south_north').mean('west_east')
+dbz_df = pd.DataFrame(dbz.values, index = dbz.Time.values, columns = z)
+
+
+# In[45]:
+
+
+lh = getvar(wrflist, "LH", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
+lh_df = pd.DataFrame(lh.values, index = lh.Time.values)
+
+sh = getvar(wrflist, "HFX", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
+sh_df = pd.DataFrame(sh.values, index = sh.Time.values)
+
+
+# In[47]:
+
+
+plt.figure(figsize = (10,10))
+plt.subplot(211)
+plt.plot(lh, 'o', alpha = 0.75)
+plt.plot(M_sen[sdate:edate], 'o', alpha = 0.75, color = 'orange')
+plt.hlines(0, xmin = sdate, xmax = '2015-05-05', linestyle = '--', color = 'k')
+plt.ylabel('Flux $(W/m^{2})$')
+plt.title('Sensible Heat Flux')
+plt.grid()
+plt.legend(['Idealized WRF, Pre-Modification', 'Measurements'])
+plt.ylim(-10,20)
+plt.xlim(sdate,'2015-02-05');
+
+plt.subplot(212)
+plt.plot(sh, 'o', alpha = 0.75)
+plt.plot(M_lat[sdate:edate], 'o', alpha = 0.75, color = 'orange')
+plt.hlines(0, xmin = sdate, xmax = '2015-02-05', linestyle = '--', color = 'k')
+plt.ylabel('Flux $(W/m^{2})$')
+plt.title('Latent Heat Flux')
+plt.grid()
+plt.legend(['Idealized WRF, Pre-Modification', 'Measurements'])
+plt.xlim(sdate,'2015-02-05');
+
+
+# In[48]:
+
+
+lwdnb = getvar(wrflist, "LWDNB", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
+lwdnb_df = pd.DataFrame(lwdnb.values, index = lwupb.Time.values)
+
+lwupb = getvar(wrflist, "LWUPB", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
+lwupb_df = pd.DataFrame(lwupb.values, index = lwupb.Time.values)
+
+swdnb = getvar(wrflist, "SWDNB", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
+swdnb_df = pd.DataFrame(swdnb.values, index = swdnb.Time.values)
+
+swupb = getvar(wrflist, "SWUPB", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
+swupb_df = pd.DataFrame(swupb.values, index = swupb.Time.values)
+
+
 # In[ ]:
 
 
+plt.figure(figsize = (15,7))
+plt.subplot(221)
+plt.plot(lwdnb_df, 'o', alpha = 0.75)
+plt.plot(M_downlw[sdate:edate], 'o', alpha = 0.75, color = 'orange')
+#plt.hlines(0, xmin = sdate, xmax = '2015-05-05', linestyle = '--', color = 'k')
+plt.ylabel('Flux $(W/m^{2})$')
+plt.title('Downwelling Longwave Radiation')
+plt.grid()
+plt.legend(['Idealized WRF', 'Measurements'])
+plt.ylim(180,300)
+plt.xlim(sdate,'2015-02-05');
 
+plt.subplot(223)
+plt.plot(lwupb_df, 'o', alpha = 0.75)
+plt.plot(M_uplw[sdate:edate], 'o', alpha = 0.75, color = 'orange')
+#plt.hlines(0, xmin = sdate, xmax = '2015-05-05', linestyle = '--', color = 'k')
+plt.ylabel('Flux $(W/m^{2})$')
+plt.title('Upwelling Longwave Radiation')
+plt.grid()
+plt.ylim(180, 300)
+plt.legend(['Idealized WRF', 'Measurements'])
+plt.xlim(sdate,'2015-02-05');
+
+plt.subplot(222)
+plt.plot(swdnb_df, 'o', alpha = 0.75)
+plt.plot(M_downsw[sdate:edate], 'o', alpha = 0.75, color = 'orange')
+#plt.hlines(0, xmin = sdate, xmax = '2015-05-05', linestyle = '--', color = 'k')
+plt.ylabel('Flux $(W/m^{2})$')
+plt.title('Downwelling Shortwave Radiation')
+plt.grid()
+plt.legend(['Idealized WRF', 'Measurements'])
+#plt.ylim(180,300)
+plt.xlim(sdate,'2015-02-05');
+
+plt.subplot(224)
+plt.plot(swupb_df, 'o', alpha = 0.75)
+plt.plot(M_upsw[sdate:edate], 'o', alpha = 0.75, color = 'orange')
+#plt.hlines(0, xmin = sdate, xmax = '2015-05-05', linestyle = '--', color = 'k')
+plt.ylabel('Flux $(W/m^{2})$')
+plt.title('Upwelling Shortwave Radiation')
+plt.grid()
+#plt.ylim(180, 300)
+plt.legend(['Idealized WRF', 'Measurements'])
+plt.xlim(sdate,'2015-02-05');
 
 
 # ## Case 2 - Spring Cloudy
 
-# In[2]:
+# In[6]:
 
 
 sdate = '2015-05-02'
@@ -65,7 +183,7 @@ sebmask = (M_downlw.index > sdate) & (M_downlw.index < edate)
 
 # ### Clouds
 
-# In[3]:
+# In[13]:
 
 
 fns = glob('/Volumes/seagate_desktop/idealized/case4/000101/wrfo*')
@@ -105,7 +223,7 @@ sh_df = pd.DataFrame(sh.values, index = sh.Time.values)
 
 plt.figure(figsize = (10,10))
 plt.subplot(211)
-plt.plot(case4_sh, 'o', alpha = 0.75)
+plt.plot(sh, 'o', alpha = 0.75)
 plt.plot(M_sen[sdate:edate], 'o', alpha = 0.75, color = 'orange')
 plt.hlines(0, xmin = sdate, xmax = '2015-05-05', linestyle = '--', color = 'k')
 plt.ylabel('Flux $(W/m^{2})$')
@@ -116,7 +234,7 @@ plt.ylim(-10,20)
 plt.xlim(sdate,'2015-05-05');
 
 plt.subplot(212)
-plt.plot(case4_lh, 'o', alpha = 0.75)
+plt.plot(lh, 'o', alpha = 0.75)
 plt.plot(M_lat[sdate:edate], 'o', alpha = 0.75, color = 'orange')
 plt.hlines(0, xmin = sdate, xmax = '2015-05-05', linestyle = '--', color = 'k')
 plt.ylabel('Flux $(W/m^{2})$')
@@ -195,7 +313,7 @@ plt.xlim(sdate,'2015-05-05');
 
 # ## Case 3 - Spring Clear
 
-# In[ ]:
+# In[34]:
 
 
 sdate = '2015-05-22'
@@ -212,7 +330,7 @@ for fn in fns:
 
 # ### Clouds
 
-# In[ ]:
+# In[35]:
 
 
 dbz = getvar(wrflist, "dbz", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
@@ -220,7 +338,7 @@ z = getvar(wrflist, "z").mean('south_north').mean('west_east')
 dbz_df = pd.DataFrame(dbz.values, index = dbz.Time.values, columns = z)
 
 
-# In[ ]:
+# In[36]:
 
 
 plt.figure(figsize = (10,5))
@@ -232,7 +350,7 @@ plt.colorbar(label = 'dBZ');
 
 # ### Sensible and Latent Heat Flux
 
-# In[ ]:
+# In[37]:
 
 
 lh = getvar(wrflist, "LH", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
@@ -242,7 +360,7 @@ sh = getvar(wrflist, "HFX", timeidx=ALL_TIMES, method="cat").mean('south_north')
 sh_df = pd.DataFrame(sh.values, index = sh.Time.values)
 
 
-# In[ ]:
+# In[41]:
 
 
 plt.figure(figsize = (10,10))
@@ -255,7 +373,7 @@ plt.title('Sensible Heat Flux')
 plt.grid()
 plt.legend(['Idealized WRF, Pre-Modification', 'Measurements'])
 plt.ylim(-10,20)
-plt.xlim(sdate,'2015-05-05');
+plt.xlim(sdate,'2015-05-25');
 
 plt.subplot(212)
 plt.plot(case4_lh, 'o', alpha = 0.75)
@@ -270,7 +388,7 @@ plt.xlim(sdate,'2015-05-25');
 
 # ### Longwave Radiation & Shortwave Radiation
 
-# In[ ]:
+# In[42]:
 
 
 lwdnb = getvar(wrflist, "LWDNB", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')

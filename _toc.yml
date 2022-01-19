@@ -11,4 +11,5 @@ parts:
     - file: calculations.ipynb
     - file: summary.md
     - file: sensitivity.md
+    - file: sensitivity_ideal.ipynb
     - file: references.md
