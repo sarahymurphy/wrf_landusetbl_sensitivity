@@ -429,7 +429,7 @@
   <div class="tex2jax_ignore mathjax_ignore section" id="idealed-sensitivity-study">
 <h1>Idealed Sensitivity Study<a class="headerlink" href="#idealed-sensitivity-study" title="Permalink to this headline">¶</a></h1>
 <p>Throughout this document <em>unmodified</em> is unsed to describe the runs which used the original values of <code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code>.</p>
-<div class="cell tag_hide-output docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -487,7 +487,7 @@
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="case-1-winter-clear">
 <h1>Case 1 - Winter Clear<a class="headerlink" href="#case-1-winter-clear" title="Permalink to this headline">¶</a></h1>
-<div class="cell tag_hide-output docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Finding all wrfout file</span>
 <span class="n">fns</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="s1">&#39;/Volumes/seagate_desktop/idealized/case1/000101/wrfo*&#39;</span><span class="p">)</span>
@@ -557,7 +557,7 @@
 <img alt="_images/sensitivity_ideal_5_0.png" src="_images/sensitivity_ideal_5_0.png" />
 </div>
 </div>
-<div class="cell tag_hide-output docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fn</span> <span class="o">=</span> <span class="s1">&#39;/Volumes/seagate_desktop/data/MPL/Robert_MPLData/FinalNICELidarData/NICE_MPLDataFinal20150206.cdf&#39;</span>
 <span class="n">rbt_cldmask</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
@@ -644,7 +644,7 @@
 </div>
 <div class="section" id="summary-table">
 <h2>Summary Table<a class="headerlink" href="#summary-table" title="Permalink to this headline">¶</a></h2>
-<div class="cell tag_hide-output docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lwdns</span> <span class="o">=</span> <span class="n">M_downlw</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="n">edate</span><span class="p">]</span>
 <span class="n">lwdns</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;measured&#39;</span><span class="p">]</span>
@@ -713,7 +713,7 @@
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="case-2-spring-cloudy">
 <h1>Case 2 - Spring Cloudy<a class="headerlink" href="#case-2-spring-cloudy" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fns</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="s1">&#39;/Volumes/seagate_desktop/idealized/case4/000101/wrfo*&#39;</span><span class="p">)</span>
 <span class="n">wrflist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
@@ -866,7 +866,7 @@
 </div>
 <div class="section" id="id3">
 <h2>Summary Table<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="cell tag_hide-output docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lwdns</span> <span class="o">=</span> <span class="n">M_downlw</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="n">edate</span><span class="p">]</span>
 <span class="n">lwdns</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;measured&#39;</span><span class="p">]</span>
@@ -935,7 +935,7 @@
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="case-3-spring-clear">
 <h1>Case 3 - Spring Clear<a class="headerlink" href="#case-3-spring-clear" title="Permalink to this headline">¶</a></h1>
-<div class="cell tag_hide-output docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sdate</span> <span class="o">=</span> <span class="s1">&#39;2015-05-22&#39;</span>
 <span class="n">edate</span> <span class="o">=</span> <span class="s1">&#39;2015-05-25&#39;</span> 
@@ -1081,7 +1081,7 @@
 </div>
 <div class="section" id="id7">
 <h2>Summary Table<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
-<div class="cell tag_hide-output docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lwdns</span> <span class="o">=</span> <span class="n">M_downlw</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="n">edate</span><span class="p">]</span>
 <span class="n">lwdns</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;measured&#39;</span><span class="p">]</span>
