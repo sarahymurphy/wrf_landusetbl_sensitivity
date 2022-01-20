@@ -114,7 +114,7 @@ swupb_df = pd.DataFrame(swupb.values, index = swupb.Time.values)
 
 # ## Clouds
 
-# In[15]:
+# In[3]:
 
 
 plt.figure(figsize = (10,5))
@@ -126,7 +126,7 @@ plt.gca().xaxis.set_major_formatter(myFmt)
 plt.show()
 
 
-# In[57]:
+# In[4]:
 
 
 fn = '/Volumes/seagate_desktop/data/MPL/Robert_MPLData/FinalNICELidarData/NICE_MPLDataFinal20150206.cdf'
@@ -138,7 +138,7 @@ date_ = fn[-12:-4]
 
 # ## Sensible and Latent Heat Flux
 
-# In[18]:
+# In[5]:
 
 
 plt.figure(figsize = (10,10))
@@ -170,7 +170,7 @@ plt.show()
 
 # ## Longwave Radiation
 
-# In[20]:
+# In[6]:
 
 
 plt.figure(figsize = (10,7))
@@ -201,7 +201,7 @@ plt.show()
 
 # ## Summary Table
 
-# In[21]:
+# In[7]:
 
 
 lwdns = M_downlw[sdate:edate]
@@ -229,7 +229,7 @@ shs.columns = ['measured']
 shs['unmodified'] = sh_df[0]
 
 
-# In[22]:
+# In[8]:
 
 
 correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
@@ -244,7 +244,7 @@ r_squared.style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(colo
 
 # # Case 2 - Spring Cloudy
 
-# In[62]:
+# In[9]:
 
 
 fns = glob('/Volumes/seagate_desktop/idealized/case4/000101/wrfo*')
@@ -282,7 +282,7 @@ swupb_df = pd.DataFrame(swupb.values, index = swupb.Time.values)
 
 # ## Clouds
 
-# In[63]:
+# In[10]:
 
 
 plt.figure(figsize = (10,5))
@@ -296,7 +296,7 @@ plt.show()
 
 # ## Sensible and Latent Heat Flux
 
-# In[67]:
+# In[11]:
 
 
 plt.figure(figsize = (10,10))
@@ -328,7 +328,7 @@ plt.show()
 
 # ## Longwave and Shortwave Radiation
 
-# In[68]:
+# In[12]:
 
 
 plt.figure(figsize = (15,7))
@@ -381,7 +381,7 @@ plt.show()
 
 # ## Summary Table
 
-# In[69]:
+# In[13]:
 
 
 lwdns = M_downlw[sdate:edate]
@@ -409,7 +409,7 @@ shs.columns = ['measured']
 shs['unmodified'] = sh_df[0]
 
 
-# In[70]:
+# In[14]:
 
 
 correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
@@ -424,7 +424,7 @@ r_squared.style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(colo
 
 # # Case 3 - Spring Clear
 
-# In[ ]:
+# In[15]:
 
 
 sdate = '2015-05-22'
@@ -463,7 +463,7 @@ swupb_df = pd.DataFrame(swupb.values, index = swupb.Time.values)
 
 # ## Clouds
 
-# In[ ]:
+# In[16]:
 
 
 plt.figure(figsize = (10,5))
@@ -478,7 +478,7 @@ plt.show()
 
 # ## Sensible and Latent Heat Flux
 
-# In[ ]:
+# In[17]:
 
 
 plt.figure(figsize = (10,10))
@@ -510,7 +510,7 @@ plt.show()
 
 # ## Longwave and Shortwave Radiation
 
-# In[ ]:
+# In[18]:
 
 
 plt.figure(figsize = (15,7))
@@ -563,7 +563,7 @@ plt.show()
 
 # ## Summary Table
 
-# In[ ]:
+# In[19]:
 
 
 lwdns = M_downlw[sdate:edate]
@@ -591,7 +591,7 @@ shs.columns = ['measured']
 shs['unmodified'] = sh_df[0]
 
 
-# In[ ]:
+# In[20]:
 
 
 correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
