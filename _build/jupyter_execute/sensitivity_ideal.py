@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Idealed Sensitivity Study
+# # Idealized Sensitivity Study
 # 
 # Throughout this document *unmodified* is unsed to describe the runs which used the original values of `LANDUSE.TBL`.
 
