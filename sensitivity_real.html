@@ -1,0 +1,737 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real Sensitivity Study &#8212; Land Surface Model Table Review</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Land Surface Model Table Review</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Reviewing Values in LANDUSE.TBL
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="calculations.html">
+   Calculations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="summary.html">
+   Summary and Recommendations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sensitivity.html">
+   Sensitivity Study Setup
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sensitivity_ideal.html">
+   Idealized Sensitivity Study
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/sensitivity_real.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/sensitivity_real.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Real Sensitivity Study
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#winter">
+   Winter
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sensible-and-latent-heat-flux">
+     Sensible and Latent Heat Flux
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#longwave-radiation">
+     Longwave Radiation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cloud-cover">
+     Cloud Cover
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#above-n-ice">
+       Above N-ICE
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#in-the-surrounding-area">
+       In the surrounding area
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#mean-monthly">
+         Mean monthly
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#mean-seasonal">
+         Mean Seasonal
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spring">
+   Spring
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Sensible and Latent Heat Flux
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#longwave-and-shortwave-radiation">
+     Longwave and Shortwave Radiation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Cloud Cover
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id3">
+       Above N-ICE
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id4">
+       In the surrounding area
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#id5">
+         Mean monthly
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#id6">
+         Mean Seasonal
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Real Sensitivity Study</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Real Sensitivity Study
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#winter">
+   Winter
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sensible-and-latent-heat-flux">
+     Sensible and Latent Heat Flux
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#longwave-radiation">
+     Longwave Radiation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cloud-cover">
+     Cloud Cover
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#above-n-ice">
+       Above N-ICE
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#in-the-surrounding-area">
+       In the surrounding area
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#mean-monthly">
+         Mean monthly
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#mean-seasonal">
+         Mean Seasonal
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spring">
+   Spring
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Sensible and Latent Heat Flux
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#longwave-and-shortwave-radiation">
+     Longwave and Shortwave Radiation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Cloud Cover
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id3">
+       Above N-ICE
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id4">
+       In the surrounding area
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#id5">
+         Mean monthly
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#id6">
+         Mean Seasonal
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="real-sensitivity-study">
+<h1>Real Sensitivity Study<a class="headerlink" href="#real-sensitivity-study" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.cm</span> <span class="kn">import</span> <span class="n">get_cmap</span>
+<span class="kn">from</span> <span class="nn">matplotlib.dates</span> <span class="kn">import</span> <span class="n">DateFormatter</span>
+<span class="kn">from</span> <span class="nn">netCDF4</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">wrf</span> <span class="kn">import</span> <span class="p">(</span><span class="n">getvar</span><span class="p">,</span> <span class="n">to_np</span><span class="p">,</span> <span class="n">vertcross</span><span class="p">,</span> <span class="n">smooth2d</span><span class="p">,</span> <span class="n">CoordPair</span><span class="p">,</span>
+                 <span class="n">get_basemap</span><span class="p">,</span> <span class="n">latlon_coords</span><span class="p">,</span> <span class="n">g_geoht</span><span class="p">,</span> <span class="n">combine_files</span><span class="p">,</span> <span class="n">ALL_TIMES</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">netCDF4</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.cm</span> <span class="kn">import</span> <span class="n">get_cmap</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">crs</span>
+<span class="kn">from</span> <span class="nn">cartopy.feature</span> <span class="kn">import</span> <span class="n">NaturalEarthFeature</span>
+
+<span class="kn">from</span> <span class="nn">wrf</span> <span class="kn">import</span> <span class="p">(</span><span class="n">to_np</span><span class="p">,</span> <span class="n">getvar</span><span class="p">,</span> <span class="n">smooth2d</span><span class="p">,</span> <span class="n">get_cartopy</span><span class="p">,</span> <span class="n">cartopy_xlim</span><span class="p">,</span>
+                 <span class="n">cartopy_ylim</span><span class="p">,</span> <span class="n">latlon_coords</span><span class="p">)</span>
+
+<span class="c1"># Suppress warnings so the notebook looks nice</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="c1"># Style for plotting</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
+
+<span class="c1"># N-ICE Measurements</span>
+<span class="c1">## NOTE: SEB Measurements are in UTC</span>
+<span class="c1">### Importing SEB dataset</span>
+<span class="n">Measurements_seb</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;/Users/smurphy/all_datasets/nice_published_datasets/N-ICE_sebData_v1.nc&#39;</span><span class="p">,</span> <span class="n">decode_times</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="c1">### Longwave radiation into dataframes</span>
+<span class="n">M_downlw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">Measurements_seb</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;surface_downwelling_longwave_flux&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+                        <span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">Measurements_seb</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;unix_time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span><span class="p">),</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lw&#39;</span><span class="p">])</span>
+<span class="n">M_uplw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">Measurements_seb</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;surface_upwelling_longwave_flux&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+                      <span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">Measurements_seb</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;unix_time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span><span class="p">),</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lw&#39;</span><span class="p">])</span>
+
+<span class="c1">### Shortwave radiation into dataframes</span>
+<span class="n">M_downsw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">Measurements_seb</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;surface_downwelling_shortwave_flux&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+                        <span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">Measurements_seb</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;unix_time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span><span class="p">),</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sw&#39;</span><span class="p">])</span>
+<span class="n">M_upsw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">Measurements_seb</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;surface_upwelling_shortwave_flux&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+                      <span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">Measurements_seb</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;unix_time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span><span class="p">),</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sw&#39;</span><span class="p">])</span>
+
+<span class="c1">###  Calculating net radiation</span>
+<span class="n">M_net</span> <span class="o">=</span> <span class="p">(</span><span class="n">M_downlw</span><span class="p">[</span><span class="s1">&#39;lw&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">M_uplw</span><span class="p">[</span><span class="s1">&#39;lw&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="n">M_downsw</span><span class="p">[</span><span class="s1">&#39;sw&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">M_upsw</span><span class="p">[</span><span class="s1">&#39;sw&#39;</span><span class="p">])</span>
+
+<span class="c1">### Sensible and latent heat flux into dataframes</span>
+<span class="n">M_lat</span> <span class="o">=</span> <span class="o">-</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">Measurements_seb</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;surface_downward_latent_heat_flux&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+                      <span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">Measurements_seb</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;unix_time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span><span class="p">),</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lh&#39;</span><span class="p">])</span>
+<span class="n">M_sen</span> <span class="o">=</span> <span class="o">-</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">Measurements_seb</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;surface_downward_sensible_heat_flux&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+                      <span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">Measurements_seb</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;unix_time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span><span class="p">),</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sh&#39;</span><span class="p">])</span>
+<span class="c1">## NOTE: sensible and latent heat flux negative to match WRF sign convention</span>
+
+<span class="c1"># Set date format for plots throughout the notebook</span>
+<span class="n">myFmt</span> <span class="o">=</span> <span class="n">DateFormatter</span><span class="p">(</span><span class="s2">&quot;%m/</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="winter">
+<h1>Winter<a class="headerlink" href="#winter" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="sensible-and-latent-heat-flux">
+<h2>Sensible and Latent Heat Flux<a class="headerlink" href="#sensible-and-latent-heat-flux" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="longwave-radiation">
+<h2>Longwave Radiation<a class="headerlink" href="#longwave-radiation" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="cloud-cover">
+<h2>Cloud Cover<a class="headerlink" href="#cloud-cover" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="above-n-ice">
+<h3>Above N-ICE<a class="headerlink" href="#above-n-ice" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">20</span><span class="n">fe083d209d</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">fns</span>
+
+<span class="ne">NameError</span>: name &#39;fns&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">month_number</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
+
+    <span class="n">fns</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="s1">&#39;/Volumes/seagate_desktop/em_real/em_real_winter_1_sfcinput/wrfout_d03_2015-0&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">month_number</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;*&#39;</span><span class="p">)</span>
+    <span class="n">wrflist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">fns</span><span class="p">:</span>
+        <span class="n">wrflist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">))</span>
+    <span class="n">cldfra</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;CLDFRA&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="s1">&#39;bottom_top&#39;</span><span class="p">)</span>
+    <span class="n">lats</span><span class="p">,</span> <span class="n">lons</span> <span class="o">=</span> <span class="n">latlon_coords</span><span class="p">(</span><span class="n">cldfra</span><span class="p">)</span>
+    <span class="n">cart_proj</span> <span class="o">=</span> <span class="n">get_cartopy</span><span class="p">(</span><span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s1">&#39;CLDFRA&#39;</span><span class="p">))</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="n">month_number</span><span class="p">]</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">cart_proj</span><span class="p">)</span>
+
+    <span class="n">states</span> <span class="o">=</span> <span class="n">NaturalEarthFeature</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s2">&quot;cultural&quot;</span><span class="p">,</span> 
+                                 <span class="n">scale</span><span class="o">=</span><span class="s2">&quot;50m&quot;</span><span class="p">,</span>
+                                 <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+                                 <span class="n">name</span><span class="o">=</span><span class="s2">&quot;admin_1_states_provinces_shp&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">(</span><span class="s1">&#39;50m&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">lons</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">lats</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">cldfra_mod</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">transform</span><span class="o">=</span><span class="n">crs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">97</span><span class="o">-</span><span class="n">ec495a9cd1c0</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">lats</span><span class="p">,</span> <span class="n">lons</span> <span class="o">=</span> <span class="n">latlon_coords</span><span class="p">(</span><span class="n">cldfra</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">cart_proj</span> <span class="o">=</span> <span class="n">get_cartopy</span><span class="p">(</span><span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s1">&#39;CLDFRA&#39;</span><span class="p">))</span>
+<span class="ne">---&gt; </span><span class="mi">12</span>     <span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="n">month_number</span><span class="p">]</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">cart_proj</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> 
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">states</span> <span class="o">=</span> <span class="n">NaturalEarthFeature</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s2">&quot;cultural&quot;</span><span class="p">,</span> 
+
+<span class="ne">TypeError</span>: &#39;AxesSubplot&#39; object is not callable
+</pre></div>
+</div>
+<img alt="_images/sensitivity_real_9_1.png" src="_images/sensitivity_real_9_1.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">month_number</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]:</span>
+    <span class="n">goal_dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2015-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">month_number</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;-01 00:00:00&#39;</span><span class="p">,</span> <span class="s1">&#39;2015-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">month_number</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;-01 00:00:00&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;H&#39;</span><span class="p">)</span>
+    <span class="n">measured_cloudmask_all</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">fns</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="s1">&#39;/Volumes/seagate_desktop/data/MPL/Robert_MPLData/FinalNICELidarData/NICE_MPLDataFinal20150&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">month_number</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;*&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">fns</span><span class="p">:</span>
+        <span class="n">rbt_cldmask</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+        <span class="c1"># Time is in UTC time stamp in fractional hours</span>
+        <span class="n">Time</span> <span class="o">=</span> <span class="n">rbt_cldmask</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;DataTime&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="c1"># Fix time to be a timestamp - Currently in hours</span>
+        <span class="n">yy</span> <span class="o">=</span> <span class="mi">2015</span>
+        <span class="n">mm</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fn</span><span class="p">[</span><span class="o">-</span><span class="mi">8</span><span class="p">:</span><span class="o">-</span><span class="mi">6</span><span class="p">])</span>
+        <span class="n">dd</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fn</span><span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">])</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="p">[</span><span class="n">datetime</span><span class="p">(</span><span class="n">yy</span><span class="p">,</span><span class="n">mm</span><span class="p">,</span><span class="n">dd</span><span class="p">)</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">hr</span><span class="o">*</span><span class="mi">3600</span><span class="p">)</span> <span class="k">for</span> <span class="n">hr</span> <span class="ow">in</span> <span class="n">Time</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">Time</span><span class="p">)]]</span>
+        
+        <span class="n">measured_cloudmask</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rbt_cldmask</span><span class="p">[</span><span class="s1">&#39;CloudMask&#39;</span><span class="p">][</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">Time</span><span class="p">)]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+                                          <span class="n">index</span> <span class="o">=</span> <span class="n">date</span><span class="p">,</span> 
+                                          <span class="n">columns</span> <span class="o">=</span> <span class="n">rbt_cldmask</span><span class="p">[</span><span class="s1">&#39;Range&#39;</span><span class="p">])</span>
+        <span class="n">measured_cloudmask_all</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">measured_cloudmask_all</span><span class="p">,</span> <span class="n">measured_cloudmask</span><span class="p">])</span>
+     
+    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">goal_dates</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="n">goal_dates</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;zeros&#39;</span><span class="p">]</span>
+    <span class="n">measured_cloudmask_all</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">measured_cloudmask_all</span><span class="p">,</span> <span class="n">df</span><span class="p">])</span>
+    <span class="n">measured_cloudmask_all</span> <span class="o">=</span> <span class="n">measured_cloudmask_all</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;1h&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="k">del</span> <span class="n">measured_cloudmask_all</span><span class="p">[</span><span class="s1">&#39;zeros&#39;</span><span class="p">]</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">month_number</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="n">heatmap</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="n">month_number</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">measured_cloudmask_all</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+                                         <span class="n">measured_cloudmask_all</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> 
+                                         <span class="n">measured_cloudmask_all</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+                                         <span class="n">levels</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="c1"># nan - no information</span>
+    <span class="c1"># 1 - cloud </span>
+    <span class="c1"># 0 - clear</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">month_number</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">date</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%B&quot;</span><span class="p">))</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">month_number</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Height (m)&#39;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">month_number</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">myFmt</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">right</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">cbar_ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.85</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.015</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">])</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">heatmap</span><span class="p">,</span><span class="n">ticks</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="n">orientation</span> <span class="o">=</span> <span class="s1">&#39;vertical&#39;</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">cbar_ax</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s1">&#39;No Cloud&#39;</span><span class="p">,</span> <span class="s1">&#39;Cloud&#39;</span><span class="p">],</span> <span class="n">rotation</span> <span class="o">=</span> <span class="mi">90</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/sensitivity_real_11_0.png" src="_images/sensitivity_real_11_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="in-the-surrounding-area">
+<h3>In the surrounding area<a class="headerlink" href="#in-the-surrounding-area" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="mean-monthly">
+<h4>Mean monthly<a class="headerlink" href="#mean-monthly" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="mean-seasonal">
+<h4>Mean Seasonal<a class="headerlink" href="#mean-seasonal" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="spring">
+<h1>Spring<a class="headerlink" href="#spring" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>Sensible and Latent Heat Flux<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="longwave-and-shortwave-radiation">
+<h2>Longwave and Shortwave Radiation<a class="headerlink" href="#longwave-and-shortwave-radiation" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id2">
+<h2>Cloud Cover<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>Above N-ICE<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id4">
+<h3>In the surrounding area<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h4>Mean monthly<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="id6">
+<h4>Mean Seasonal<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="summary">
+<h1>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h1>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Sarah Y. Murphy<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
