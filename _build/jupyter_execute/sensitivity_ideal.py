@@ -156,7 +156,7 @@ swupb_df_mod = pd.DataFrame(swupb_mod.values, index = swupb_mod.Time.values)
 
 # ## Clouds
 
-# In[3]:
+# In[ ]:
 
 
 fig, axs = plt.subplots(2, figsize=(10,7))
@@ -183,7 +183,7 @@ cbar.ax.tick_params(size=0)
 plt.show()
 
 
-# In[4]:
+# In[ ]:
 
 
 fns = ['/Volumes/seagate_desktop/data/MPL/Robert_MPLData/FinalNICELidarData/NICE_MPLDataFinal20150204.cdf',
@@ -221,14 +221,14 @@ cbar = fig.colorbar(heatmap, label = 'Phase', ticks = [0.5, 1.5], orientation = 
 cbar.ax.set_yticklabels(['Ice', 'Water'], rotation = 90)
 cbar.ax.tick_params(size=0)
 plt.gca().xaxis.set_major_formatter(myFmt)
-
+plt.ylim(0, max(cldfra_df_mod.columns))
 plt.tight_layout()
 plt.show()
 
 
 # ## Sensible and Latent Heat Flux
 
-# In[5]:
+# In[ ]:
 
 
 plt.figure(figsize = (10,7))
@@ -263,7 +263,7 @@ plt.show()
 
 # ## Longwave Radiation
 
-# In[6]:
+# In[ ]:
 
 
 plt.figure(figsize = (10,7))
@@ -295,8 +295,9 @@ plt.show()
 
 
 # ## Summary Table
+# Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
 
-# In[7]:
+# In[ ]:
 
 
 lwdns = M_downlw[sdate:edate]
@@ -330,7 +331,7 @@ shs['unmodified'] = sh_df[0]
 shs['modified'] = sh_df_mod[0]
 
 
-# In[8]:
+# In[ ]:
 
 
 correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
@@ -345,7 +346,7 @@ r_squared[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(
 
 # # Case 2 - Spring Cloudy
 
-# In[9]:
+# In[ ]:
 
 
 fns = glob('/Volumes/seagate_desktop/idealized/case4/000101/wrfo*')
@@ -381,7 +382,7 @@ swupb = getvar(wrflist, "SWUPB", timeidx=ALL_TIMES, method="cat").mean('south_no
 swupb_df = pd.DataFrame(swupb.values, index = swupb.Time.values)
 
 # Finding all wrfout file
-fns = glob('/Volumes/seagate_desktop/idealized/landusetbl_modifications/3ClearSpring_000101/wrfo*')
+fns = glob('/Volumes/seagate_desktop/idealized/landusetbl_modifications/2CloudySpring_000101/wrfo*')
 
 # Creating an empty list to append to
 wrflist = list()
@@ -421,7 +422,7 @@ swupb_df_mod = pd.DataFrame(swupb_mod.values, index = swupb_mod.Time.values)
 
 # ## Clouds
 
-# In[10]:
+# In[ ]:
 
 
 fig, axs = plt.subplots(2, figsize=(10,7))
@@ -448,7 +449,7 @@ cbar.ax.tick_params(size=0)
 plt.show()
 
 
-# In[11]:
+# In[ ]:
 
 
 fns = ['/Volumes/seagate_desktop/data/MPL/Robert_MPLData/FinalNICELidarData/NICE_MPLDataFinal20150502.cdf',
@@ -486,14 +487,14 @@ cbar = fig.colorbar(heatmap, label = 'Phase', ticks = [0.5, 1.5], orientation = 
 cbar.ax.set_yticklabels(['Ice', 'Water'], rotation = 90)
 cbar.ax.tick_params(size=0)
 plt.gca().xaxis.set_major_formatter(myFmt)
-
+plt.ylim(0, max(cldfra_df_mod.columns))
 plt.tight_layout()
 plt.show()
 
 
 # ## Sensible and Latent Heat Flux
 
-# In[12]:
+# In[ ]:
 
 
 plt.figure(figsize = (10,7))
@@ -527,7 +528,7 @@ plt.show()
 
 # ## Longwave and Shortwave Radiation
 
-# In[13]:
+# In[ ]:
 
 
 plt.figure(figsize = (15,7))
@@ -583,8 +584,10 @@ plt.show()
 
 
 # ## Summary Table
+# 
+# Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
 
-# In[14]:
+# In[ ]:
 
 
 lwdns = M_downlw[sdate:edate]
@@ -618,13 +621,7 @@ shs['unmodified'] = sh_df[0]
 shs['modified'] = sh_df_mod[0]
 
 
-# In[15]:
-
-
-lhs.corr()['measured'].values
-
-
-# In[16]:
+# In[ ]:
 
 
 correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
@@ -641,7 +638,7 @@ r_squared[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(
 
 # # Case 3 - Spring Clear
 
-# In[17]:
+# In[ ]:
 
 
 sdate = '2015-05-22'
@@ -722,7 +719,7 @@ swupb_df_mod = pd.DataFrame(swupb_mod.values, index = swupb_mod.Time.values)
 
 # ## Clouds
 
-# In[18]:
+# In[ ]:
 
 
 fig, axs = plt.subplots(2, figsize=(10,7))
@@ -749,7 +746,7 @@ cbar.ax.tick_params(size=0)
 plt.show()
 
 
-# In[19]:
+# In[ ]:
 
 
 fns = ['/Volumes/seagate_desktop/data/MPL/Robert_MPLData/FinalNICELidarData/NICE_MPLDataFinal20150522.cdf',
@@ -794,7 +791,7 @@ plt.show()
 
 # ## Sensible and Latent Heat Flux
 
-# In[20]:
+# In[ ]:
 
 
 plt.figure(figsize = (10,7))
@@ -828,7 +825,7 @@ plt.show()
 
 # ## Longwave and Shortwave Radiation
 
-# In[21]:
+# In[ ]:
 
 
 plt.figure(figsize = (15,7))
@@ -883,8 +880,9 @@ plt.show()
 
 
 # ## Summary Table
+# Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
 
-# In[22]:
+# In[ ]:
 
 
 lwdns = M_downlw[sdate:edate]
@@ -918,7 +916,7 @@ shs['unmodified'] = sh_df[0]
 shs['modified'] = sh_df_mod[0]
 
 
-# In[23]:
+# In[ ]:
 
 
 correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
