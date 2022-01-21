@@ -156,7 +156,7 @@ swupb_df_mod = pd.DataFrame(swupb_mod.values, index = swupb_mod.Time.values)
 
 # ## Clouds
 
-# In[ ]:
+# In[17]:
 
 
 fig, axs = plt.subplots(2, figsize=(10,7))
@@ -183,7 +183,7 @@ cbar.ax.tick_params(size=0)
 plt.show()
 
 
-# In[ ]:
+# In[18]:
 
 
 fns = ['/Volumes/seagate_desktop/data/MPL/Robert_MPLData/FinalNICELidarData/NICE_MPLDataFinal20150204.cdf',
@@ -228,7 +228,7 @@ plt.show()
 
 # ## Sensible and Latent Heat Flux
 
-# In[ ]:
+# In[19]:
 
 
 plt.figure(figsize = (10,7))
@@ -263,7 +263,7 @@ plt.show()
 
 # ## Longwave Radiation
 
-# In[ ]:
+# In[20]:
 
 
 plt.figure(figsize = (10,7))
@@ -297,7 +297,7 @@ plt.show()
 # ## Summary Table
 # Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
 
-# In[ ]:
+# In[21]:
 
 
 lwdns = M_downlw[sdate:edate]
@@ -331,7 +331,7 @@ shs['unmodified'] = sh_df[0]
 shs['modified'] = sh_df_mod[0]
 
 
-# In[ ]:
+# In[22]:
 
 
 correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
@@ -346,7 +346,7 @@ r_squared[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(
 
 # # Case 2 - Spring Cloudy
 
-# In[ ]:
+# In[23]:
 
 
 fns = glob('/Volumes/seagate_desktop/idealized/case4/000101/wrfo*')
@@ -422,7 +422,7 @@ swupb_df_mod = pd.DataFrame(swupb_mod.values, index = swupb_mod.Time.values)
 
 # ## Clouds
 
-# In[ ]:
+# In[24]:
 
 
 fig, axs = plt.subplots(2, figsize=(10,7))
@@ -449,7 +449,7 @@ cbar.ax.tick_params(size=0)
 plt.show()
 
 
-# In[ ]:
+# In[25]:
 
 
 fns = ['/Volumes/seagate_desktop/data/MPL/Robert_MPLData/FinalNICELidarData/NICE_MPLDataFinal20150502.cdf',
@@ -494,7 +494,7 @@ plt.show()
 
 # ## Sensible and Latent Heat Flux
 
-# In[ ]:
+# In[26]:
 
 
 plt.figure(figsize = (10,7))
@@ -528,7 +528,7 @@ plt.show()
 
 # ## Longwave and Shortwave Radiation
 
-# In[ ]:
+# In[27]:
 
 
 plt.figure(figsize = (15,7))
@@ -586,10 +586,6 @@ plt.show()
 # ## Summary Table
 # 
 # Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
-
-# In[ ]:
-
-
 lwdns = M_downlw[sdate:edate]
 lwdns.columns = ['measured']
 lwdns['unmodified'] = lwdnb_df[0]
@@ -618,13 +614,7 @@ lhs['modified'] = lh_df_mod[0]
 shs = M_sen[sdate:edate]
 shs.columns = ['measured']
 shs['unmodified'] = sh_df[0]
-shs['modified'] = sh_df_mod[0]
-
-
-# In[ ]:
-
-
-correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
+shs['modified'] = sh_df_mod[0]correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
                                          shs.corr()['measured'].values,
                                          lwdns.corr()['measured'].values,
                                          lwups.corr()['measured'].values,
@@ -634,8 +624,6 @@ correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values,
                                          index = ['Latent', 'Sensible', 'Downwelling Longwave', 'Upwelling Longwave', 'Downwelling Shortwave', 'Upwelling Shortwave']).T
 r_squared = correlation_coefficients ** 2
 r_squared[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(color = 'pink', axis = 0)
-
-
 # # Case 3 - Spring Clear
 
 # In[ ]:
