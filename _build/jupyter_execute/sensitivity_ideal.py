@@ -346,7 +346,7 @@ r_squared[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(
 
 # # Case 2 - Spring Cloudy
 
-# In[23]:
+# In[ ]:
 
 
 fns = glob('/Volumes/seagate_desktop/idealized/case4/000101/wrfo*')
@@ -422,7 +422,7 @@ swupb_df_mod = pd.DataFrame(swupb_mod.values, index = swupb_mod.Time.values)
 
 # ## Clouds
 
-# In[24]:
+# In[ ]:
 
 
 fig, axs = plt.subplots(2, figsize=(10,7))
@@ -626,7 +626,7 @@ r_squared = correlation_coefficients ** 2
 r_squared[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(color = 'pink', axis = 0)
 # # Case 3 - Spring Clear
 
-# In[ ]:
+# In[31]:
 
 
 sdate = '2015-05-22'
@@ -707,7 +707,7 @@ swupb_df_mod = pd.DataFrame(swupb_mod.values, index = swupb_mod.Time.values)
 
 # ## Clouds
 
-# In[ ]:
+# In[32]:
 
 
 fig, axs = plt.subplots(2, figsize=(10,7))
@@ -734,7 +734,7 @@ cbar.ax.tick_params(size=0)
 plt.show()
 
 
-# In[ ]:
+# In[34]:
 
 
 fns = ['/Volumes/seagate_desktop/data/MPL/Robert_MPLData/FinalNICELidarData/NICE_MPLDataFinal20150522.cdf',
@@ -772,14 +772,14 @@ cbar = fig.colorbar(heatmap, label = 'Phase', ticks = [0.5, 1.5], orientation = 
 cbar.ax.set_yticklabels(['Ice', 'Water'], rotation = 90)
 cbar.ax.tick_params(size=0)
 plt.gca().xaxis.set_major_formatter(myFmt)
-
+plt.ylim(0, max(cldfra_df_mod.columns))
 plt.tight_layout()
 plt.show()
 
 
 # ## Sensible and Latent Heat Flux
 
-# In[ ]:
+# In[35]:
 
 
 plt.figure(figsize = (10,7))
@@ -813,7 +813,7 @@ plt.show()
 
 # ## Longwave and Shortwave Radiation
 
-# In[ ]:
+# In[36]:
 
 
 plt.figure(figsize = (15,7))
@@ -870,7 +870,7 @@ plt.show()
 # ## Summary Table
 # Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
 
-# In[ ]:
+# In[37]:
 
 
 lwdns = M_downlw[sdate:edate]
@@ -904,7 +904,7 @@ shs['unmodified'] = sh_df[0]
 shs['modified'] = sh_df_mod[0]
 
 
-# In[ ]:
+# In[38]:
 
 
 correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
