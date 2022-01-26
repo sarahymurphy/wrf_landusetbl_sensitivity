@@ -83,7 +83,7 @@ edate = '2015-02-06'
 sebmask = (M_downlw.index > sdate) & (M_downlw.index < edate)
 
 # Importing WRF variables
-cldfra = getvar(wrflist, "CLDFRA", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
+cldfra = getvar(wrflist, "QCLOUD", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
 z = getvar(wrflist, "z").mean('south_north').mean('west_east')
 cldfra_df = pd.DataFrame(cldfra.values, index = cldfra.Time.values, columns = z)
 
@@ -124,8 +124,8 @@ for fn in fns:
     wrflist.append(Dataset(fn))
 
 # Importing WRF variables
-## dbZ - for cloud plotting
-cldfra_mod = getvar(wrflist, "CLDFRA", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
+## QCloud - Cloud Water Mixing Ratio is kg/kg
+cldfra_mod = getvar(wrflist, "QCLOUD", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
 z_mod = getvar(wrflist, "z").mean('south_north').mean('west_east')
 cldfra_df_mod = pd.DataFrame(cldfra_mod.values, index = cldfra_mod.Time.values, columns = z_mod)
 
@@ -154,36 +154,67 @@ swupb_mod = getvar(wrflist, "SWUPB", timeidx=ALL_TIMES, method="cat").mean('sout
 swupb_df_mod = pd.DataFrame(swupb_mod.values, index = swupb_mod.Time.values)
 
 
+# In[3]:
+
+
+wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/case1/000101/wrfstat_d01_2015-02-04_00:00:00')
+cst_qc = wrfstat['CSP_QC']
+cst_sh = wrfstat['CST_SH']
+cst_lh = wrfstat['CST_LH']
+cst_time = wrfstat['Times']
+csp_z = wrfstat['CSP_Z']
+qc = pd.DataFrame(cst_qc.values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+sh = pd.DataFrame(cst_sh.values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), columns = ['sh'])
+lh = pd.DataFrame(cst_lh.values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), columns = ['lh'])
+
+wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/landusetbl_modifications/1ClearWinter_000101/wrfstat_d01_2015-02-04_00:00:00')
+cst_qc = wrfstat['CSP_QC']
+cst_sh = wrfstat['CST_SH']
+cst_lh = wrfstat['CST_LH']
+cst_time = wrfstat['Times']
+csp_z = wrfstat['CSP_Z']
+qc_mod = pd.DataFrame(cst_qc.values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+sh_mod = pd.DataFrame(cst_sh.values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), columns = ['sh'])
+lh_mod = pd.DataFrame(cst_lh.values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), columns = ['lh'])
+
+
 # ## Clouds
 
-# In[17]:
+# In[4]:
 
 
 fig, axs = plt.subplots(2, figsize=(10,7))
+levels = np.arange(0,0.21,0.01)
 
-heatmap = axs[0].contourf(cldfra_df.index, cldfra_df.columns, cldfra_df.T.values, [-1, 0, 1])
-axs[0].set_ylabel('Height (m)')
+heatmap = axs[0].contourf(qc.index, qc.columns / 1000, qc.T.values * 1000, levels=levels)
+contourmap = axs[0].contour(qc.index, qc.columns / 1000, qc.T.values * 1000, colors = ['white'], levels = [0.02])
+axs[0].set_ylabel('Height (km)')
 axs[0].set_title('Cloud Fraction (WRF)\nUnmodified')
 axs[0].xaxis.set_major_formatter(myFmt)
 
-
-heatmap = axs[1].contourf(cldfra_df_mod.index, cldfra_df_mod.columns, cldfra_df_mod.T.values, [-1, 0, 1])
-axs[1].set_ylabel('Height (m)')
+heatmap = axs[1].contourf(qc_mod.index, qc_mod.columns / 1000, qc_mod.T.values * 1000, levels=levels)
+contourmap = axs[1].contour(qc_mod.index, qc_mod.columns / 1000, qc_mod.T.values * 1000, [0.02], colors = ['white'])
+axs[1].set_ylabel('Height (km)')
 axs[1].set_title('Modified')
 axs[1].xaxis.set_major_formatter(myFmt)
 
 plt.tight_layout()
-fig.subplots_adjust(right=0.8)
-cbar_ax = fig.add_axes([0.85, 0.15, 0.015, 0.7])
-cbar = fig.colorbar(heatmap,ticks = [-0.5, 0.5], orientation = 'vertical', cax=cbar_ax)
-cbar.ax.set_yticklabels(['No Cloud', 'Cloud'], rotation = 90)
-cbar.ax.tick_params(size=0)
-
+cbar = fig.colorbar(heatmap, ax=axs[:])
+cbar.set_ticks(np.arange(0,0.21,0.02))
+cbar.set_label('Cloud Water Mixing Ratio (g/kg)')
 
 plt.show()
 
 
-# In[18]:
+# In[5]:
 
 
 fns = ['/Volumes/seagate_desktop/data/MPL/Robert_MPLData/FinalNICELidarData/NICE_MPLDataFinal20150204.cdf',
@@ -228,7 +259,7 @@ plt.show()
 
 # ## Sensible and Latent Heat Flux
 
-# In[19]:
+# In[6]:
 
 
 plt.figure(figsize = (10,7))
@@ -236,26 +267,26 @@ plt.subplot(211)
 plt.plot(sh_df, 'o', alpha = 0.75)
 plt.plot(sh_df_mod, 'o', alpha = 0.75)
 plt.plot(M_sen[sdate:edate], 'o', alpha = 0.75, color = 'k')
-plt.hlines(0, xmin = sdate, xmax = '2015-05-05', linestyle = '--', color = 'k')
+plt.hlines(0, xmin = M_lat[sdate:edate].index[0], xmax = M_lat[sdate:edate].index[-1], linestyle = '--', color = 'k')
 plt.ylabel('Flux $(W/m^{2})$')
 plt.title('Sensible Heat Flux')
 plt.grid()
 plt.legend(['Idealized WRF, Unmodified', 'Idealized WRF, Modified', 'Measurements'])
-plt.ylim(-50,175)
-plt.xlim(sdate,'2015-02-05')
+plt.ylim(-50,200)
+plt.xlim(M_lat[sdate:edate].index[0],M_lat[sdate:edate].index[-1])
 plt.gca().xaxis.set_major_formatter(myFmt)
 
 plt.subplot(212)
 plt.plot(lh_df, 'o', alpha = 0.75)
 plt.plot(lh_df_mod, 'o', alpha = 0.75)
 plt.plot(M_lat[sdate:edate], 'o', alpha = 0.75, color = 'k')
-plt.hlines(0, xmin = sdate, xmax = '2015-02-05', linestyle = '--', color = 'k')
+plt.hlines(0, xmin = M_lat[sdate:edate].index[0], xmax = M_lat[sdate:edate].index[-1], linestyle = '--', color = 'k')
 plt.ylabel('Flux $(W/m^{2})$')
 plt.title('Latent Heat Flux')
 plt.grid()
-plt.ylim(-20,30)
+plt.ylim(-30,50)
 plt.legend(['Idealized WRF, Unmodified', 'Idealized WRF, Modified', 'Measurements'])
-plt.xlim(sdate,'2015-02-05')
+plt.xlim(M_lat[sdate:edate].index[0],M_lat[sdate:edate].index[-1])
 plt.tight_layout()
 plt.gca().xaxis.set_major_formatter(myFmt)
 plt.show()
@@ -263,7 +294,7 @@ plt.show()
 
 # ## Longwave Radiation
 
-# In[20]:
+# In[7]:
 
 
 plt.figure(figsize = (10,7))
@@ -275,8 +306,8 @@ plt.ylabel('Flux $(W/m^{2})$')
 plt.title('Downwelling Longwave Radiation')
 plt.grid()
 plt.legend(['Idealized WRF, Unmodified', 'Idealized WRF, Modified', 'Measurements'])
-plt.ylim(250,320)
-plt.xlim(sdate,'2015-02-05')
+plt.ylim(175,325)
+plt.xlim(M_downlw[sdate:edate].index[0],M_downlw[sdate:edate].index[-1])
 plt.gca().xaxis.set_major_formatter(myFmt)
 
 plt.subplot(212)
@@ -286,9 +317,9 @@ plt.plot(M_uplw[sdate:edate], 'o', alpha = 0.75, color = 'k')
 plt.ylabel('Flux $(W/m^{2})$')
 plt.title('Upwelling Longwave Radiation')
 plt.grid()
-plt.ylim(250, 320)
+plt.ylim(175,325)
 plt.legend(['Idealized WRF, Unmodified', 'Idealized WRF, Modified', 'Measurements'])
-plt.xlim(sdate,'2015-02-05')
+plt.xlim(M_downlw[sdate:edate].index[0],M_downlw[sdate:edate].index[-1])
 plt.gca().xaxis.set_major_formatter(myFmt)
 plt.tight_layout()
 plt.show()
@@ -297,7 +328,7 @@ plt.show()
 # ## Summary Table
 # Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
 
-# In[21]:
+# In[8]:
 
 
 lwdns = M_downlw[sdate:edate]
@@ -331,7 +362,7 @@ shs['unmodified'] = sh_df[0]
 shs['modified'] = sh_df_mod[0]
 
 
-# In[22]:
+# In[9]:
 
 
 correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
@@ -340,13 +371,15 @@ correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values,
                                          lwups.corr()['measured'].values], 
                                          columns = lhs.corr().columns,
                                          index = ['Latent', 'Sensible', 'Downwelling Longwave', 'Upwelling Longwave']).T
+cc_1 = correlation_coefficients
 r_squared = correlation_coefficients ** 2
+rs_1 = r_squared
 r_squared[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(color = 'pink', axis = 0)
 
 
 # # Case 2 - Spring Cloudy
 
-# In[ ]:
+# In[10]:
 
 
 fns = glob('/Volumes/seagate_desktop/idealized/case4/000101/wrfo*')
@@ -420,36 +453,87 @@ swupb_mod = getvar(wrflist, "SWUPB", timeidx=ALL_TIMES, method="cat").mean('sout
 swupb_df_mod = pd.DataFrame(swupb_mod.values, index = swupb_mod.Time.values)
 
 
+# In[11]:
+
+
+wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/case4/000101/wrfstat_d01_2015-05-02_00:00:00')
+cst_qc = wrfstat['CSP_QC']
+cst_sh = wrfstat['CST_SH']
+cst_lh = wrfstat['CST_LH']
+cst_time = wrfstat['Times']
+csp_z = wrfstat['CSP_Z']
+qc = pd.DataFrame(cst_qc.values, 
+                  index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 19:30:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+sh = pd.DataFrame(cst_sh.values, 
+                  index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 19:30:00', freq = '30min'), columns = ['sh'])
+lh = pd.DataFrame(cst_lh.values, 
+                  index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 19:30:00', freq = '30min'), columns = ['lh'])
+
+wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/landusetbl_modifications/2CloudySpring_000101/wrfstat_d01_2015-05-02_00:00:00')
+cst_qc = wrfstat['CSP_QC']
+cst_sh = wrfstat['CST_SH']
+cst_lh = wrfstat['CST_LH']
+cst_time = wrfstat['Times']
+csp_z = wrfstat['CSP_Z']
+qc_mod = pd.DataFrame(cst_qc.values, 
+                  index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 22:30:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+sh_mod = pd.DataFrame(cst_sh.values, 
+                  index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 22:30:00', freq = '30min'), columns = ['sh'])
+lh_mod = pd.DataFrame(cst_lh.values, 
+                  index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 22:30:00', freq = '30min'), columns = ['lh'])
+
+
 # ## Clouds
 
-# In[ ]:
+# In[12]:
 
 
 fig, axs = plt.subplots(2, figsize=(10,7))
+levels = np.arange(0,0.21,0.01)
 
-heatmap = axs[0].contourf(cldfra_df.index, cldfra_df.columns, cldfra_df.T.values, [-1, 0, 1])
-axs[0].set_ylabel('Height (m)')
-axs[0].set_title('Cloud Fraction (WRF)\nUnmodified')
+heatmap = axs[0].contourf(qc.index, qc.columns / 1000, qc.T.values * 1000, levels=levels)
+contourmap = axs[0].contour(qc.index, qc.columns / 1000, qc.T.values * 1000, colors = ['white'], levels = [0.02])
+axs[0].set_ylabel('Height (km)')
+axs[0].set_title('Clouds (WRF)')
 axs[0].xaxis.set_major_formatter(myFmt)
-
-
-heatmap = axs[1].contourf(cldfra_df_mod.index, cldfra_df_mod.columns, cldfra_df_mod.T.values, [-1, 0, 1])
-axs[1].set_ylabel('Height (m)')
-axs[1].set_title('Modified')
-axs[1].xaxis.set_major_formatter(myFmt)
-
+axs[0].set_ylim(0,3)
 plt.tight_layout()
-fig.subplots_adjust(right=0.8)
-cbar_ax = fig.add_axes([0.85, 0.15, 0.015, 0.7])
-cbar = fig.colorbar(heatmap,ticks = [-0.5, 0.5], orientation = 'vertical', cax=cbar_ax)
-cbar.ax.set_yticklabels(['No Cloud', 'Cloud'], rotation = 90)
-cbar.ax.tick_params(size=0)
-
+cbar = fig.colorbar(heatmap, ax=axs[0])
+cbar.set_ticks([0,0.05,0.1,0.15,0.2,0.25,0.3])
+cbar.set_label('Cloud Water Mixing Ratio (g/kg)')
 
 plt.show()
 
 
-# In[25]:
+# In[13]:
+
+
+fig, axs = plt.subplots(2, figsize=(10,7))
+levels = np.arange(0,0.21,0.01)
+
+heatmap = axs[0].contourf(qc.index, qc.columns / 1000, qc.T.values * 1000, levels=levels)
+contourmap = axs[0].contour(qc.index, qc.columns / 1000, qc.T.values * 1000, colors = ['white'], levels = [0.02])
+axs[0].set_ylabel('Height (km)')
+axs[0].set_title('Cloud Fraction (WRF)\nUnmodified')
+axs[0].xaxis.set_major_formatter(myFmt)
+
+heatmap = axs[1].contourf(qc_mod.index, qc_mod.columns / 1000, qc_mod.T.values * 1000, levels=levels)
+contourmap = axs[1].contour(qc_mod.index, qc_mod.columns / 1000, qc_mod.T.values * 1000, [0.02], colors = ['white'])
+axs[1].set_ylabel('Height (km)')
+axs[1].set_title('Modified')
+axs[1].xaxis.set_major_formatter(myFmt)
+
+plt.tight_layout()
+cbar = fig.colorbar(heatmap, ax=axs[:])
+cbar.set_ticks(np.arange(0,0.21,0.02))
+cbar.set_label('Cloud Water Mixing Ratio (g/kg)')
+
+plt.show()
+
+
+# In[14]:
 
 
 fns = ['/Volumes/seagate_desktop/data/MPL/Robert_MPLData/FinalNICELidarData/NICE_MPLDataFinal20150502.cdf',
@@ -494,7 +578,7 @@ plt.show()
 
 # ## Sensible and Latent Heat Flux
 
-# In[26]:
+# In[15]:
 
 
 plt.figure(figsize = (10,7))
@@ -502,25 +586,26 @@ plt.subplot(211)
 plt.plot(sh_df, 'o', alpha = 0.75)
 plt.plot(sh_df_mod, 'o', alpha = 0.75)
 plt.plot(M_sen[sdate:edate], 'o', alpha = 0.75, color = 'k')
-plt.hlines(0, xmin = sdate, xmax = '2015-05-05', linestyle = '--', color = 'k')
+plt.hlines(0, xmin = M_lat[sdate:edate].index[0], xmax = M_lat[sdate:edate].index[-1], linestyle = '--', color = 'k')
 plt.ylabel('Flux $(W/m^{2})$')
 plt.title('Sensible Heat Flux')
 plt.grid()
 plt.legend(['Idealized WRF, Unmodified', 'Idealized WRF, Modified', 'Measurements'])
-plt.ylim(-10,20)
-plt.xlim(sdate,'2015-05-05')
+plt.ylim(-10,50)
+plt.xlim(M_lat[sdate:edate].index[0],M_lat[sdate:edate].index[-1])
 plt.gca().xaxis.set_major_formatter(myFmt)
 
 plt.subplot(212)
 plt.plot(lh_df, 'o', alpha = 0.75)
 plt.plot(lh_df_mod, 'o', alpha = 0.75)
 plt.plot(M_lat[sdate:edate], 'o', alpha = 0.75, color = 'k')
-plt.hlines(0, xmin = sdate, xmax = '2015-05-05', linestyle = '--', color = 'k')
+plt.hlines(0, xmin = M_lat[sdate:edate].index[0], xmax = M_lat[sdate:edate].index[-1], linestyle = '--', color = 'k')
 plt.ylabel('Flux $(W/m^{2})$')
 plt.title('Latent Heat Flux')
 plt.grid()
+plt.ylim(-5,10)
 plt.legend(['Idealized WRF, Unmodified', 'Idealized WRF, Modified', 'Measurements'])
-plt.xlim(sdate,'2015-05-05')
+plt.xlim(M_lat[sdate:edate].index[0],M_lat[sdate:edate].index[-1])
 plt.tight_layout()
 plt.gca().xaxis.set_major_formatter(myFmt)
 plt.show()
@@ -528,7 +613,7 @@ plt.show()
 
 # ## Longwave and Shortwave Radiation
 
-# In[27]:
+# In[16]:
 
 
 plt.figure(figsize = (15,7))
@@ -540,8 +625,8 @@ plt.ylabel('Flux $(W/m^{2})$')
 plt.title('Downwelling Longwave Radiation')
 plt.grid()
 plt.legend(['Idealized WRF, Unmodified', 'Idealized WRF, Modified', 'Measurements'])
-plt.ylim(180,300)
-plt.xlim(sdate,'2015-05-05')
+plt.ylim(150,300)
+plt.xlim(M_downlw[sdate:edate].index[0],M_downlw[sdate:edate].index[-1])
 plt.gca().xaxis.set_major_formatter(myFmt)
 
 plt.subplot(223)
@@ -551,9 +636,9 @@ plt.plot(M_uplw[sdate:edate], 'o', alpha = 0.75, color = 'k')
 plt.ylabel('Flux $(W/m^{2})$')
 plt.title('Upwelling Longwave Radiation')
 plt.grid()
-plt.ylim(180, 300)
+plt.ylim(280,220)
 plt.legend(['Idealized WRF, Unmodified', 'Idealized WRF, Modified', 'Measurements'])
-plt.xlim(sdate,'2015-05-05')
+plt.xlim(M_downlw[sdate:edate].index[0],M_downlw[sdate:edate].index[-1])
 plt.gca().xaxis.set_major_formatter(myFmt)
 
 plt.subplot(222)
@@ -565,7 +650,7 @@ plt.title('Downwelling Shortwave Radiation')
 plt.grid()
 plt.legend(['Idealized WRF, Unmodified', 'Idealized WRF, Modified', 'Measurements'])
 #plt.ylim(180,300)
-plt.xlim(sdate,'2015-05-05')
+plt.xlim(M_downlw[sdate:edate].index[0],M_downlw[sdate:edate].index[-1])
 plt.gca().xaxis.set_major_formatter(myFmt)
 
 plt.subplot(224)
@@ -577,7 +662,7 @@ plt.title('Upwelling Shortwave Radiation')
 plt.grid()
 #plt.ylim(180, 300)
 plt.legend(['Idealized WRF, Unmodified', 'Idealized WRF, Modified', 'Measurements'])
-plt.xlim(sdate,'2015-05-05')
+plt.xlim(M_downlw[sdate:edate].index[0],M_downlw[sdate:edate].index[-1])
 plt.gca().xaxis.set_major_formatter(myFmt)
 plt.tight_layout()
 plt.show()
@@ -586,6 +671,10 @@ plt.show()
 # ## Summary Table
 # 
 # Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
+
+# In[17]:
+
+
 lwdns = M_downlw[sdate:edate]
 lwdns.columns = ['measured']
 lwdns['unmodified'] = lwdnb_df[0]
@@ -614,7 +703,13 @@ lhs['modified'] = lh_df_mod[0]
 shs = M_sen[sdate:edate]
 shs.columns = ['measured']
 shs['unmodified'] = sh_df[0]
-shs['modified'] = sh_df_mod[0]correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
+shs['modified'] = sh_df_mod[0]
+
+
+# In[18]:
+
+
+correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
                                          shs.corr()['measured'].values,
                                          lwdns.corr()['measured'].values,
                                          lwups.corr()['measured'].values,
@@ -622,15 +717,19 @@ shs['modified'] = sh_df_mod[0]correlation_coefficients = pd.DataFrame([lhs.corr(
                                          swups.corr()['measured'].values], 
                                          columns = lhs.corr().columns,
                                          index = ['Latent', 'Sensible', 'Downwelling Longwave', 'Upwelling Longwave', 'Downwelling Shortwave', 'Upwelling Shortwave']).T
+cc_2 = correlation_coefficients
 r_squared = correlation_coefficients ** 2
+rs_2 = r_squared
 r_squared[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(color = 'pink', axis = 0)
+
+
 # # Case 3 - Spring Clear
 
-# In[31]:
+# In[19]:
 
 
 sdate = '2015-05-22'
-edate = '2015-05-25' 
+edate = '2015-05-24' 
 
 M_net = (M_downlw['lw'] - M_uplw['lw'])
 sebmask = (M_downlw.index > sdate) & (M_downlw.index < edate)
@@ -705,36 +804,68 @@ swupb_mod = getvar(wrflist, "SWUPB", timeidx=ALL_TIMES, method="cat").mean('sout
 swupb_df_mod = pd.DataFrame(swupb_mod.values, index = swupb_mod.Time.values)
 
 
+# In[20]:
+
+
+wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/case3/000101/wrfstat_d01_2015-05-22_00:00:00')
+cst_qc = wrfstat['CSP_QC']
+cst_sh = wrfstat['CST_SH']
+cst_lh = wrfstat['CST_LH']
+cst_time = wrfstat['Times']
+csp_z = wrfstat['CSP_Z']
+qc = pd.DataFrame(cst_qc.values, 
+                  index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+sh = pd.DataFrame(cst_sh.values, 
+                  index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), columns = ['sh'])
+lh = pd.DataFrame(cst_lh.values, 
+                  index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), columns = ['lh'])
+
+
+wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/landusetbl_modifications/3ClearSpring_000101/wrfstat_d01_2015-05-22_00:00:00')
+cst_qc = wrfstat['CSP_QC']
+cst_sh = wrfstat['CST_SH']
+cst_lh = wrfstat['CST_LH']
+cst_time = wrfstat['Times']
+csp_z = wrfstat['CSP_Z']
+qc_mod = pd.DataFrame(cst_qc.values, 
+                  index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+sh_mod = pd.DataFrame(cst_sh.values, 
+                  index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), columns = ['sh'])
+lh_mod = pd.DataFrame(cst_lh.values, 
+                  index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), columns = ['lh'])
+
+
 # ## Clouds
 
-# In[32]:
+# In[21]:
 
 
 fig, axs = plt.subplots(2, figsize=(10,7))
+levels = np.arange(0,0.21,0.01)
 
-heatmap = axs[0].contourf(cldfra_df.index, cldfra_df.columns, cldfra_df.T.values, [-1, 0, 1])
-axs[0].set_ylabel('Height (m)')
+heatmap = axs[0].contourf(qc.index, qc.columns / 1000, qc.T.values * 1000, levels=levels)
+contourmap = axs[0].contour(qc.index, qc.columns / 1000, qc.T.values * 1000, colors = ['white'], levels = [0.02])
+axs[0].set_ylabel('Height (km)')
 axs[0].set_title('Cloud Fraction (WRF)\nUnmodified')
 axs[0].xaxis.set_major_formatter(myFmt)
 
-
-heatmap = axs[1].contourf(cldfra_df_mod.index, cldfra_df_mod.columns, cldfra_df_mod.T.values, [-1, 0, 1])
-axs[1].set_ylabel('Height (m)')
+heatmap = axs[1].contourf(qc_mod.index, qc_mod.columns / 1000, qc_mod.T.values * 1000, levels=levels)
+contourmap = axs[1].contour(qc_mod.index, qc_mod.columns / 1000, qc_mod.T.values * 1000, [0.02], colors = ['white'])
+axs[1].set_ylabel('Height (km)')
 axs[1].set_title('Modified')
 axs[1].xaxis.set_major_formatter(myFmt)
 
 plt.tight_layout()
-fig.subplots_adjust(right=0.8)
-cbar_ax = fig.add_axes([0.85, 0.15, 0.015, 0.7])
-cbar = fig.colorbar(heatmap,ticks = [-0.5, 0.5], orientation = 'vertical', cax=cbar_ax)
-cbar.ax.set_yticklabels(['No Cloud', 'Cloud'], rotation = 90)
-cbar.ax.tick_params(size=0)
-
+cbar = fig.colorbar(heatmap, ax=axs[:])
+cbar.set_ticks(np.arange(0,0.21,0.02))
+cbar.set_label('Cloud Water Mixing Ratio (g/kg)')
 
 plt.show()
 
 
-# In[34]:
+# In[22]:
 
 
 fns = ['/Volumes/seagate_desktop/data/MPL/Robert_MPLData/FinalNICELidarData/NICE_MPLDataFinal20150522.cdf',
@@ -779,7 +910,7 @@ plt.show()
 
 # ## Sensible and Latent Heat Flux
 
-# In[35]:
+# In[23]:
 
 
 plt.figure(figsize = (10,7))
@@ -787,33 +918,34 @@ plt.subplot(211)
 plt.plot(sh_df, 'o', alpha = 0.75)
 plt.plot(sh_df_mod, 'o', alpha = 0.75)
 plt.plot(M_sen[sdate:edate], 'o', alpha = 0.75, color = 'k')
-plt.hlines(0, xmin = sdate, xmax = '2015-05-25', linestyle = '--', color = 'k')
+plt.hlines(0, xmin = M_lat[sdate:edate].index[0], xmax = M_lat[sdate:edate].index[-1], linestyle = '--', color = 'k')
 plt.ylabel('Flux $(W/m^{2})$')
 plt.title('Sensible Heat Flux')
 plt.grid()
-plt.legend(['Idealized WRF, Pre-Modification', 'Idealized WRF, Modified', 'Measurements'])
-#plt.ylim(-10,20)
-plt.xlim(sdate,'2015-05-25')
+plt.legend(['Idealized WRF, Unmodified', 'Idealized WRF, Modified', 'Measurements'])
+plt.ylim(-10,50)
+plt.xlim(M_lat[sdate:edate].index[0],M_lat[sdate:edate].index[-1])
 plt.gca().xaxis.set_major_formatter(myFmt)
 
 plt.subplot(212)
 plt.plot(lh_df, 'o', alpha = 0.75)
 plt.plot(lh_df_mod, 'o', alpha = 0.75)
 plt.plot(M_lat[sdate:edate], 'o', alpha = 0.75, color = 'k')
-plt.hlines(0, xmin = sdate, xmax = '2015-05-25', linestyle = '--', color = 'k')
+plt.hlines(0, xmin = M_lat[sdate:edate].index[0], xmax = M_lat[sdate:edate].index[-1], linestyle = '--', color = 'k')
 plt.ylabel('Flux $(W/m^{2})$')
 plt.title('Latent Heat Flux')
 plt.grid()
-plt.legend(['Idealized WRF, Pre-Modification', 'Idealized WRF, Modified', 'Measurements'])
-plt.xlim(sdate,'2015-05-25')
-plt.gca().xaxis.set_major_formatter(myFmt)
+plt.ylim(-5,30)
+plt.legend(['Idealized WRF, Unmodified', 'Idealized WRF, Modified', 'Measurements'])
+plt.xlim(M_lat[sdate:edate].index[0],M_lat[sdate:edate].index[-1])
 plt.tight_layout()
+plt.gca().xaxis.set_major_formatter(myFmt)
 plt.show()
 
 
 # ## Longwave and Shortwave Radiation
 
-# In[36]:
+# In[24]:
 
 
 plt.figure(figsize = (15,7))
@@ -824,9 +956,9 @@ plt.plot(M_downlw[sdate:edate], 'o', alpha = 0.75, color = 'k')
 plt.ylabel('Flux $(W/m^{2})$')
 plt.title('Downwelling Longwave Radiation')
 plt.grid()
-plt.legend(['Idealized WRF, Pre-Modification', 'Idealized WRF, Modified', 'Measurements'])
+plt.legend(['Idealized WRF, Unmodified', 'Idealized WRF, Modified', 'Measurements'])
 plt.ylim(150,300)
-plt.xlim(sdate,'2015-05-25')
+plt.xlim(M_downlw[sdate:edate].index[0],M_downlw[sdate:edate].index[-1])
 plt.gca().xaxis.set_major_formatter(myFmt)
 
 plt.subplot(223)
@@ -836,9 +968,9 @@ plt.plot(M_uplw[sdate:edate], 'o', alpha = 0.75, color = 'k')
 plt.ylabel('Flux $(W/m^{2})$')
 plt.title('Upwelling Longwave Radiation')
 plt.grid()
-plt.ylim(240,300)
-plt.legend(['Idealized WRF, Pre-Modification', 'Idealized WRF, Modified', 'Measurements'])
-plt.xlim(sdate,'2015-05-25')
+plt.ylim(220,300)
+plt.legend(['Idealized WRF, Unmodified', 'Idealized WRF, Modified', 'Measurements'])
+plt.xlim(M_downlw[sdate:edate].index[0],M_downlw[sdate:edate].index[-1])
 plt.gca().xaxis.set_major_formatter(myFmt)
 
 plt.subplot(222)
@@ -848,9 +980,9 @@ plt.plot(M_downsw[sdate:edate], 'o', alpha = 0.75, color = 'k')
 plt.ylabel('Flux $(W/m^{2})$')
 plt.title('Downwelling Shortwave Radiation')
 plt.grid()
-plt.ylim(50, 600)
-plt.legend(['Idealized WRF, Pre-Modification', 'Idealized WRF, Modified', 'Measurements'])
-plt.xlim(sdate,'2015-05-25')
+plt.legend(['Idealized WRF, Unmodified', 'Idealized WRF, Modified', 'Measurements'])
+#plt.ylim(180,300)
+plt.xlim(M_downlw[sdate:edate].index[0],M_downlw[sdate:edate].index[-1])
 plt.gca().xaxis.set_major_formatter(myFmt)
 
 plt.subplot(224)
@@ -858,10 +990,11 @@ plt.plot(swupb_df, 'o', alpha = 0.75)
 plt.plot(swupb_df_mod, 'o', alpha = 0.75)
 plt.plot(M_upsw[sdate:edate], 'o', alpha = 0.75, color = 'k')
 plt.ylabel('Flux $(W/m^{2})$')
+plt.title('Upwelling Shortwave Radiation')
 plt.grid()
-plt.ylim(50, 500)
-plt.legend(['Idealized WRF, Pre-Modification', 'Idealized WRF, Modified', 'Measurements'])
-plt.xlim(sdate,'2015-05-25')
+#plt.ylim(180, 300)
+plt.legend(['Idealized WRF, Unmodified', 'Idealized WRF, Modified', 'Measurements'])
+plt.xlim(M_downlw[sdate:edate].index[0],M_downlw[sdate:edate].index[-1])
 plt.gca().xaxis.set_major_formatter(myFmt)
 plt.tight_layout()
 plt.show()
@@ -870,7 +1003,7 @@ plt.show()
 # ## Summary Table
 # Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
 
-# In[37]:
+# In[25]:
 
 
 lwdns = M_downlw[sdate:edate]
@@ -904,7 +1037,7 @@ shs['unmodified'] = sh_df[0]
 shs['modified'] = sh_df_mod[0]
 
 
-# In[38]:
+# In[26]:
 
 
 correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
@@ -915,14 +1048,26 @@ correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values,
                                          swups.corr()['measured'].values], 
                                          columns = lhs.corr().columns,
                                          index = ['Latent', 'Sensible', 'Downwelling Longwave', 'Upwelling Longwave', 'Downwelling Shortwave', 'Upwelling Shortwave']).T
+cc_3 = correlation_coefficients
 r_squared = correlation_coefficients ** 2
+rs_3 = r_squared
 r_squared[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(color = 'pink', axis = 0)
 
 
 # ## Statistics and Summary
 
-# In[ ]:
+# In[27]:
 
 
+mean_cc = (cc_3.iloc[:,0:4] + cc_2.iloc[:,0:4] + cc_1)/2
+mean_cc_sw = ((cc_3.iloc[:,4:6] + cc_2.iloc[:,4:6])/2)
+mean_cc = pd.concat([mean_cc, mean_cc_sw])
+
+mean_rs = (rs_3.iloc[:,0:4] + rs_2.iloc[:,0:4] + rs_1)/2
+mean_rs_sw = ((rs_3.iloc[:,4:6] + rs_2.iloc[:,4:6])/2)
+mean_rs = pd.concat([mean_rs, mean_rs_sw], axis=1, join="inner")
+
+mean_rs[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(color = 'pink', axis = 0)
 
 
+# On average, the modified $R^{2}$ values are *slightly* better than unmodified for most categories, the most notable difference being in the upwelling shortwave likely due to the correction in downwelling shortave and increased albedo. 
