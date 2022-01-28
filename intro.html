@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Reviewing Values in LANDUSE.TBL &#8212; Land Surface Model Table Review</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
@@ -297,7 +298,7 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="reviewing-values-in-landuse-tbl">
+  <section class="tex2jax_ignore mathjax_ignore" id="reviewing-values-in-landuse-tbl">
 <h1>Reviewing Values in <code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code><a class="headerlink" href="#reviewing-values-in-landuse-tbl" title="Permalink to this headline">¶</a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code> is used by the land surface model to specify some variables depending on the land surface type. According to the Dudhia WRF Overview presentation <span id="id1">[<a class="reference internal" href="references.html#id2">Dudhia, 2014</a>]</span> , the following are used:</p>
 <ul class="simple">
@@ -305,27 +306,27 @@
 <li><p>SOILPARM.TBL - Soil peoperties in <strong>Noah and RUC</strong></p></li>
 <li><p>LANDUSE.TBL - Surface properties in <strong>5-layer model</strong> <span id="id2">[<a class="reference internal" href="references.html#id3">Dudhia, 1996</a>]</span></p></li>
 </ul>
-<div class="section" id="we-are-using-the-following-in-the-idealized-model">
+<section id="we-are-using-the-following-in-the-idealized-model">
 <h2>We are using the following in the idealized model<a class="headerlink" href="#we-are-using-the-following-in-the-idealized-model" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>5-layer model (use <code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code>)</p></li>
 <li><p>USGS section (specified in <code class="docutils literal notranslate"><span class="pre">namelist.input</span></code>)</p></li>
 <li><p>The entire time we have land use category number 24 - snow and ice</p></li>
 </ul>
-</div>
-<div class="section" id="currently-for-snow-and-ice-in-my-idealized-simulations">
+</section>
+<section id="currently-for-snow-and-ice-in-my-idealized-simulations">
 <h2>Currently for snow and ice in my idealized simulations:<a class="headerlink" href="#currently-for-snow-and-ice-in-my-idealized-simulations" title="Permalink to this headline">¶</a></h2>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
-<tr class="row-odd"><th class="text-align:center head"><p><div style="width:75px">Season</div></p></th>
-<th class="text-align:center head"><p><div style="width:75px">Albedo<br><span class="math notranslate nohighlight">\((\%)\)</span></div></p></th>
-<th class="text-align:center head"><p><div style="width:100px">Suface Moisture Availability<br><span class="math notranslate nohighlight">\((*100\%)\)</span></div></p></th>
-<th class="text-align:center head"><p><div style="width:100px">Surface Emissivity<br><span class="math notranslate nohighlight">\((\%)\)</span></div></p></th>
-<th class="text-align:center head"><p><div style="width:100px">Surface Roughness</div></p></th>
-<th class="text-align:center head"><p><div style="width:100px">Thermal Inertia Constant</div></p></th>
-<th class="text-align:center head"><p><div style="width:100px">Snow Cover Effect</div></p></th>
-<th class="text-align:center head"><p><div style="width:100px">Surface Heat Capacity<br><span class="math notranslate nohighlight">\((J / (m^{3} K))\)</span></div></p></th>
-<th class="text-align:center head"><p><div style="width:75px">Label</div></center></p></th>
+<tr class="row-odd"><th class="head text-align:center"><p><div style="width:75px">Season</div></p></th>
+<th class="head text-align:center"><p><div style="width:75px">Albedo<br><span class="math notranslate nohighlight">\((\%)\)</span></div></p></th>
+<th class="head text-align:center"><p><div style="width:100px">Suface Moisture Availability<br><span class="math notranslate nohighlight">\((*100\%)\)</span></div></p></th>
+<th class="head text-align:center"><p><div style="width:100px">Surface Emissivity<br><span class="math notranslate nohighlight">\((\%)\)</span></div></p></th>
+<th class="head text-align:center"><p><div style="width:100px">Surface Roughness</div></p></th>
+<th class="head text-align:center"><p><div style="width:100px">Thermal Inertia Constant</div></p></th>
+<th class="head text-align:center"><p><div style="width:100px">Snow Cover Effect</div></p></th>
+<th class="head text-align:center"><p><div style="width:100px">Surface Heat Capacity<br><span class="math notranslate nohighlight">\((J / (m^{3} K))\)</span></div></p></th>
+<th class="head text-align:center"><p><div style="width:75px">Label</div></center></p></th>
 </tr>
 </thead>
 <tbody>
@@ -351,7 +352,7 @@
 </tr>
 </tbody>
 </table>
-<div class="section" id="preliminary-observations">
+<section id="preliminary-observations">
 <h3>Preliminary observations<a class="headerlink" href="#preliminary-observations" title="Permalink to this headline">¶</a></h3>
 <ol class="simple">
 <li><p><strong>Albedo</strong> is far too low - <em><strong>BUT we have defined this in the namelist</strong></em> so this value is not used.</p></li>
@@ -361,11 +362,11 @@
 <li><p>The <strong>thermal inertial constant</strong> could probably be improved, but I’m not sure what this is.</p></li>
 <li><p><strong>Surface heat capacity</strong> could be improved.</p></li>
 </ol>
-</div>
-</div>
-<div class="section" id="what-variables-do-we-need-where-can-we-get-them">
+</section>
+</section>
+<section id="what-variables-do-we-need-where-can-we-get-them">
 <h2>What variables do we need? Where can we get them?<a class="headerlink" href="#what-variables-do-we-need-where-can-we-get-them" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="have">
+<section id="have">
 <h3>Have<a class="headerlink" href="#have" title="Permalink to this headline">¶</a></h3>
 <ol class="simple">
 <li><p>Albedo</p>
@@ -374,8 +375,8 @@
 </ul>
 </li>
 </ol>
-</div>
-<div class="section" id="can-calculate">
+</section>
+<section id="can-calculate">
 <h3>Can Calculate<a class="headerlink" href="#can-calculate" title="Permalink to this headline">¶</a></h3>
 <ol class="simple">
 <li><p>Surface roughness length</p>
@@ -396,8 +397,8 @@
 </ul>
 </li>
 </ol>
-</div>
-<div class="section" id="can-improve-estimations">
+</section>
+<section id="can-improve-estimations">
 <h3>Can improve estimations<a class="headerlink" href="#can-improve-estimations" title="Permalink to this headline">¶</a></h3>
 <ol class="simple">
 <li><p>Surface moisture availability</p>
@@ -412,11 +413,11 @@
 </ul>
 </li>
 </ol>
-</div>
-</div>
+</section>
+</section>
 <div class="toctree-wrapper compound">
 </div>
-</div>
+</section>
 
     <script type="text/x-thebe-config">
     {
