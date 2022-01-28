@@ -32,7 +32,7 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['# Finding all wrfout file', "fns = glob('/Volumes/seagate_desktop/idealized/case1/000101/wrfo*')", '', '# Creating an empty list to append to', 'wrflist = list()']
+["fns = glob('/Volumes/seagate_desktop/idealized/case4/000101/wrfo*')", 'wrflist = list()', 'for fn in fns:', '    wrflist.append(Dataset(fn))', '    ']
 ...
 ['swdnb_df_mod = pd.DataFrame(swdnb_mod.values, index = swdnb_mod.Time.values)', '', '## swupb - upwelling shortwave radiation', 'swupb_mod = getvar(wrflist, "SWUPB", timeidx=ALL_TIMES, method="cat").mean(\'south_north\').mean(\'west_east\')', 'swupb_df_mod = pd.DataFrame(swupb_mod.values, index = swupb_mod.Time.values)']
 -------------------

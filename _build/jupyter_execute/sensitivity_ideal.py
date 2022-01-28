@@ -86,9 +86,9 @@ edate = '2015-02-06'
 sebmask = (M_downlw.index > sdate) & (M_downlw.index < edate)
 
 # Importing WRF variables
-cldfra = getvar(wrflist, "QCLOUD", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
+#cldfra = getvar(wrflist, "QCLOUD", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
 z = getvar(wrflist, "z").mean('south_north').mean('west_east')
-cldfra_df = pd.DataFrame(cldfra.values, index = cldfra.Time.values, columns = z)
+#cldfra_df = pd.DataFrame(cldfra.values, index = cldfra.Time.values, columns = z)
 
 ## lh - latent heat flux
 lh = getvar(wrflist, "LH", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
@@ -128,9 +128,9 @@ for fn in fns:
 
 # Importing WRF variables
 ## QCloud - Cloud Water Mixing Ratio is kg/kg
-cldfra_mod = getvar(wrflist, "QCLOUD", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
+#cldfra_mod = getvar(wrflist, "QCLOUD", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
 z_mod = getvar(wrflist, "z").mean('south_north').mean('west_east')
-cldfra_df_mod = pd.DataFrame(cldfra_mod.values, index = cldfra_mod.Time.values, columns = z_mod)
+#cldfra_df_mod = pd.DataFrame(cldfra_mod.values, index = cldfra_mod.Time.values, columns = z_mod)
 
 ## lh - latent heat flux
 lh_mod = getvar(wrflist, "LH", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
@@ -1051,7 +1051,7 @@ plt.show()
 # ## Summary Table
 # Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
 
-# In[27]:
+# In[26]:
 
 
 edate = '2015-05-24 22:30:00'
@@ -1086,7 +1086,7 @@ shs['unmodified'] = sh_df[sdate:edate]
 shs['modified'] = sh_df_mod[sdate:edate]
 
 
-# In[28]:
+# In[27]:
 
 
 correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
@@ -1105,7 +1105,7 @@ r_squared[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(
 
 # ## Statistics and Summary
 
-# In[30]:
+# In[28]:
 
 
 mean_cc = (cc_3.iloc[:,0:4] + cc_2.iloc[:,0:4] + cc_1)/3
