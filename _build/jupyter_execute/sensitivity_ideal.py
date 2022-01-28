@@ -56,6 +56,9 @@ M_sen = -pd.DataFrame(Measurements_seb.variables['surface_downward_sensible_heat
                       index = pd.to_datetime(Measurements_seb.variables['unix_time'].values, unit = 's'), columns = ['sh'])
 ## NOTE: sensible and latent heat flux negative to match WRF sign convention
 
+### Temperature 
+T_meas = pd.read_excel('/Users/smurphy/Documents/PhD/datasets/nice_data/Ts.xlsx', index_col = 0)
+
 # Set date format for plots throughout the notebook
 myFmt = DateFormatter("%m/%d \n %H:%M:%S")
 
@@ -159,6 +162,7 @@ swupb_df_mod = pd.DataFrame(swupb_mod.values, index = swupb_mod.Time.values)
 
 wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/case1/000101/wrfstat_d01_2015-02-04_00:00:00')
 cst_qc = wrfstat['CSP_QC']
+cst_tsk = wrfstat['CST_TSK']
 cst_sh = wrfstat['CST_SH']
 cst_lh = wrfstat['CST_LH']
 cst_time = wrfstat['Times']
@@ -166,13 +170,16 @@ csp_z = wrfstat['CSP_Z']
 qc = pd.DataFrame(cst_qc.values, 
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
-sh = pd.DataFrame(cst_sh.values, 
+sh_df = pd.DataFrame(cst_sh.values, 
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), columns = ['sh'])
-lh = pd.DataFrame(cst_lh.values, 
+lh_df = pd.DataFrame(cst_lh.values, 
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), columns = ['lh'])
+tsk_df = pd.DataFrame(cst_tsk.values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), columns = ['tsk'])
 
 wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/landusetbl_modifications/1ClearWinter_000101/wrfstat_d01_2015-02-04_00:00:00')
 cst_qc = wrfstat['CSP_QC']
+cst_tsk = wrfstat['CST_TSK']
 cst_sh = wrfstat['CST_SH']
 cst_lh = wrfstat['CST_LH']
 cst_time = wrfstat['Times']
@@ -180,10 +187,12 @@ csp_z = wrfstat['CSP_Z']
 qc_mod = pd.DataFrame(cst_qc.values, 
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
-sh_mod = pd.DataFrame(cst_sh.values, 
+sh_df_mod = pd.DataFrame(cst_sh.values, 
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), columns = ['sh'])
-lh_mod = pd.DataFrame(cst_lh.values, 
+lh_df_mod = pd.DataFrame(cst_lh.values, 
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), columns = ['lh'])
+tsk_df_mod = pd.DataFrame(cst_tsk.values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), columns = ['tsk'])
 
 
 # ## Clouds
@@ -199,12 +208,14 @@ contourmap = axs[0].contour(qc.index, qc.columns / 1000, qc.T.values * 1000, col
 axs[0].set_ylabel('Height (km)')
 axs[0].set_title('Cloud Fraction (WRF)\nUnmodified')
 axs[0].xaxis.set_major_formatter(myFmt)
+axs[0].set_ylim(0,4)
 
 heatmap = axs[1].contourf(qc_mod.index, qc_mod.columns / 1000, qc_mod.T.values * 1000, levels=levels)
 contourmap = axs[1].contour(qc_mod.index, qc_mod.columns / 1000, qc_mod.T.values * 1000, [0.02], colors = ['white'])
 axs[1].set_ylabel('Height (km)')
 axs[1].set_title('Modified')
 axs[1].xaxis.set_major_formatter(myFmt)
+axs[1].set_ylim(0,4)
 
 plt.tight_layout()
 cbar = fig.colorbar(heatmap, ax=axs[:])
@@ -239,7 +250,7 @@ fig, ax = plt.subplots(figsize=(10,4))
 
 plt.grid()
 heatmap = plt.contourf(measured_cloudmask_all.index,
-                       measured_cloudmask_all.columns, 
+                       measured_cloudmask_all.columns / 1000, 
                        measured_cloudmask_all.T.values, 
                        [0, 1, 2])
 # nan - no information
@@ -252,7 +263,7 @@ cbar = fig.colorbar(heatmap, label = 'Phase', ticks = [0.5, 1.5], orientation = 
 cbar.ax.set_yticklabels(['Ice', 'Water'], rotation = 90)
 cbar.ax.tick_params(size=0)
 plt.gca().xaxis.set_major_formatter(myFmt)
-plt.ylim(0, max(cldfra_df_mod.columns))
+plt.ylim(0, 4)
 plt.tight_layout()
 plt.show()
 
@@ -325,44 +336,66 @@ plt.tight_layout()
 plt.show()
 
 
-# ## Summary Table
-# Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
+# ## Skin Temperature
 
 # In[8]:
 
 
+plt.figure(figsize = (10,3.5))
+
+plt.plot(tsk_df, 'o', alpha = 0.5)
+plt.plot(tsk_df_mod, 'o', alpha = 0.5)
+plt.plot(T_meas[sdate:edate].resample('30min').first(), 'o', alpha = 0.5, color = 'k')
+plt.ylabel('Temperature $(K)$')
+plt.title('Skin Temperature')
+plt.grid()
+plt.legend(['Idealized WRF, Unmodified', 'Idealized WRF, Modified', 'Measurements'])
+plt.ylim(240,275)
+plt.xlim(M_downlw[sdate:edate].index[0],M_downlw[sdate:edate].index[-1])
+plt.gca().xaxis.set_major_formatter(myFmt)
+plt.tight_layout()
+plt.show()
+
+
+# ## Summary Table
+# Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
+
+# In[9]:
+
+
+edate = '2015-02-06 21:00:00'
 lwdns = M_downlw[sdate:edate]
 lwdns.columns = ['measured']
-lwdns['unmodified'] = lwdnb_df[0]
-lwdns['modified'] = lwdnb_df_mod[0]
+lwdns['unmodified'] = lwdnb_df[sdate:edate]
+lwdns['modified'] = lwdnb_df_mod[sdate:edate]
 
 lwups = M_uplw[sdate:edate]
 lwups.columns = ['measured']
-lwups['unmodified'] = lwupb_df[0]
-lwups['modified'] = lwupb_df_mod[0]
+lwups['unmodified'] = lwupb_df[sdate:edate]
+lwups['modified'] = lwupb_df_mod[sdate:edate]
 
 swdns = M_downsw[sdate:edate]
 swdns.columns = ['measured']
-swdns['unmodified'] = swdnb_df[0]
-swdns['modified'] = swdnb_df_mod[0]
+swdns['unmodified'] = swdnb_df[sdate:edate]
+swdns['modified'] = swdnb_df_mod[sdate:edate]
 
 swups = M_upsw[sdate:edate]
 swups.columns = ['measured']
-swups['unmodified'] = swupb_df[0]
-swups['modified'] = swupb_df_mod[0]
+swups['unmodified'] = swupb_df[sdate:edate]
+swups['modified'] = swupb_df_mod[sdate:edate]
 
 lhs = M_lat[sdate:edate]
 lhs.columns = ['measured']
-lhs['unmodified'] = lh_df[0]
-lhs['modified'] = lh_df_mod[0]
+lhs['unmodified'] = lh_df[sdate:edate]
+lhs['modified'] = lh_df_mod[sdate:edate]
 
 shs = M_sen[sdate:edate]
 shs.columns = ['measured']
-shs['unmodified'] = sh_df[0]
-shs['modified'] = sh_df_mod[0]
+shs['unmodified'] = sh_df[sdate:edate]
+shs['modified'] = sh_df_mod[sdate:edate]
 
 
-# In[9]:
+# In[10]:
 
 
 correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
@@ -379,7 +412,7 @@ r_squared[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(
 
 # # Case 2 - Spring Cloudy
 
-# In[10]:
+# In[11]:
 
 
 fns = glob('/Volumes/seagate_desktop/idealized/case4/000101/wrfo*')
@@ -453,11 +486,12 @@ swupb_mod = getvar(wrflist, "SWUPB", timeidx=ALL_TIMES, method="cat").mean('sout
 swupb_df_mod = pd.DataFrame(swupb_mod.values, index = swupb_mod.Time.values)
 
 
-# In[11]:
+# In[12]:
 
 
 wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/case4/000101/wrfstat_d01_2015-05-02_00:00:00')
 cst_qc = wrfstat['CSP_QC']
+cst_tsk = wrfstat['CST_TSK']
 cst_sh = wrfstat['CST_SH']
 cst_lh = wrfstat['CST_LH']
 cst_time = wrfstat['Times']
@@ -465,13 +499,16 @@ csp_z = wrfstat['CSP_Z']
 qc = pd.DataFrame(cst_qc.values, 
                   index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 19:30:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
-sh = pd.DataFrame(cst_sh.values, 
+sh_df = pd.DataFrame(cst_sh.values, 
                   index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 19:30:00', freq = '30min'), columns = ['sh'])
-lh = pd.DataFrame(cst_lh.values, 
+lh_df = pd.DataFrame(cst_lh.values, 
                   index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 19:30:00', freq = '30min'), columns = ['lh'])
+tsk_df = pd.DataFrame(cst_tsk.values, 
+                  index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 19:30:00', freq = '30min'), columns = ['tsk'])
 
 wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/landusetbl_modifications/2CloudySpring_000101/wrfstat_d01_2015-05-02_00:00:00')
 cst_qc = wrfstat['CSP_QC']
+cst_tsk = wrfstat['CST_TSK']
 cst_sh = wrfstat['CST_SH']
 cst_lh = wrfstat['CST_LH']
 cst_time = wrfstat['Times']
@@ -479,33 +516,15 @@ csp_z = wrfstat['CSP_Z']
 qc_mod = pd.DataFrame(cst_qc.values, 
                   index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 22:30:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
-sh_mod = pd.DataFrame(cst_sh.values, 
+sh_df_mod = pd.DataFrame(cst_sh.values, 
                   index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 22:30:00', freq = '30min'), columns = ['sh'])
-lh_mod = pd.DataFrame(cst_lh.values, 
+lh_df_mod = pd.DataFrame(cst_lh.values, 
                   index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 22:30:00', freq = '30min'), columns = ['lh'])
+tsk_df_mod = pd.DataFrame(cst_tsk.values, 
+                  index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 22:30:00', freq = '30min'), columns = ['tsk'])
 
 
 # ## Clouds
-
-# In[12]:
-
-
-fig, axs = plt.subplots(2, figsize=(10,7))
-levels = np.arange(0,0.21,0.01)
-
-heatmap = axs[0].contourf(qc.index, qc.columns / 1000, qc.T.values * 1000, levels=levels)
-contourmap = axs[0].contour(qc.index, qc.columns / 1000, qc.T.values * 1000, colors = ['white'], levels = [0.02])
-axs[0].set_ylabel('Height (km)')
-axs[0].set_title('Clouds (WRF)')
-axs[0].xaxis.set_major_formatter(myFmt)
-axs[0].set_ylim(0,3)
-plt.tight_layout()
-cbar = fig.colorbar(heatmap, ax=axs[0])
-cbar.set_ticks([0,0.05,0.1,0.15,0.2,0.25,0.3])
-cbar.set_label('Cloud Water Mixing Ratio (g/kg)')
-
-plt.show()
-
 
 # In[13]:
 
@@ -518,12 +537,14 @@ contourmap = axs[0].contour(qc.index, qc.columns / 1000, qc.T.values * 1000, col
 axs[0].set_ylabel('Height (km)')
 axs[0].set_title('Cloud Fraction (WRF)\nUnmodified')
 axs[0].xaxis.set_major_formatter(myFmt)
+axs[0].set_ylim(0,4)
 
 heatmap = axs[1].contourf(qc_mod.index, qc_mod.columns / 1000, qc_mod.T.values * 1000, levels=levels)
 contourmap = axs[1].contour(qc_mod.index, qc_mod.columns / 1000, qc_mod.T.values * 1000, [0.02], colors = ['white'])
 axs[1].set_ylabel('Height (km)')
 axs[1].set_title('Modified')
 axs[1].xaxis.set_major_formatter(myFmt)
+axs[1].set_ylim(0,4)
 
 plt.tight_layout()
 cbar = fig.colorbar(heatmap, ax=axs[:])
@@ -558,7 +579,7 @@ fig, ax = plt.subplots(figsize=(10,4))
 
 plt.grid()
 heatmap = plt.contourf(measured_cloudmask_all.index,
-                       measured_cloudmask_all.columns, 
+                       measured_cloudmask_all.columns / 1000, 
                        measured_cloudmask_all.T.values, 
                        [0, 1, 2])
 # nan - no information
@@ -566,12 +587,12 @@ heatmap = plt.contourf(measured_cloudmask_all.index,
 # 2 - cloud ice
 
 plt.title('Cloud Mask\nMeasured by MPL')
-plt.ylabel('Height (m)')
+plt.ylabel('Height (km)')
 cbar = fig.colorbar(heatmap, label = 'Phase', ticks = [0.5, 1.5], orientation = 'vertical')
 cbar.ax.set_yticklabels(['Ice', 'Water'], rotation = 90)
 cbar.ax.tick_params(size=0)
 plt.gca().xaxis.set_major_formatter(myFmt)
-plt.ylim(0, max(cldfra_df_mod.columns))
+plt.ylim(0, 4)
 plt.tight_layout()
 plt.show()
 
@@ -668,45 +689,66 @@ plt.tight_layout()
 plt.show()
 
 
-# ## Summary Table
-# 
-# Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
+# ## Skin Temperature
 
 # In[17]:
 
 
+plt.figure(figsize = (10,3.5))
+plt.plot(tsk_df, 'o', alpha = 0.5)
+plt.plot(tsk_df_mod, 'o', alpha = 0.5)
+plt.plot(T_meas[sdate:edate].resample('30min').first(), 'o', alpha = 0.5, color = 'k')
+plt.ylabel('Temperature $(K)$')
+plt.title('Skin Temperature')
+plt.grid()
+plt.legend(['Idealized WRF, Unmodified', 'Idealized WRF, Modified', 'Measurements'])
+plt.ylim(255,265)
+plt.xlim(M_downlw[sdate:edate].index[0],M_downlw[sdate:edate].index[-1])
+plt.gca().xaxis.set_major_formatter(myFmt)
+plt.tight_layout()
+plt.show()
+
+
+# ## Summary Table
+# 
+# Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
+
+# In[18]:
+
+
+edate = '2015-05-04 19:30:00'
 lwdns = M_downlw[sdate:edate]
 lwdns.columns = ['measured']
-lwdns['unmodified'] = lwdnb_df[0]
-lwdns['modified'] = lwdnb_df_mod[0]
+lwdns['unmodified'] = lwdnb_df[sdate:edate]
+lwdns['modified'] = lwdnb_df_mod[sdate:edate]
 
 lwups = M_uplw[sdate:edate]
 lwups.columns = ['measured']
-lwups['unmodified'] = lwupb_df[0]
-lwups['modified'] = lwupb_df_mod[0]
+lwups['unmodified'] = lwupb_df[sdate:edate]
+lwups['modified'] = lwupb_df_mod[sdate:edate]
 
 swdns = M_downsw[sdate:edate]
 swdns.columns = ['measured']
-swdns['unmodified'] = swdnb_df[0]
-swdns['modified'] = swdnb_df_mod[0]
+swdns['unmodified'] = swdnb_df[sdate:edate]
+swdns['modified'] = swdnb_df_mod[sdate:edate]
 
 swups = M_upsw[sdate:edate]
 swups.columns = ['measured']
-swups['unmodified'] = swupb_df[0]
-swups['modified'] = swupb_df_mod[0]
+swups['unmodified'] = swupb_df[sdate:edate]
+swups['modified'] = swupb_df_mod[sdate:edate]
 
 lhs = M_lat[sdate:edate]
 lhs.columns = ['measured']
-lhs['unmodified'] = lh_df[0]
-lhs['modified'] = lh_df_mod[0]
+lhs['unmodified'] = lh_df[sdate:edate]
+lhs['modified'] = lh_df_mod[sdate:edate]
 
 shs = M_sen[sdate:edate]
 shs.columns = ['measured']
-shs['unmodified'] = sh_df[0]
-shs['modified'] = sh_df_mod[0]
+shs['unmodified'] = sh_df[sdate:edate]
+shs['modified'] = sh_df_mod[sdate:edate]
 
 
-# In[18]:
+# In[19]:
 
 
 correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
@@ -725,7 +767,7 @@ r_squared[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(
 
 # # Case 3 - Spring Clear
 
-# In[19]:
+# In[20]:
 
 
 sdate = '2015-05-22'
@@ -804,11 +846,12 @@ swupb_mod = getvar(wrflist, "SWUPB", timeidx=ALL_TIMES, method="cat").mean('sout
 swupb_df_mod = pd.DataFrame(swupb_mod.values, index = swupb_mod.Time.values)
 
 
-# In[20]:
+# In[21]:
 
 
 wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/case3/000101/wrfstat_d01_2015-05-22_00:00:00')
 cst_qc = wrfstat['CSP_QC']
+cst_tsk = wrfstat['CST_TSK']
 cst_sh = wrfstat['CST_SH']
 cst_lh = wrfstat['CST_LH']
 cst_time = wrfstat['Times']
@@ -816,14 +859,16 @@ csp_z = wrfstat['CSP_Z']
 qc = pd.DataFrame(cst_qc.values, 
                   index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
-sh = pd.DataFrame(cst_sh.values, 
+sh_df = pd.DataFrame(cst_sh.values, 
                   index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), columns = ['sh'])
-lh = pd.DataFrame(cst_lh.values, 
+lh_df = pd.DataFrame(cst_lh.values, 
                   index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), columns = ['lh'])
+tsk_df = pd.DataFrame(cst_tsk.values, 
+                  index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), columns = ['tsk'])
 
-
-wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/landusetbl_modifications/3ClearSpring_000101/wrfstat_d01_2015-05-22_00:00:00')
+wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/landusetbl_modifications/3ClearSpring_000101/corrected_input/wrfstat_d01_2015-05-22_00:00:00')
 cst_qc = wrfstat['CSP_QC']
+cst_tsk = wrfstat['CST_TSK']
 cst_sh = wrfstat['CST_SH']
 cst_lh = wrfstat['CST_LH']
 cst_time = wrfstat['Times']
@@ -831,15 +876,17 @@ csp_z = wrfstat['CSP_Z']
 qc_mod = pd.DataFrame(cst_qc.values, 
                   index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
-sh_mod = pd.DataFrame(cst_sh.values, 
+sh_df_mod = pd.DataFrame(cst_sh.values, 
                   index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), columns = ['sh'])
-lh_mod = pd.DataFrame(cst_lh.values, 
+lh_df_mod = pd.DataFrame(cst_lh.values, 
                   index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), columns = ['lh'])
+tsk_df_mod = pd.DataFrame(cst_tsk.values, 
+                  index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), columns = ['tsk'])
 
 
 # ## Clouds
 
-# In[21]:
+# In[22]:
 
 
 fig, axs = plt.subplots(2, figsize=(10,7))
@@ -850,13 +897,14 @@ contourmap = axs[0].contour(qc.index, qc.columns / 1000, qc.T.values * 1000, col
 axs[0].set_ylabel('Height (km)')
 axs[0].set_title('Cloud Fraction (WRF)\nUnmodified')
 axs[0].xaxis.set_major_formatter(myFmt)
+axs[0].set_ylim(0,4)
 
 heatmap = axs[1].contourf(qc_mod.index, qc_mod.columns / 1000, qc_mod.T.values * 1000, levels=levels)
 contourmap = axs[1].contour(qc_mod.index, qc_mod.columns / 1000, qc_mod.T.values * 1000, [0.02], colors = ['white'])
 axs[1].set_ylabel('Height (km)')
 axs[1].set_title('Modified')
 axs[1].xaxis.set_major_formatter(myFmt)
-
+axs[1].set_ylim(0,4)
 plt.tight_layout()
 cbar = fig.colorbar(heatmap, ax=axs[:])
 cbar.set_ticks(np.arange(0,0.21,0.02))
@@ -865,7 +913,7 @@ cbar.set_label('Cloud Water Mixing Ratio (g/kg)')
 plt.show()
 
 
-# In[22]:
+# In[23]:
 
 
 fns = ['/Volumes/seagate_desktop/data/MPL/Robert_MPLData/FinalNICELidarData/NICE_MPLDataFinal20150522.cdf',
@@ -890,7 +938,7 @@ fig, ax = plt.subplots(figsize=(10,4))
 
 plt.grid()
 heatmap = plt.contourf(measured_cloudmask_all.index,
-                       measured_cloudmask_all.columns, 
+                       measured_cloudmask_all.columns / 1000, 
                        measured_cloudmask_all.T.values, 
                        [0, 1, 2])
 # nan - no information
@@ -903,14 +951,14 @@ cbar = fig.colorbar(heatmap, label = 'Phase', ticks = [0.5, 1.5], orientation = 
 cbar.ax.set_yticklabels(['Ice', 'Water'], rotation = 90)
 cbar.ax.tick_params(size=0)
 plt.gca().xaxis.set_major_formatter(myFmt)
-plt.ylim(0, max(cldfra_df_mod.columns))
+plt.ylim(0, 4)
 plt.tight_layout()
 plt.show()
 
 
 # ## Sensible and Latent Heat Flux
 
-# In[23]:
+# In[24]:
 
 
 plt.figure(figsize = (10,7))
@@ -945,7 +993,7 @@ plt.show()
 
 # ## Longwave and Shortwave Radiation
 
-# In[24]:
+# In[25]:
 
 
 plt.figure(figsize = (15,7))
@@ -1003,41 +1051,42 @@ plt.show()
 # ## Summary Table
 # Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
 
-# In[25]:
+# In[27]:
 
 
+edate = '2015-05-24 22:30:00'
 lwdns = M_downlw[sdate:edate]
 lwdns.columns = ['measured']
-lwdns['unmodified'] = lwdnb_df[0]
-lwdns['modified'] = lwdnb_df_mod[0]
+lwdns['unmodified'] = lwdnb_df[sdate:edate]
+lwdns['modified'] = lwdnb_df_mod[sdate:edate]
 
 lwups = M_uplw[sdate:edate]
 lwups.columns = ['measured']
-lwups['unmodified'] = lwupb_df[0]
-lwups['modified'] = lwupb_df_mod[0]
+lwups['unmodified'] = lwupb_df[sdate:edate]
+lwups['modified'] = lwupb_df_mod[sdate:edate]
 
 swdns = M_downsw[sdate:edate]
 swdns.columns = ['measured']
-swdns['unmodified'] = swdnb_df[0]
-swdns['modified'] = swdnb_df_mod[0]
+swdns['unmodified'] = swdnb_df[sdate:edate]
+swdns['modified'] = swdnb_df_mod[sdate:edate]
 
 swups = M_upsw[sdate:edate]
 swups.columns = ['measured']
-swups['unmodified'] = swupb_df[0]
-swups['modified'] = swupb_df_mod[0]
+swups['unmodified'] = swupb_df[sdate:edate]
+swups['modified'] = swupb_df_mod[sdate:edate]
 
 lhs = M_lat[sdate:edate]
 lhs.columns = ['measured']
-lhs['unmodified'] = lh_df[0]
-lhs['modified'] = lh_df_mod[0]
+lhs['unmodified'] = lh_df[sdate:edate]
+lhs['modified'] = lh_df_mod[sdate:edate]
 
 shs = M_sen[sdate:edate]
 shs.columns = ['measured']
-shs['unmodified'] = sh_df[0]
-shs['modified'] = sh_df_mod[0]
+shs['unmodified'] = sh_df[sdate:edate]
+shs['modified'] = sh_df_mod[sdate:edate]
 
 
-# In[26]:
+# In[28]:
 
 
 correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
@@ -1056,18 +1105,22 @@ r_squared[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(
 
 # ## Statistics and Summary
 
-# In[27]:
+# In[30]:
 
 
-mean_cc = (cc_3.iloc[:,0:4] + cc_2.iloc[:,0:4] + cc_1)/2
+mean_cc = (cc_3.iloc[:,0:4] + cc_2.iloc[:,0:4] + cc_1)/3
 mean_cc_sw = ((cc_3.iloc[:,4:6] + cc_2.iloc[:,4:6])/2)
 mean_cc = pd.concat([mean_cc, mean_cc_sw])
 
-mean_rs = (rs_3.iloc[:,0:4] + rs_2.iloc[:,0:4] + rs_1)/2
+mean_rs = (rs_3.iloc[:,0:4] + rs_2.iloc[:,0:4] + rs_1)/3
 mean_rs_sw = ((rs_3.iloc[:,4:6] + rs_2.iloc[:,4:6])/2)
 mean_rs = pd.concat([mean_rs, mean_rs_sw], axis=1, join="inner")
 
 mean_rs[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(color = 'pink', axis = 0)
 
 
-# On average, the modified $R^{2}$ values are *slightly* better than unmodified for most categories, the most notable difference being in the upwelling shortwave likely due to the correction in downwelling shortave and increased albedo. 
+# In[ ]:
+
+
+
+
