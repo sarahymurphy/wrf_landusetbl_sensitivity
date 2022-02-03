@@ -881,21 +881,21 @@
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Wind Speed (WRF)</span><span class="se">\n</span><span class="s1">Unmodified&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">myFmt</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">sounding_ws</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="s1">&#39;2015-02-06&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">sounding_ws</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="s1">&#39;2015-02-06&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
 
 <span class="n">heatmap</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">ws_df_mod</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">ws_df_mod</span><span class="o">.</span><span class="n">columns</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">ws_df_mod</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">levels</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Height (km)&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">myFmt</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">sounding_ws</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="s1">&#39;2015-02-06&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">sounding_ws</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="s1">&#39;2015-02-06&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
 
 <span class="n">heatmap_1</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">ws_df_mod</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">ws_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">ws_df</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">values</span><span class="p">[:,:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">ws_df_mod</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">levels</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Height (km)&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Difference in Wind Speed (unmod - mod)&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">myFmt</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">sounding_ws</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="s1">&#39;2015-02-06&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">sounding_ws</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="s1">&#39;2015-02-06&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">heatmap</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
@@ -1026,14 +1026,14 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
-#T_efac6_row0_col0, #T_efac6_row0_col3, #T_efac6_row1_col1, #T_efac6_row1_col2 {
+#T_03e08_row0_col0, #T_03e08_row0_col3, #T_03e08_row1_col1, #T_03e08_row1_col2 {
   background-color: lightgreen;
 }
-#T_efac6_row0_col1, #T_efac6_row0_col2, #T_efac6_row1_col0, #T_efac6_row1_col3 {
+#T_03e08_row0_col1, #T_03e08_row0_col2, #T_03e08_row1_col0, #T_03e08_row1_col3 {
   background-color: pink;
 }
 </style>
-<table id="T_efac6_">
+<table id="T_03e08_">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
@@ -1045,18 +1045,18 @@
   </thead>
   <tbody>
     <tr>
-      <th id="T_efac6_level0_row0" class="row_heading level0 row0" >unmodified</th>
-      <td id="T_efac6_row0_col0" class="data row0 col0" >0.003053</td>
-      <td id="T_efac6_row0_col1" class="data row0 col1" >0.031668</td>
-      <td id="T_efac6_row0_col2" class="data row0 col2" >0.712964</td>
-      <td id="T_efac6_row0_col3" class="data row0 col3" >0.609335</td>
+      <th id="T_03e08_level0_row0" class="row_heading level0 row0" >unmodified</th>
+      <td id="T_03e08_row0_col0" class="data row0 col0" >0.003053</td>
+      <td id="T_03e08_row0_col1" class="data row0 col1" >0.031668</td>
+      <td id="T_03e08_row0_col2" class="data row0 col2" >0.712964</td>
+      <td id="T_03e08_row0_col3" class="data row0 col3" >0.609335</td>
     </tr>
     <tr>
-      <th id="T_efac6_level0_row1" class="row_heading level0 row1" >modified</th>
-      <td id="T_efac6_row1_col0" class="data row1 col0" >0.000586</td>
-      <td id="T_efac6_row1_col1" class="data row1 col1" >0.051439</td>
-      <td id="T_efac6_row1_col2" class="data row1 col2" >0.744958</td>
-      <td id="T_efac6_row1_col3" class="data row1 col3" >0.609335</td>
+      <th id="T_03e08_level0_row1" class="row_heading level0 row1" >modified</th>
+      <td id="T_03e08_row1_col0" class="data row1 col0" >0.000586</td>
+      <td id="T_03e08_row1_col1" class="data row1 col1" >0.051439</td>
+      <td id="T_03e08_row1_col2" class="data row1 col2" >0.744958</td>
+      <td id="T_03e08_row1_col3" class="data row1 col3" >0.609335</td>
     </tr>
   </tbody>
 </table>
@@ -1078,9 +1078,9 @@
 
 <span class="n">sebmask</span> <span class="o">=</span> <span class="p">(</span><span class="n">M_downlw</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;</span> <span class="n">sdate</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">M_downlw</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">edate</span><span class="p">)</span>
 
-<span class="n">cldfra</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;CLDFRA&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
+<span class="c1">#cldfra = getvar(wrflist, &quot;CLDFRA&quot;, timeidx=ALL_TIMES, method=&quot;cat&quot;).mean(&#39;south_north&#39;).mean(&#39;west_east&#39;)</span>
 <span class="n">z</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
-<span class="n">cldfra_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cldfra</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">cldfra</span><span class="o">.</span><span class="n">Time</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">z</span><span class="p">)</span>
+<span class="c1">#cldfra_df = pd.DataFrame(cldfra.values, index = cldfra.Time.values, columns = z)</span>
 
 <span class="n">lh</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;LH&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
 <span class="n">lh_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lh</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">lh</span><span class="o">.</span><span class="n">Time</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
@@ -1110,9 +1110,9 @@
 <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">fns</span><span class="p">:</span>
     <span class="n">wrflist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">))</span>
 
-<span class="n">cldfra_mod</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;CLDFRA&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
+<span class="c1">#cldfra_mod = getvar(wrflist, &quot;CLDFRA&quot;, timeidx=ALL_TIMES, method=&quot;cat&quot;).mean(&#39;south_north&#39;).mean(&#39;west_east&#39;)</span>
 <span class="n">z_mod</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
-<span class="n">cldfra_df_mod</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cldfra_mod</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">cldfra_mod</span><span class="o">.</span><span class="n">Time</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">z_mod</span><span class="p">)</span>
+<span class="c1">#cldfra_df_mod = pd.DataFrame(cldfra_mod.values, index = cldfra_mod.Time.values, columns = z_mod)</span>
 
 <span class="c1">## lh - latent heat flux</span>
 <span class="n">lh_mod</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;LH&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
@@ -1143,12 +1143,11 @@
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">21</span><span class="o">/</span><span class="n">bhksj_cn7zz43y8x0m4gsh0h0000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_61071</span><span class="o">/</span><span class="mf">197880382.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">sebmask</span> <span class="o">=</span> <span class="p">(</span><span class="n">M_downlw</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;</span> <span class="n">sdate</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">M_downlw</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">edate</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> 
-<span class="ne">---&gt; </span><span class="mi">11</span> <span class="n">cldfra</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;CLDFRA&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">z</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">cldfra_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cldfra</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">cldfra</span><span class="o">.</span><span class="n">Time</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">z</span><span class="p">)</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">21</span><span class="o">/</span><span class="n">bhksj_cn7zz43y8x0m4gsh0h0000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_68251</span><span class="o">/</span><span class="mf">2540130914.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span> 
+<span class="g g-Whitespace">     </span><span class="mi">67</span> <span class="c1">## swupb - upwelling shortwave radiation</span>
+<span class="ne">---&gt; </span><span class="mi">68</span> <span class="n">swupb_mod</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;SWUPB&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span> <span class="n">swupb_df_mod</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">swupb_mod</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">swupb_mod</span><span class="o">.</span><span class="n">Time</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 
 <span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/wrf/routines.py</span> in <span class="ni">getvar</span><span class="nt">(wrfin, varname, timeidx, method, squeeze, cache, meta, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">334</span>     <span class="k">if</span> <span class="n">is_standard_wrf_var</span><span class="p">(</span><span class="n">wrfin</span><span class="p">,</span> <span class="n">varname</span><span class="p">)</span> <span class="ow">and</span> <span class="n">varname</span> <span class="o">!=</span> <span class="s2">&quot;Times&quot;</span><span class="p">:</span>
@@ -1186,11 +1185,11 @@
 <span class="g g-Whitespace">   </span><span class="mi">2119</span>     <span class="k">elif</span> <span class="n">method</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;join&quot;</span><span class="p">:</span>
 
 <span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/wrf/util.py</span> in <span class="ni">_cat_files</span><span class="nt">(wrfseq, varname, timeidx, is_moving, squeeze, meta, _key)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1698</span>             <span class="k">if</span> <span class="n">xarray_enabled</span><span class="p">()</span> <span class="ow">and</span> <span class="n">meta</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1699</span>                 <span class="k">if</span> <span class="n">timename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">timecached</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1700</span>                     <span class="n">xtimedata</span> <span class="o">=</span> <span class="n">wrfnc</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">timename</span><span class="p">][:]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1701</span>                     <span class="n">outxtimes</span><span class="p">[</span><span class="n">startidx</span><span class="p">:</span><span class="n">endidx</span><span class="p">]</span> <span class="o">=</span> <span class="n">xtimedata</span><span class="p">[:]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1702</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1685</span>             <span class="k">break</span>
+<span class="g g-Whitespace">   </span><span class="mi">1686</span>         <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1687</span>             <span class="n">vardata</span> <span class="o">=</span> <span class="n">wrfnc</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">varname</span><span class="p">][:]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1688</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1689</span>             <span class="n">numtimes</span> <span class="o">=</span> <span class="n">vardata</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="nn">netCDF4/_netCDF4.pyx</span> in <span class="ni">netCDF4._netCDF4.Variable.__getitem__</span><span class="nt">()</span>
 
@@ -1608,14 +1607,14 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
-#T_7054e_row0_col0, #T_7054e_row0_col2, #T_7054e_row0_col4, #T_7054e_row0_col5, #T_7054e_row1_col1, #T_7054e_row1_col3 {
+#T_e1f99_row0_col0, #T_e1f99_row0_col2, #T_e1f99_row0_col4, #T_e1f99_row0_col5, #T_e1f99_row1_col1, #T_e1f99_row1_col3 {
   background-color: pink;
 }
-#T_7054e_row0_col1, #T_7054e_row0_col3, #T_7054e_row1_col0, #T_7054e_row1_col2, #T_7054e_row1_col4, #T_7054e_row1_col5 {
+#T_e1f99_row0_col1, #T_e1f99_row0_col3, #T_e1f99_row1_col0, #T_e1f99_row1_col2, #T_e1f99_row1_col4, #T_e1f99_row1_col5 {
   background-color: lightgreen;
 }
 </style>
-<table id="T_7054e_">
+<table id="T_e1f99_">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
@@ -1629,22 +1628,22 @@
   </thead>
   <tbody>
     <tr>
-      <th id="T_7054e_level0_row0" class="row_heading level0 row0" >unmodified</th>
-      <td id="T_7054e_row0_col0" class="data row0 col0" >0.000645</td>
-      <td id="T_7054e_row0_col1" class="data row0 col1" >0.004846</td>
-      <td id="T_7054e_row0_col2" class="data row0 col2" >0.091075</td>
-      <td id="T_7054e_row0_col3" class="data row0 col3" >0.006432</td>
-      <td id="T_7054e_row0_col4" class="data row0 col4" >0.885284</td>
-      <td id="T_7054e_row0_col5" class="data row0 col5" >0.883314</td>
+      <th id="T_e1f99_level0_row0" class="row_heading level0 row0" >unmodified</th>
+      <td id="T_e1f99_row0_col0" class="data row0 col0" >0.000645</td>
+      <td id="T_e1f99_row0_col1" class="data row0 col1" >0.004846</td>
+      <td id="T_e1f99_row0_col2" class="data row0 col2" >0.091075</td>
+      <td id="T_e1f99_row0_col3" class="data row0 col3" >0.006432</td>
+      <td id="T_e1f99_row0_col4" class="data row0 col4" >0.885284</td>
+      <td id="T_e1f99_row0_col5" class="data row0 col5" >0.883314</td>
     </tr>
     <tr>
-      <th id="T_7054e_level0_row1" class="row_heading level0 row1" >modified</th>
-      <td id="T_7054e_row1_col0" class="data row1 col0" >0.007810</td>
-      <td id="T_7054e_row1_col1" class="data row1 col1" >0.001159</td>
-      <td id="T_7054e_row1_col2" class="data row1 col2" >0.108260</td>
-      <td id="T_7054e_row1_col3" class="data row1 col3" >0.006431</td>
-      <td id="T_7054e_row1_col4" class="data row1 col4" >0.886173</td>
-      <td id="T_7054e_row1_col5" class="data row1 col5" >0.895837</td>
+      <th id="T_e1f99_level0_row1" class="row_heading level0 row1" >modified</th>
+      <td id="T_e1f99_row1_col0" class="data row1 col0" >0.007810</td>
+      <td id="T_e1f99_row1_col1" class="data row1 col1" >0.001159</td>
+      <td id="T_e1f99_row1_col2" class="data row1 col2" >0.108260</td>
+      <td id="T_e1f99_row1_col3" class="data row1 col3" >0.006431</td>
+      <td id="T_e1f99_row1_col4" class="data row1 col4" >0.886173</td>
+      <td id="T_e1f99_row1_col5" class="data row1 col5" >0.895837</td>
     </tr>
   </tbody>
 </table>
@@ -1667,9 +1666,9 @@
 <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">fns</span><span class="p">:</span>
     <span class="n">wrflist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">))</span>
     
-<span class="n">cldfra</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;CLDFRA&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
+<span class="c1">#cldfra = getvar(wrflist, &quot;CLDFRA&quot;, timeidx=ALL_TIMES, method=&quot;cat&quot;).mean(&#39;south_north&#39;).mean(&#39;west_east&#39;)</span>
 <span class="n">z</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
-<span class="n">cldfra_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cldfra</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">cldfra</span><span class="o">.</span><span class="n">Time</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">z</span><span class="p">)</span>
+<span class="c1">#cldfra_df = pd.DataFrame(cldfra.values, index = cldfra.Time.values, columns = z)</span>
 
 <span class="n">lh</span> <span class="o">=</span> <span class="n">getvar</span><span class="p">(</span><span class="n">wrflist</span><span class="p">,</span> <span class="s2">&quot;LH&quot;</span><span class="p">,</span> <span class="n">timeidx</span><span class="o">=</span><span class="n">ALL_TIMES</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;south_north&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;west_east&#39;</span><span class="p">)</span>
 <span class="n">lh_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lh</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">lh</span><span class="o">.</span><span class="n">Time</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
@@ -1985,21 +1984,21 @@
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Wind Speed (WRF)</span><span class="se">\n</span><span class="s1">Unmodified&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">myFmt</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">sounding_ws</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="s1">&#39;2015-05-24&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">sounding_ws</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="s1">&#39;2015-05-24&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
 
 <span class="n">heatmap</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">ws_df_mod</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">ws_df_mod</span><span class="o">.</span><span class="n">columns</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">ws_df_mod</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">levels</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Height (km)&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Modified&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">myFmt</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">sounding_ws</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="s1">&#39;2015-05-24&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">sounding_ws</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="s1">&#39;2015-05-24&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
 
 <span class="n">heatmap_1</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">ws_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">ws_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">ws_df</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">values</span> <span class="o">-</span> <span class="n">ws_df_mod</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Height (km)&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Difference in Wind Speed (unmod - mod)&#39;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">myFmt</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">sounding_ws</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="s1">&#39;2015-05-24&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">sounding_ws</span><span class="p">[</span><span class="n">sdate</span><span class="p">:</span><span class="s1">&#39;2015-05-24&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">heatmap</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
@@ -2132,14 +2131,14 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
-#T_89da4_row0_col0, #T_89da4_row0_col1, #T_89da4_row0_col2, #T_89da4_row0_col3, #T_89da4_row1_col4, #T_89da4_row1_col5 {
+#T_7c268_row0_col0, #T_7c268_row0_col1, #T_7c268_row0_col2, #T_7c268_row0_col3, #T_7c268_row1_col4, #T_7c268_row1_col5 {
   background-color: lightgreen;
 }
-#T_89da4_row0_col4, #T_89da4_row0_col5, #T_89da4_row1_col0, #T_89da4_row1_col1, #T_89da4_row1_col2, #T_89da4_row1_col3 {
+#T_7c268_row0_col4, #T_7c268_row0_col5, #T_7c268_row1_col0, #T_7c268_row1_col1, #T_7c268_row1_col2, #T_7c268_row1_col3 {
   background-color: pink;
 }
 </style>
-<table id="T_89da4_">
+<table id="T_7c268_">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
@@ -2153,22 +2152,22 @@
   </thead>
   <tbody>
     <tr>
-      <th id="T_89da4_level0_row0" class="row_heading level0 row0" >unmodified</th>
-      <td id="T_89da4_row0_col0" class="data row0 col0" >0.019199</td>
-      <td id="T_89da4_row0_col1" class="data row0 col1" >0.399344</td>
-      <td id="T_89da4_row0_col2" class="data row0 col2" >0.142917</td>
-      <td id="T_89da4_row0_col3" class="data row0 col3" >0.011557</td>
-      <td id="T_89da4_row0_col4" class="data row0 col4" >0.801807</td>
-      <td id="T_89da4_row0_col5" class="data row0 col5" >0.803250</td>
+      <th id="T_7c268_level0_row0" class="row_heading level0 row0" >unmodified</th>
+      <td id="T_7c268_row0_col0" class="data row0 col0" >0.019199</td>
+      <td id="T_7c268_row0_col1" class="data row0 col1" >0.399344</td>
+      <td id="T_7c268_row0_col2" class="data row0 col2" >0.142917</td>
+      <td id="T_7c268_row0_col3" class="data row0 col3" >0.011557</td>
+      <td id="T_7c268_row0_col4" class="data row0 col4" >0.801807</td>
+      <td id="T_7c268_row0_col5" class="data row0 col5" >0.803250</td>
     </tr>
     <tr>
-      <th id="T_89da4_level0_row1" class="row_heading level0 row1" >modified</th>
-      <td id="T_89da4_row1_col0" class="data row1 col0" >0.018927</td>
-      <td id="T_89da4_row1_col1" class="data row1 col1" >0.390447</td>
-      <td id="T_89da4_row1_col2" class="data row1 col2" >0.070061</td>
-      <td id="T_89da4_row1_col3" class="data row1 col3" >0.001145</td>
-      <td id="T_89da4_row1_col4" class="data row1 col4" >0.821090</td>
-      <td id="T_89da4_row1_col5" class="data row1 col5" >0.840806</td>
+      <th id="T_7c268_level0_row1" class="row_heading level0 row1" >modified</th>
+      <td id="T_7c268_row1_col0" class="data row1 col0" >0.018927</td>
+      <td id="T_7c268_row1_col1" class="data row1 col1" >0.390447</td>
+      <td id="T_7c268_row1_col2" class="data row1 col2" >0.070061</td>
+      <td id="T_7c268_row1_col3" class="data row1 col3" >0.001145</td>
+      <td id="T_7c268_row1_col4" class="data row1 col4" >0.821090</td>
+      <td id="T_7c268_row1_col5" class="data row1 col5" >0.840806</td>
     </tr>
   </tbody>
 </table>
@@ -2192,14 +2191,14 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
-#T_c0942_row0_col0, #T_c0942_row0_col1, #T_c0942_row0_col4, #T_c0942_row0_col5, #T_c0942_row1_col2, #T_c0942_row1_col3 {
+#T_ce88e_row0_col0, #T_ce88e_row0_col1, #T_ce88e_row0_col4, #T_ce88e_row0_col5, #T_ce88e_row1_col2, #T_ce88e_row1_col3 {
   background-color: pink;
 }
-#T_c0942_row0_col2, #T_c0942_row0_col3, #T_c0942_row1_col0, #T_c0942_row1_col1, #T_c0942_row1_col4, #T_c0942_row1_col5 {
+#T_ce88e_row0_col2, #T_ce88e_row0_col3, #T_ce88e_row1_col0, #T_ce88e_row1_col1, #T_ce88e_row1_col4, #T_ce88e_row1_col5 {
   background-color: lightgreen;
 }
 </style>
-<table id="T_c0942_">
+<table id="T_ce88e_">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
@@ -2213,22 +2212,22 @@
   </thead>
   <tbody>
     <tr>
-      <th id="T_c0942_level0_row0" class="row_heading level0 row0" >unmodified</th>
-      <td id="T_c0942_row0_col0" class="data row0 col0" >0.007632</td>
-      <td id="T_c0942_row0_col1" class="data row0 col1" >0.145286</td>
-      <td id="T_c0942_row0_col2" class="data row0 col2" >0.315652</td>
-      <td id="T_c0942_row0_col3" class="data row0 col3" >0.209108</td>
-      <td id="T_c0942_row0_col4" class="data row0 col4" >0.843545</td>
-      <td id="T_c0942_row0_col5" class="data row0 col5" >0.843282</td>
+      <th id="T_ce88e_level0_row0" class="row_heading level0 row0" >unmodified</th>
+      <td id="T_ce88e_row0_col0" class="data row0 col0" >0.007632</td>
+      <td id="T_ce88e_row0_col1" class="data row0 col1" >0.145286</td>
+      <td id="T_ce88e_row0_col2" class="data row0 col2" >0.315652</td>
+      <td id="T_ce88e_row0_col3" class="data row0 col3" >0.209108</td>
+      <td id="T_ce88e_row0_col4" class="data row0 col4" >0.843545</td>
+      <td id="T_ce88e_row0_col5" class="data row0 col5" >0.843282</td>
     </tr>
     <tr>
-      <th id="T_c0942_level0_row1" class="row_heading level0 row1" >modified</th>
-      <td id="T_c0942_row1_col0" class="data row1 col0" >0.009108</td>
-      <td id="T_c0942_row1_col1" class="data row1 col1" >0.147682</td>
-      <td id="T_c0942_row1_col2" class="data row1 col2" >0.307759</td>
-      <td id="T_c0942_row1_col3" class="data row1 col3" >0.205637</td>
-      <td id="T_c0942_row1_col4" class="data row1 col4" >0.853632</td>
-      <td id="T_c0942_row1_col5" class="data row1 col5" >0.868321</td>
+      <th id="T_ce88e_level0_row1" class="row_heading level0 row1" >modified</th>
+      <td id="T_ce88e_row1_col0" class="data row1 col0" >0.009108</td>
+      <td id="T_ce88e_row1_col1" class="data row1 col1" >0.147682</td>
+      <td id="T_ce88e_row1_col2" class="data row1 col2" >0.307759</td>
+      <td id="T_ce88e_row1_col3" class="data row1 col3" >0.205637</td>
+      <td id="T_ce88e_row1_col4" class="data row1 col4" >0.853632</td>
+      <td id="T_ce88e_row1_col5" class="data row1 col5" >0.868321</td>
     </tr>
   </tbody>
 </table>
