@@ -380,21 +380,21 @@ axs[0].set_ylabel('Height (km)')
 axs[0].set_title('Wind Speed (WRF)\nUnmodified')
 axs[0].xaxis.set_major_formatter(myFmt)
 axs[0].set_ylim(0,2)
-axs[0].vlines(sounding_ws[sdate:'2015-02-06'].index, 0, 2, color = 'k', alpha = 0.75, lw = 3)
+axs[0].vlines(sounding_ws[sdate:'2015-02-06'].index, 0, 2, color = 'k', alpha = 0.25, lw = 3)
 
 heatmap = axs[1].contourf(ws_df_mod.index, ws_df_mod.columns / 1000, ws_df_mod.T.values, levels = 20)
 axs[1].set_ylabel('Height (km)')
 axs[1].set_title('Modified')
 axs[1].xaxis.set_major_formatter(myFmt)
 axs[1].set_ylim(0,2)
-axs[1].vlines(sounding_ws[sdate:'2015-02-06'].index, 0, 2, color = 'k', alpha = 0.75, lw = 3)
+axs[1].vlines(sounding_ws[sdate:'2015-02-06'].index, 0, 2, color = 'k', alpha = 0.25, lw = 3)
 
 heatmap_1 = axs[2].contourf(ws_df_mod.index, ws_df.columns / 1000, ws_df.T.values[:,:-2] - ws_df_mod.T.values, levels = 20)
 axs[2].set_ylabel('Height (km)')
 axs[2].set_title('Difference in Wind Speed (unmod - mod)')
 axs[2].xaxis.set_major_formatter(myFmt)
 axs[2].set_ylim(0,2)
-axs[2].vlines(sounding_ws[sdate:'2015-02-06'].index, 0, 2, color = 'k', alpha = 0.75, lw = 3)
+axs[2].vlines(sounding_ws[sdate:'2015-02-06'].index, 0, 2, color = 'k', alpha = 0.25, lw = 3)
 
 plt.tight_layout()
 cbar = fig.colorbar(heatmap, ax=axs[0:2])
@@ -522,9 +522,9 @@ edate = '2015-05-04'
 
 sebmask = (M_downlw.index > sdate) & (M_downlw.index < edate)
 
-cldfra = getvar(wrflist, "CLDFRA", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
+#cldfra = getvar(wrflist, "CLDFRA", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
 z = getvar(wrflist, "z").mean('south_north').mean('west_east')
-cldfra_df = pd.DataFrame(cldfra.values, index = cldfra.Time.values, columns = z)
+#cldfra_df = pd.DataFrame(cldfra.values, index = cldfra.Time.values, columns = z)
 
 lh = getvar(wrflist, "LH", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
 lh_df = pd.DataFrame(lh.values, index = lh.Time.values)
@@ -554,9 +554,9 @@ wrflist = list()
 for fn in fns:
     wrflist.append(Dataset(fn))
 
-cldfra_mod = getvar(wrflist, "CLDFRA", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
+#cldfra_mod = getvar(wrflist, "CLDFRA", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
 z_mod = getvar(wrflist, "z").mean('south_north').mean('west_east')
-cldfra_df_mod = pd.DataFrame(cldfra_mod.values, index = cldfra_mod.Time.values, columns = z_mod)
+#cldfra_df_mod = pd.DataFrame(cldfra_mod.values, index = cldfra_mod.Time.values, columns = z_mod)
 
 ## lh - latent heat flux
 lh_mod = getvar(wrflist, "LH", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
@@ -963,9 +963,9 @@ wrflist = list()
 for fn in fns:
     wrflist.append(Dataset(fn))
     
-cldfra = getvar(wrflist, "CLDFRA", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
+#cldfra = getvar(wrflist, "CLDFRA", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
 z = getvar(wrflist, "z").mean('south_north').mean('west_east')
-cldfra_df = pd.DataFrame(cldfra.values, index = cldfra.Time.values, columns = z)
+#cldfra_df = pd.DataFrame(cldfra.values, index = cldfra.Time.values, columns = z)
 
 lh = getvar(wrflist, "LH", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
 lh_df = pd.DataFrame(lh.values, index = lh.Time.values)
@@ -1260,21 +1260,21 @@ axs[0].set_ylabel('Height (km)')
 axs[0].set_title('Wind Speed (WRF)\nUnmodified')
 axs[0].xaxis.set_major_formatter(myFmt)
 axs[0].set_ylim(0,2)
-axs[0].vlines(sounding_ws[sdate:'2015-05-24'].index, 0, 2, color = 'k', alpha = 0.75, lw = 3)
+axs[0].vlines(sounding_ws[sdate:'2015-05-24'].index, 0, 2, color = 'k', alpha = 0.25, lw = 3)
 
 heatmap = axs[1].contourf(ws_df_mod.index, ws_df_mod.columns / 1000, ws_df_mod.T.values, levels = 20)
 axs[1].set_ylabel('Height (km)')
 axs[1].set_title('Modified')
 axs[1].xaxis.set_major_formatter(myFmt)
 axs[1].set_ylim(0,2)
-axs[1].vlines(sounding_ws[sdate:'2015-05-24'].index, 0, 2, color = 'k', alpha = 0.75, lw = 3)
+axs[1].vlines(sounding_ws[sdate:'2015-05-24'].index, 0, 2, color = 'k', alpha = 0.25, lw = 3)
 
 heatmap_1 = axs[2].contourf(ws_df.index, ws_df.columns / 1000, ws_df.T.values - ws_df_mod.T.values)
 axs[2].set_ylabel('Height (km)')
 axs[2].set_title('Difference in Wind Speed (unmod - mod)')
 axs[2].xaxis.set_major_formatter(myFmt)
 axs[2].set_ylim(0,2)
-axs[2].vlines(sounding_ws[sdate:'2015-05-24'].index, 0, 2, color = 'k', alpha = 0.75, lw = 3)
+axs[2].vlines(sounding_ws[sdate:'2015-05-24'].index, 0, 2, color = 'k', alpha = 0.25, lw = 3)
 
 plt.tight_layout()
 cbar = fig.colorbar(heatmap, ax=axs[0:2])
