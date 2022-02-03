@@ -59,6 +59,19 @@ M_sen = -pd.DataFrame(Measurements_seb.variables['surface_downward_sensible_heat
 ### Temperature 
 T_meas = pd.read_excel('/Users/smurphy/Documents/PhD/datasets/nice_data/Ts.xlsx', index_col = 0)
 
+## Soundings
+MeasSoundings = xr.open_dataset('/Users/smurphy/all_datasets/nice_published_datasets/rsData_gridded.nc')
+MeasSoundings_Times = pd.read_fwf('/Users/smurphy/all_datasets/nice_published_datasets/rsData_gridded_dates.txt', header = None)
+
+MeasSoundings_Times.columns = ['year','month','day','hour','minute','second']
+MeasSoundings_Times.index = pd.to_datetime(MeasSoundings_Times[['year', 'month', 'day', 'hour', 'minute', 'second']])
+
+sounding_t = pd.DataFrame(MeasSoundings['temp'].values, index = MeasSoundings_Times.index, columns = MeasSoundings['height'].values)
+
+sounding_rh = pd.DataFrame(MeasSoundings['rh'].values, index = MeasSoundings_Times.index, columns = MeasSoundings['height'].values)
+
+sounding_ws = pd.DataFrame(MeasSoundings['ws'].values, index = MeasSoundings_Times.index, columns = MeasSoundings['height'].values)
+
 # Set date format for plots throughout the notebook
 myFmt = DateFormatter("%m/%d \n %H:%M:%S")
 
@@ -167,6 +180,8 @@ cst_sh = wrfstat['CST_SH']
 cst_lh = wrfstat['CST_LH']
 cst_time = wrfstat['Times']
 csp_z = wrfstat['CSP_Z']
+csp_u = wrfstat['CSP_U']
+csp_v = wrfstat['CSP_V']
 qc = pd.DataFrame(cst_qc.values, 
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
@@ -176,6 +191,14 @@ lh_df = pd.DataFrame(cst_lh.values,
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), columns = ['lh'])
 tsk_df = pd.DataFrame(cst_tsk.values, 
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), columns = ['tsk'])
+u_df = pd.DataFrame(csp_u.values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+v_df = pd.DataFrame(csp_v.values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+ws_df = np.sqrt(v_df**2 + u_df**2)
+
 
 wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/landusetbl_modifications/1ClearWinter_000101/wrfstat_d01_2015-02-04_00:00:00')
 cst_qc = wrfstat['CSP_QC']
@@ -184,6 +207,8 @@ cst_sh = wrfstat['CST_SH']
 cst_lh = wrfstat['CST_LH']
 cst_time = wrfstat['Times']
 csp_z = wrfstat['CSP_Z']
+csp_u = wrfstat['CSP_U']
+csp_v = wrfstat['CSP_V']
 qc_mod = pd.DataFrame(cst_qc.values, 
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
@@ -193,6 +218,13 @@ lh_df_mod = pd.DataFrame(cst_lh.values,
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), columns = ['lh'])
 tsk_df_mod = pd.DataFrame(cst_tsk.values, 
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), columns = ['tsk'])
+u_df_mod = pd.DataFrame(csp_u.values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+v_df_mod = pd.DataFrame(csp_v.values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+ws_df_mod = np.sqrt(v_df_mod**2 + u_df_mod**2)
 
 
 # ## Clouds
@@ -336,9 +368,74 @@ plt.tight_layout()
 plt.show()
 
 
-# ## Skin Temperature
+# ## Wind Speed
 
 # In[8]:
+
+
+fig, axs = plt.subplots(3, figsize=(10,7))
+
+heatmap = axs[0].contourf(ws_df_mod.index, ws_df.columns / 1000, ws_df.T.values[:,:-2], levels = 20)
+axs[0].set_ylabel('Height (km)')
+axs[0].set_title('Wind Speed (WRF)\nUnmodified')
+axs[0].xaxis.set_major_formatter(myFmt)
+axs[0].set_ylim(0,2)
+axs[0].vlines(sounding_ws[sdate:'2015-02-06'].index, 0, 2, color = 'k', alpha = 0.75, lw = 3)
+
+heatmap = axs[1].contourf(ws_df_mod.index, ws_df_mod.columns / 1000, ws_df_mod.T.values, levels = 20)
+axs[1].set_ylabel('Height (km)')
+axs[1].set_title('Modified')
+axs[1].xaxis.set_major_formatter(myFmt)
+axs[1].set_ylim(0,2)
+axs[1].vlines(sounding_ws[sdate:'2015-02-06'].index, 0, 2, color = 'k', alpha = 0.75, lw = 3)
+
+heatmap_1 = axs[2].contourf(ws_df_mod.index, ws_df.columns / 1000, ws_df.T.values[:,:-2] - ws_df_mod.T.values, levels = 20)
+axs[2].set_ylabel('Height (km)')
+axs[2].set_title('Difference in Wind Speed (unmod - mod)')
+axs[2].xaxis.set_major_formatter(myFmt)
+axs[2].set_ylim(0,2)
+axs[2].vlines(sounding_ws[sdate:'2015-02-06'].index, 0, 2, color = 'k', alpha = 0.75, lw = 3)
+
+plt.tight_layout()
+cbar = fig.colorbar(heatmap, ax=axs[0:2])
+cbar.set_label('Wind Speed ($m/s$)')
+
+cbar = fig.colorbar(heatmap_1, ax=axs[2])
+cbar.set_label('Wind Speed Difference ($m/s$)')
+
+plt.show()
+
+
+# In[9]:
+
+
+dates = sounding_ws[sdate:'2015-02-06'].index
+fig, axs = plt.subplots(ncols = len(dates), figsize=(15,5))
+
+for i in np.arange(0, len(dates), 1):
+    prof = axs[i].plot(sounding_ws.loc[dates[i]], sounding_ws.loc[dates[i]].index / 1000, label = 'Measurements')
+    axs[i].set_ylim(0, 2)
+    axs[i].grid()
+    axs[i].set_xlim(0, 50)
+    axs[i].set_xlabel('Wind Speed ($m/s$)')
+    axs[i].set_title(dates[i].strftime('%m/%d') + '\n' + dates[i].strftime('%H:%M:%S'))
+    
+    axs[i].plot(ws_df.iloc[ws_df.index.get_loc(dates[i], method = 'nearest')], ws_df.iloc[ws_df.index.get_loc(dates[0], method = 'nearest')].index / 1000, label = 'Unmodified', alpha = 0.75)
+    axs[i].plot(ws_df_mod.iloc[ws_df_mod.index.get_loc(dates[i], method = 'nearest')], ws_df_mod.iloc[ws_df_mod.index.get_loc(dates[0], method = 'nearest')].index / 1000, '--', label = 'Modified', alpha = 0.75, lw = 2)
+
+axs[0].set_ylabel('Height ($km$)')
+plt.suptitle('Vertical Wind Profiles', fontsize = 15)
+plt.tight_layout()
+
+handles, labels = axs[0].get_legend_handles_labels()
+fig.legend(handles, labels, loc='upper right', ncol = 3)
+
+plt.show()
+
+
+# ## Skin Temperature
+
+# In[10]:
 
 
 plt.figure(figsize = (10,3.5))
@@ -360,7 +457,7 @@ plt.show()
 # ## Summary Table
 # Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
 
-# In[9]:
+# In[11]:
 
 
 edate = '2015-02-06 21:00:00'
@@ -395,7 +492,7 @@ shs['unmodified'] = sh_df[sdate:edate]
 shs['modified'] = sh_df_mod[sdate:edate]
 
 
-# In[10]:
+# In[12]:
 
 
 correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
@@ -412,7 +509,7 @@ r_squared[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(
 
 # # Case 2 - Spring Cloudy
 
-# In[11]:
+# In[13]:
 
 
 fns = glob('/Volumes/seagate_desktop/idealized/case4/000101/wrfo*')
@@ -486,7 +583,7 @@ swupb_mod = getvar(wrflist, "SWUPB", timeidx=ALL_TIMES, method="cat").mean('sout
 swupb_df_mod = pd.DataFrame(swupb_mod.values, index = swupb_mod.Time.values)
 
 
-# In[12]:
+# In[14]:
 
 
 wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/case4/000101/wrfstat_d01_2015-05-02_00:00:00')
@@ -496,6 +593,8 @@ cst_sh = wrfstat['CST_SH']
 cst_lh = wrfstat['CST_LH']
 cst_time = wrfstat['Times']
 csp_z = wrfstat['CSP_Z']
+csp_u = wrfstat['CSP_U']
+csp_v = wrfstat['CSP_V']
 qc = pd.DataFrame(cst_qc.values, 
                   index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 19:30:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
@@ -505,6 +604,13 @@ lh_df = pd.DataFrame(cst_lh.values,
                   index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 19:30:00', freq = '30min'), columns = ['lh'])
 tsk_df = pd.DataFrame(cst_tsk.values, 
                   index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 19:30:00', freq = '30min'), columns = ['tsk'])
+u_df = pd.DataFrame(csp_u.values, 
+                  index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 19:30:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+v_df = pd.DataFrame(csp_v.values, 
+                  index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 19:30:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+ws_df = np.sqrt(v_df**2 + u_df**2)
 
 wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/landusetbl_modifications/2CloudySpring_000101/wrfstat_d01_2015-05-02_00:00:00')
 cst_qc = wrfstat['CSP_QC']
@@ -513,6 +619,8 @@ cst_sh = wrfstat['CST_SH']
 cst_lh = wrfstat['CST_LH']
 cst_time = wrfstat['Times']
 csp_z = wrfstat['CSP_Z']
+csp_u = wrfstat['CSP_U']
+csp_v = wrfstat['CSP_V']
 qc_mod = pd.DataFrame(cst_qc.values, 
                   index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 22:30:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
@@ -522,11 +630,18 @@ lh_df_mod = pd.DataFrame(cst_lh.values,
                   index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 22:30:00', freq = '30min'), columns = ['lh'])
 tsk_df_mod = pd.DataFrame(cst_tsk.values, 
                   index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 22:30:00', freq = '30min'), columns = ['tsk'])
+u_df_mod = pd.DataFrame(csp_u.values, 
+                  index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 22:30:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+v_df_mod = pd.DataFrame(csp_v.values, 
+                  index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 22:30:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+ws_df_mod = np.sqrt(v_df_mod**2 + u_df_mod**2)
 
 
 # ## Clouds
 
-# In[13]:
+# In[15]:
 
 
 fig, axs = plt.subplots(2, figsize=(10,7))
@@ -554,7 +669,7 @@ cbar.set_label('Cloud Water Mixing Ratio (g/kg)')
 plt.show()
 
 
-# In[14]:
+# In[16]:
 
 
 fns = ['/Volumes/seagate_desktop/data/MPL/Robert_MPLData/FinalNICELidarData/NICE_MPLDataFinal20150502.cdf',
@@ -599,7 +714,7 @@ plt.show()
 
 # ## Sensible and Latent Heat Flux
 
-# In[15]:
+# In[17]:
 
 
 plt.figure(figsize = (10,7))
@@ -634,7 +749,7 @@ plt.show()
 
 # ## Longwave and Shortwave Radiation
 
-# In[16]:
+# In[18]:
 
 
 plt.figure(figsize = (15,7))
@@ -689,9 +804,76 @@ plt.tight_layout()
 plt.show()
 
 
+# ## Wind Speed
+
+# In[19]:
+
+
+fig, axs = plt.subplots(3, figsize=(10,7))
+levels = np.arange(0,10,0.5)
+
+heatmap = axs[0].contourf(ws_df.index, ws_df.columns / 1000, ws_df.T.values, levels = levels)
+axs[0].set_ylabel('Height (km)')
+axs[0].set_title('Wind Speed (WRF)\nUnmodified')
+axs[0].xaxis.set_major_formatter(myFmt)
+axs[0].set_ylim(0,2)
+axs[0].vlines(sounding_ws[sdate:'2015-05-04'].index, 0, 2, color = 'k', alpha = 0.25, lw = 3)
+
+heatmap = axs[1].contourf(ws_df.index, ws_df_mod.columns / 1000, ws_df_mod.T.values[:,:-6], levels = levels)
+axs[1].set_ylabel('Height (km)')
+axs[1].set_title('Modified')
+axs[1].xaxis.set_major_formatter(myFmt)
+axs[1].set_ylim(0,2)
+axs[1].vlines(sounding_ws[sdate:'2015-05-04'].index, 0, 2, color = 'k', alpha = 0.25, lw = 3)
+
+levels = np.arange(-2.5,2.5,0.1)
+heatmap_1 = axs[2].contourf(ws_df.index, ws_df.columns / 1000, ws_df.T.values - ws_df_mod.T.values[:,:-6], levels = levels)
+axs[2].set_ylabel('Height (km)')
+axs[2].set_title('Difference in Wind Speed (unmod - mod)')
+axs[2].xaxis.set_major_formatter(myFmt)
+axs[2].set_ylim(0,2)
+axs[2].vlines(sounding_ws[sdate:'2015-05-04'].index, 0, 2, color = 'k', alpha = 0.25, lw = 3)
+
+plt.tight_layout()
+cbar = fig.colorbar(heatmap, ax=axs[0:2])
+cbar.set_label('Wind Speed ($m/s$)')
+
+cbar = fig.colorbar(heatmap_1, ax=axs[2])
+cbar.set_label('Wind Speed Difference ($m/s$)')
+
+plt.show()
+
+
+# In[20]:
+
+
+dates = sounding_ws[sdate:'2015-05-04'].index
+fig, axs = plt.subplots(ncols = len(dates), figsize=(15,5))
+
+for i in np.arange(0, len(dates), 1):
+    prof = axs[i].plot(sounding_ws.loc[dates[i]], sounding_ws.loc[dates[i]].index / 1000, label = 'Measurements')
+    axs[i].set_ylim(0, 2)
+    axs[i].grid()
+    axs[i].set_xlim(0, 15)
+    axs[i].set_xlabel('Wind Speed ($m/s$)')
+    axs[i].set_title(dates[i].strftime('%m/%d') + '\n' + dates[i].strftime('%H:%M:%S'))
+    
+    axs[i].plot(ws_df.iloc[ws_df.index.get_loc(dates[i], method = 'nearest')], ws_df.iloc[ws_df.index.get_loc(dates[0], method = 'nearest')].index / 1000, label = 'Unmodified', alpha = 0.75)
+    axs[i].plot(ws_df_mod.iloc[ws_df_mod.index.get_loc(dates[i], method = 'nearest')], ws_df_mod.iloc[ws_df_mod.index.get_loc(dates[0], method = 'nearest')].index / 1000, '--', label = 'Modified', alpha = 0.75, lw = 2)
+
+axs[0].set_ylabel('Height ($km$)')
+plt.suptitle('Vertical Wind Profiles', fontsize = 15)
+plt.tight_layout()
+
+handles, labels = axs[0].get_legend_handles_labels()
+fig.legend(handles, labels, loc='upper right', ncol = 3)
+
+plt.show()
+
+
 # ## Skin Temperature
 
-# In[17]:
+# In[21]:
 
 
 plt.figure(figsize = (10,3.5))
@@ -713,7 +895,7 @@ plt.show()
 # 
 # Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
 
-# In[18]:
+# In[22]:
 
 
 edate = '2015-05-04 19:30:00'
@@ -748,7 +930,7 @@ shs['unmodified'] = sh_df[sdate:edate]
 shs['modified'] = sh_df_mod[sdate:edate]
 
 
-# In[19]:
+# In[23]:
 
 
 correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
@@ -767,7 +949,7 @@ r_squared[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(
 
 # # Case 3 - Spring Clear
 
-# In[20]:
+# In[24]:
 
 
 sdate = '2015-05-22'
@@ -846,16 +1028,18 @@ swupb_mod = getvar(wrflist, "SWUPB", timeidx=ALL_TIMES, method="cat").mean('sout
 swupb_df_mod = pd.DataFrame(swupb_mod.values, index = swupb_mod.Time.values)
 
 
-# In[21]:
+# In[25]:
 
 
-wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/case3/000101/wrfstat_d01_2015-05-22_00:00:00')
+wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/case3/000101/second_try/wrfstat_d01_2015-05-22_00:00:00')
 cst_qc = wrfstat['CSP_QC']
 cst_tsk = wrfstat['CST_TSK']
 cst_sh = wrfstat['CST_SH']
 cst_lh = wrfstat['CST_LH']
 cst_time = wrfstat['Times']
 csp_z = wrfstat['CSP_Z']
+csp_u = wrfstat['CSP_U']
+csp_v = wrfstat['CSP_V']
 qc = pd.DataFrame(cst_qc.values, 
                   index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
@@ -865,6 +1049,13 @@ lh_df = pd.DataFrame(cst_lh.values,
                   index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), columns = ['lh'])
 tsk_df = pd.DataFrame(cst_tsk.values, 
                   index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), columns = ['tsk'])
+u_df = pd.DataFrame(csp_u.values, 
+                  index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+v_df = pd.DataFrame(csp_v.values, 
+                  index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+ws_df = np.sqrt(v_df**2 + u_df**2)
 
 wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/landusetbl_modifications/3ClearSpring_000101/corrected_input/wrfstat_d01_2015-05-22_00:00:00')
 cst_qc = wrfstat['CSP_QC']
@@ -873,6 +1064,8 @@ cst_sh = wrfstat['CST_SH']
 cst_lh = wrfstat['CST_LH']
 cst_time = wrfstat['Times']
 csp_z = wrfstat['CSP_Z']
+csp_u = wrfstat['CSP_U']
+csp_v = wrfstat['CSP_V']
 qc_mod = pd.DataFrame(cst_qc.values, 
                   index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
@@ -882,11 +1075,18 @@ lh_df_mod = pd.DataFrame(cst_lh.values,
                   index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), columns = ['lh'])
 tsk_df_mod = pd.DataFrame(cst_tsk.values, 
                   index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), columns = ['tsk'])
+u_df_mod = pd.DataFrame(csp_u.values, 
+                  index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+v_df_mod = pd.DataFrame(csp_v.values, 
+                  index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+ws_df_mod = np.sqrt(v_df_mod**2 + u_df_mod**2)
 
 
 # ## Clouds
 
-# In[22]:
+# In[26]:
 
 
 fig, axs = plt.subplots(2, figsize=(10,7))
@@ -913,7 +1113,7 @@ cbar.set_label('Cloud Water Mixing Ratio (g/kg)')
 plt.show()
 
 
-# In[23]:
+# In[27]:
 
 
 fns = ['/Volumes/seagate_desktop/data/MPL/Robert_MPLData/FinalNICELidarData/NICE_MPLDataFinal20150522.cdf',
@@ -958,7 +1158,7 @@ plt.show()
 
 # ## Sensible and Latent Heat Flux
 
-# In[24]:
+# In[28]:
 
 
 plt.figure(figsize = (10,7))
@@ -993,7 +1193,7 @@ plt.show()
 
 # ## Longwave and Shortwave Radiation
 
-# In[25]:
+# In[29]:
 
 
 plt.figure(figsize = (15,7))
@@ -1048,10 +1248,95 @@ plt.tight_layout()
 plt.show()
 
 
-# ## Summary Table
+# ## Wind Speed
+
+# In[30]:
+
+
+fig, axs = plt.subplots(3, figsize=(10,7))
+
+heatmap = axs[0].contourf(ws_df.index, ws_df.columns / 1000, ws_df.T.values, levels = 20)
+axs[0].set_ylabel('Height (km)')
+axs[0].set_title('Wind Speed (WRF)\nUnmodified')
+axs[0].xaxis.set_major_formatter(myFmt)
+axs[0].set_ylim(0,2)
+axs[0].vlines(sounding_ws[sdate:'2015-05-24'].index, 0, 2, color = 'k', alpha = 0.75, lw = 3)
+
+heatmap = axs[1].contourf(ws_df_mod.index, ws_df_mod.columns / 1000, ws_df_mod.T.values, levels = 20)
+axs[1].set_ylabel('Height (km)')
+axs[1].set_title('Modified')
+axs[1].xaxis.set_major_formatter(myFmt)
+axs[1].set_ylim(0,2)
+axs[1].vlines(sounding_ws[sdate:'2015-05-24'].index, 0, 2, color = 'k', alpha = 0.75, lw = 3)
+
+heatmap_1 = axs[2].contourf(ws_df.index, ws_df.columns / 1000, ws_df.T.values - ws_df_mod.T.values)
+axs[2].set_ylabel('Height (km)')
+axs[2].set_title('Difference in Wind Speed (unmod - mod)')
+axs[2].xaxis.set_major_formatter(myFmt)
+axs[2].set_ylim(0,2)
+axs[2].vlines(sounding_ws[sdate:'2015-05-24'].index, 0, 2, color = 'k', alpha = 0.75, lw = 3)
+
+plt.tight_layout()
+cbar = fig.colorbar(heatmap, ax=axs[0:2])
+cbar.set_label('Wind Speed ($m/s$)')
+
+cbar = fig.colorbar(heatmap_1, ax=axs[2])
+cbar.set_label('Wind Speed Difference ($m/s$)')
+
+plt.show()
+
+
+# In[31]:
+
+
+dates = sounding_ws[sdate:'2015-05-25'].index
+fig, axs = plt.subplots(ncols = len(dates), figsize=(15,5))
+
+for i in np.arange(0, len(dates), 1):
+    prof = axs[i].plot(sounding_ws.loc[dates[i]], sounding_ws.loc[dates[i]].index / 1000, label = 'Measurements')
+    axs[i].set_ylim(0, 2)
+    axs[i].grid()
+    axs[i].set_xlim(0, 25)
+    axs[i].set_xlabel('Wind Speed ($m/s$)')
+    axs[i].set_title(dates[i].strftime('%m/%d') + '\n' + dates[i].strftime('%H:%M:%S'))
+    
+    axs[i].plot(ws_df.iloc[ws_df.index.get_loc(dates[i], method = 'nearest')], ws_df.iloc[ws_df.index.get_loc(dates[0], method = 'nearest')].index / 1000, label = 'Unmodified', alpha = 0.75)
+    axs[i].plot(ws_df_mod.iloc[ws_df_mod.index.get_loc(dates[i], method = 'nearest')], ws_df_mod.iloc[ws_df_mod.index.get_loc(dates[0], method = 'nearest')].index / 1000, '--', label = 'Modified', alpha = 0.75, lw = 2)
+
+axs[0].set_ylabel('Height ($km$)')
+plt.suptitle('Vertical Wind Profiles', fontsize = 15)
+plt.tight_layout()
+
+handles, labels = axs[0].get_legend_handles_labels()
+fig.legend(handles, labels, loc='upper right', ncol = 3)
+
+plt.show()
+
+
+# ## Temperature
+
+# In[32]:
+
+
+plt.figure(figsize = (10,3.5))
+plt.plot(tsk_df, 'o', alpha = 0.5)
+plt.plot(tsk_df_mod, 'o', alpha = 0.5)
+plt.plot(T_meas[sdate:edate].resample('30min').first(), 'o', alpha = 0.5, color = 'k')
+plt.ylabel('Temperature $(K)$')
+plt.title('Skin Temperature')
+plt.grid()
+plt.legend(['Idealized WRF, Unmodified', 'Idealized WRF, Modified', 'Measurements'])
+plt.ylim(255,265)
+plt.xlim(M_downlw[sdate:edate].index[0],M_downlw[sdate:edate].index[-1])
+plt.gca().xaxis.set_major_formatter(myFmt)
+plt.tight_layout()
+plt.show()
+
+
+# # Summary Table
 # Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
 
-# In[26]:
+# In[33]:
 
 
 edate = '2015-05-24 22:30:00'
@@ -1086,7 +1371,7 @@ shs['unmodified'] = sh_df[sdate:edate]
 shs['modified'] = sh_df_mod[sdate:edate]
 
 
-# In[27]:
+# In[34]:
 
 
 correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
@@ -1105,7 +1390,7 @@ r_squared[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(
 
 # ## Statistics and Summary
 
-# In[28]:
+# In[35]:
 
 
 mean_cc = (cc_3.iloc[:,0:4] + cc_2.iloc[:,0:4] + cc_1)/3
@@ -1117,10 +1402,4 @@ mean_rs_sw = ((rs_3.iloc[:,4:6] + rs_2.iloc[:,4:6])/2)
 mean_rs = pd.concat([mean_rs, mean_rs_sw], axis=1, join="inner")
 
 mean_rs[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(color = 'pink', axis = 0)
-
-
-# In[ ]:
-
-
-
 

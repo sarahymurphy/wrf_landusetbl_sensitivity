@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Calculations &#8212; Land Surface Model Table Review</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
@@ -22,8 +23,8 @@
       
 
     
-    <link rel="stylesheet" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -33,20 +34,19 @@
     
   <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -103,6 +103,16 @@
  <li class="toctree-l1">
   <a class="reference internal" href="summary.html">
    Summary and Recommendations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sensitivity.html">
+   Sensitivity Study Setup
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sensitivity_ideal.html">
+   Idealized Sensitivity Study
   </a>
  </li>
  <li class="toctree-l1">
@@ -325,9 +335,9 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="calculations">
+  <section class="tex2jax_ignore mathjax_ignore" id="calculations">
 <h1>Calculations<a class="headerlink" href="#calculations" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="surface-roughness-length">
+<section id="surface-roughness-length">
 <h2>Surface Roughness Length<a class="headerlink" href="#surface-roughness-length" title="Permalink to this headline">¶</a></h2>
 <div class="math notranslate nohighlight">
 \[ z_{0} = \frac{(z_{2}-z_{1})}{[exp(\frac{kU_{2}}{u*}) - exp(\frac{kU_{1}}{u*})]} \]</div>
@@ -425,21 +435,24 @@ Canopy height is defined as \)</span>0$ in our EddyPro runs <span id="id2">[<a c
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         z
-Jan  0.001
-Feb  0.001
-Mar  0.001
-Apr  0.001
-May  0.001
-Jun  0.001
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">21</span><span class="o">/</span><span class="n">bhksj_cn7zz43y8x0m4gsh0h0000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_61065</span><span class="o">/</span><span class="mf">2827172348.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">for</span> <span class="n">mon</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Jan&#39;</span><span class="p">,</span><span class="s1">&#39;Feb&#39;</span><span class="p">,</span><span class="s1">&#39;Mar&#39;</span><span class="p">,</span><span class="s1">&#39;Apr&#39;</span><span class="p">,</span><span class="s1">&#39;May&#39;</span><span class="p">,</span><span class="s1">&#39;Jun&#39;</span><span class="p">]:</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">path</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;/Volumes/509_data/EddyPro/Output/EddyPro_Runs/FDCorrected_Output/20hz/&#39;</span> <span class="o">+</span> <span class="n">mon</span> <span class="o">+</span> <span class="s1">&#39;/eddypro_sonic_essentials_*&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">5</span>     <span class="n">mean_rl</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> 
+<span class="g g-Whitespace">      </span><span class="mi">6</span>                           <span class="n">index_col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)[</span><span class="s1">&#39;roughness_length&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">roughness_length</span><span class="p">[</span><span class="n">mon</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">mean_rl</span><span class="p">]</span>
+
+<span class="ne">IndexError</span>: list index out of range
 </pre></div>
 </div>
 </div>
 </div>
 <p>So, I believe it’s safe to say we can be confident in my roughness length calculations.</p>
-</div>
+</section>
 <hr class="docutils" />
-<div class="section" id="surface-heat-capacity">
+<section id="surface-heat-capacity">
 <h2>Surface Heat Capacity<a class="headerlink" href="#surface-heat-capacity" title="Permalink to this headline">¶</a></h2>
 <p>Sea Ice Thermodynamics <span id="id3">[<a class="reference internal" href="references.html#id5">UCAR, 2017</a>]</span> equation 12</p>
 <div class="math notranslate nohighlight">
@@ -494,7 +507,7 @@ Jun  0.001
 </div>
 </div>
 </div>
-<div class="section" id="what-value-of-temperature-should-i-use">
+<section id="what-value-of-temperature-should-i-use">
 <h3>What value of temperature should I use?<a class="headerlink" href="#what-value-of-temperature-should-i-use" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -584,8 +597,8 @@ Jun  0.001
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="how-does-this-temperature-compare-to-the-surface-temperature-that-von-calculated">
+</section>
+<section id="how-does-this-temperature-compare-to-the-surface-temperature-that-von-calculated">
 <h3>How does this temperature compare to the surface temperature that Von calculated?<a class="headerlink" href="#how-does-this-temperature-compare-to-the-surface-temperature-that-von-calculated" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -672,8 +685,8 @@ Jun  0.001
 </div>
 </div>
 <p>This doesn’t change much, but I’ll use our valaues of surface temperature for the calculations.</p>
-</div>
-<div class="section" id="what-value-of-salinity-should-i-use">
+</section>
+<section id="what-value-of-salinity-should-i-use">
 <h3>What value of salinity should I use?<a class="headerlink" href="#what-value-of-salinity-should-i-use" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -712,7 +725,11 @@ Jun  0.001
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/calculations_19_0.png" src="_images/calculations_19_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/smurphy/opt/anaconda3/lib/python3.8/site-packages/numpy/core/_asarray.py:83: UserWarning: Warning: converting a masked element to nan.
+  return array(a, dtype, copy=False, order=order)
+</pre></div>
+</div>
+<img alt="_images/calculations_19_1.png" src="_images/calculations_19_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -731,8 +748,8 @@ Jun  0.001
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="calculating">
+</section>
+<section id="calculating">
 <h3>Calculating<a class="headerlink" href="#calculating" title="Permalink to this headline">¶</a></h3>
 <p>Before we calculate this, let’s remind ourselves of the equation:</p>
 <div class="math notranslate nohighlight">
@@ -814,11 +831,11 @@ Jun  0.001
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="can-we-trust-this-calculation">
+</section>
+<section id="can-we-trust-this-calculation">
 <h3>Can we trust this calculation?<a class="headerlink" href="#can-we-trust-this-calculation" title="Permalink to this headline">¶</a></h3>
 <p>First, let’s plot <span class="math notranslate nohighlight">\(\frac{L_{i}\mu S}{T^{2}}\)</span> since this is the correction term.</p>
-<div class="section" id="units">
+<section id="units">
 <h4>Units?<a class="headerlink" href="#units" title="Permalink to this headline">¶</a></h4>
 <p><span class="math notranslate nohighlight">\(\frac{\frac{J}{kg} \frac{K}{ppt} ppt}{K^{2}} = \frac{\frac{J}{kg}}{K} \)</span></p>
 <div class="cell docutils container">
@@ -1013,10 +1030,10 @@ Jun  0.001
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="albedo">
+</section>
+</section>
+</section>
+<section id="albedo">
 <h2>Albedo<a class="headerlink" href="#albedo" title="Permalink to this headline">¶</a></h2>
 <p>What is the exact albedo throughout the experiment? We used a value of .8 for the simulations, but what is the actual value for each season? We have these measurements from N-ICE.</p>
 <div class="cell docutils container">
@@ -1076,8 +1093,8 @@ Jun  0.001
 </div>
 </div>
 <p>So we could increase the surface albedo to <strong>0.86 in winter</strong> and <strong>0.81 in summer</strong></p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
