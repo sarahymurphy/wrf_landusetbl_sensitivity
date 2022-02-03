@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Sensitivity Study Setup &#8212; Land Surface Model Table Review</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
@@ -22,8 +23,8 @@
       
 
     
-    <link rel="stylesheet" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -33,27 +34,17 @@
     
   <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -61,7 +52,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Idealed Sensitivity Study" href="sensitivity_ideal.html" />
+    <link rel="next" title="Idealized Sensitivity Study" href="sensitivity_ideal.html" />
     <link rel="prev" title="Summary and Recommendations" href="summary.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -119,7 +110,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="sensitivity_ideal.html">
-   Idealed Sensitivity Study
+   Idealized Sensitivity Study
   </a>
  </li>
  <li class="toctree-l1">
@@ -291,18 +282,18 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="sensitivity-study-setup">
+  <section class="tex2jax_ignore mathjax_ignore" id="sensitivity-study-setup">
 <h1>Sensitivity Study Setup<a class="headerlink" href="#sensitivity-study-setup" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="current-plan">
+<section id="current-plan">
 <h2>Current Plan<a class="headerlink" href="#current-plan" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
 <li><p>Run an idealized case with the best idealized setup for all cases</p></li>
 <li><p>If I see an improvement for these cases, see if implementing this into polar WRF would work</p></li>
 </ol>
-</div>
-<div class="section" id="idealized">
+</section>
+<section id="idealized">
 <h2>Idealized<a class="headerlink" href="#idealized" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="cases-to-run">
+<section id="cases-to-run">
 <h3>Cases to run<a class="headerlink" href="#cases-to-run" title="Permalink to this headline">¶</a></h3>
 <ol class="simple">
 <li><p>Winter 1 - February 4, 5, and 6</p>
@@ -321,8 +312,8 @@
 </ul>
 </li>
 </ol>
-</div>
-<div class="section" id="namelist-settings">
+</section>
+<section id="namelist-settings">
 <h3>Namelist settings<a class="headerlink" href="#namelist-settings" title="Permalink to this headline">¶</a></h3>
 <p>The following is the physics and crm sections of the <code class="docutils literal notranslate"><span class="pre">namelist.input</span></code> files being used for the sensitivity study.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="p">&amp;</span>physics
@@ -391,8 +382,8 @@
 /
 </pre></div>
 </div>
-</div>
-<div class="section" id="model-setup">
+</section>
+<section id="model-setup">
 <h3>Model setup<a class="headerlink" href="#model-setup" title="Permalink to this headline">¶</a></h3>
 <p>Change the values of the USGS section of <code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code> from the following:</p>
 <blockquote>
@@ -413,13 +404,13 @@ WINTER <br />
 <p>Not for modifications to the <code class="docutils literal notranslate"><span class="pre">.TBL</span></code> files.</p>
 <p>I tested this by modifying the values in <code class="docutils literal notranslate"><span class="pre">LANDUSE.TBL</span></code> to all zero for the ‘Snow and Ice’ entry. This made the model crash as soon as it began to run, indicating that these changes did modify the model without recompilation.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 <hr class="docutils" />
-<div class="section" id="real">
+<section id="real">
 <h2>Real<a class="headerlink" href="#real" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -456,7 +447,7 @@ WINTER <br />
     <a class='right-next' id="next-link" href="sensitivity_ideal.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Idealed Sensitivity Study</p>
+        <p class="prev-next-title">Idealized Sensitivity Study</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
