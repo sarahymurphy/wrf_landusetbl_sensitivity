@@ -68,9 +68,49 @@ MeasSoundings_Times.index = pd.to_datetime(MeasSoundings_Times[['year', 'month',
 
 sounding_t = pd.DataFrame(MeasSoundings['temp'].values, index = MeasSoundings_Times.index, columns = MeasSoundings['height'].values)
 
-sounding_rh = pd.DataFrame(MeasSoundings['rh'].values, index = MeasSoundings_Times.index, columns = MeasSoundings['height'].values)
-
 sounding_ws = pd.DataFrame(MeasSoundings['ws'].values, index = MeasSoundings_Times.index, columns = MeasSoundings['height'].values)
+
+
+sfc_relative_humidity = pd.DataFrame(MeasSoundings['rh'].values, 
+                           index = MeasSoundings_Times.index, 
+                           columns = MeasSoundings['height'].astype(str))
+
+sfc_wind_direction = pd.DataFrame(MeasSoundings['wd'].values, 
+                           index = MeasSoundings_Times.index, 
+                           columns = MeasSoundings['height'].astype(str))
+
+sfc_wind_speed = pd.DataFrame(MeasSoundings['ws'].values, 
+                           index = MeasSoundings_Times.index, 
+                           columns = MeasSoundings['height'].astype(str))
+
+sfc_temperature = pd.DataFrame(MeasSoundings['temp'].values + 273.15, 
+                                index = MeasSoundings_Times.index, 
+                                columns = MeasSoundings['height'].astype(str))
+
+sfc_pressure = pd.DataFrame(MeasSoundings['press'].values, 
+                             index = MeasSoundings_Times.index, 
+                             columns = MeasSoundings['height'].astype(str))
+
+
+# Height above sea level (m)
+sfc_height = sfc_relative_humidity.index.values
+
+# Potential temperature (k)
+k = 2/7 # constent for potential temperature equation
+sfc_potential_temperature = sfc_temperature * (1000 / sfc_pressure) ** k
+
+# Mixing ratio (g/kg)
+# Using Clasius Clapperyon
+
+# Saturation vapor pressure #hPa
+sfc_saturation_vapor_pressure = 6.112 * np.exp(((17.67 * (sfc_temperature - 273.15)) / ((sfc_temperature - 273.15) + 243.5)))
+
+# Vapor pressure
+sfc_vapor_pressure = sfc_saturation_vapor_pressure * (sfc_relative_humidity / 100)
+
+# Mixing ratio g/kg
+sfc_mixing_ratio = 621.97 * (sfc_vapor_pressure / ((sfc_pressure) - sfc_vapor_pressure))
+sfc_mixing_ratio.index = sfc_mixing_ratio.index.to_pydatetime()
 
 # Set date format for plots throughout the notebook
 myFmt = DateFormatter("%m/%d \n %H:%M:%S")
@@ -81,53 +121,38 @@ myFmt = DateFormatter("%m/%d \n %H:%M:%S")
 # In[2]:
 
 
-# Finding all wrfout file
 fns = glob('/Volumes/seagate_desktop/idealized/case1/000101/wrfo*')
-
-# Creating an empty list to append to
 wrflist = list()
-
-# Opening the wrfout files and appending them to the empty list
 for fn in fns:
     wrflist.append(Dataset(fn))
-
+    
 # Defining start and end dates of case study
 sdate = '2015-02-04'
 edate = '2015-02-06' 
 
-# Creating a mask for the above start and end date to be used later
 sebmask = (M_downlw.index > sdate) & (M_downlw.index < edate)
 
-# Importing WRF variables
-#cldfra = getvar(wrflist, "QCLOUD", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
+#cldfra = getvar(wrflist, "CLDFRA", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
 z = getvar(wrflist, "z").mean('south_north').mean('west_east')
 #cldfra_df = pd.DataFrame(cldfra.values, index = cldfra.Time.values, columns = z)
 
-## lh - latent heat flux
 lh = getvar(wrflist, "LH", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
 lh_df = pd.DataFrame(lh.values, index = lh.Time.values)
 
-## sh - sensible heat flux
 sh = getvar(wrflist, "HFX", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
 sh_df = pd.DataFrame(sh.values, index = sh.Time.values)
 
-## lwdnb - downwelling longwave radiation
 lwdnb = getvar(wrflist, "LWDNB", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
 lwdnb_df = pd.DataFrame(lwdnb.values, index = lwdnb.Time.values)
 
-## lwupb - upwelling longwave radiation
 lwupb = getvar(wrflist, "LWUPB", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
 lwupb_df = pd.DataFrame(lwupb.values, index = lwupb.Time.values)
 
-## swdnb - downwelling shortwave radiation
 swdnb = getvar(wrflist, "SWDNB", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
 swdnb_df = pd.DataFrame(swdnb.values, index = swdnb.Time.values)
 
-## swupb - upwelling shortwave radiation
 swupb = getvar(wrflist, "SWUPB", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
 swupb_df = pd.DataFrame(swupb.values, index = swupb.Time.values)
-
-# MODIFIED
 
 # Finding all wrfout file
 fns = glob('/Volumes/seagate_desktop/idealized/landusetbl_modifications/1ClearWinter_000101/wrfo*')
@@ -139,9 +164,7 @@ wrflist = list()
 for fn in fns:
     wrflist.append(Dataset(fn))
 
-# Importing WRF variables
-## QCloud - Cloud Water Mixing Ratio is kg/kg
-#cldfra_mod = getvar(wrflist, "QCLOUD", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
+#cldfra_mod = getvar(wrflist, "CLDFRA", timeidx=ALL_TIMES, method="cat").mean('south_north').mean('west_east')
 z_mod = getvar(wrflist, "z").mean('south_north').mean('west_east')
 #cldfra_df_mod = pd.DataFrame(cldfra_mod.values, index = cldfra_mod.Time.values, columns = z_mod)
 
@@ -182,6 +205,13 @@ cst_time = wrfstat['Times']
 csp_z = wrfstat['CSP_Z']
 csp_u = wrfstat['CSP_U']
 csp_v = wrfstat['CSP_V']
+csv_qv = wrfstat["CSP_QV"]
+csv_swupf = wrfstat["CSP_SWUPF"]
+csv_swdnf = wrfstat["CSP_SWDNF"]
+csv_lwupf = wrfstat["CSP_LWUPF"]
+csv_lwdnf = wrfstat["CSP_LWDNF"]
+
+
 qc = pd.DataFrame(cst_qc.values, 
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
@@ -198,7 +228,18 @@ v_df = pd.DataFrame(csp_v.values,
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
 ws_df = np.sqrt(v_df**2 + u_df**2)
+qv_df = pd.DataFrame(csv_qv.values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
 
+swupb_df = pd.DataFrame(csv_swupf.sel(bottom_top = 0).values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), columns = ['sw'])
+swdnb_df = pd.DataFrame(csv_swdnf.sel(bottom_top = 0).values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), columns = ['sw'])
+lwupb_df = pd.DataFrame(csv_lwupf.sel(bottom_top = 0).values,
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), columns = ['lw'])
+lwdnb_df = pd.DataFrame(csv_lwdnf.sel(bottom_top = 0).values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), columns = ['lw'])
 
 wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/landusetbl_modifications/1ClearWinter_000101/wrfstat_d01_2015-02-04_00:00:00')
 cst_qc = wrfstat['CSP_QC']
@@ -209,6 +250,12 @@ cst_time = wrfstat['Times']
 csp_z = wrfstat['CSP_Z']
 csp_u = wrfstat['CSP_U']
 csp_v = wrfstat['CSP_V']
+csv_qv = wrfstat["CSP_QV"]
+csv_swupf = wrfstat["CSP_SWUPF"]
+csv_swdnf = wrfstat["CSP_SWDNF"]
+csv_lwupf = wrfstat["CSP_LWUPF"]
+csv_lwdnf = wrfstat["CSP_LWDNF"]
+
 qc_mod = pd.DataFrame(cst_qc.values, 
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
@@ -225,6 +272,17 @@ v_df_mod = pd.DataFrame(csp_v.values,
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
 ws_df_mod = np.sqrt(v_df_mod**2 + u_df_mod**2)
+qv_df_mod = pd.DataFrame(csv_qv.values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+swupb_df_mod = pd.DataFrame(csv_swupf.sel(bottom_top = 0).values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), columns = ['sw'])
+swdnb_df_mod = pd.DataFrame(csv_swdnf.sel(bottom_top = 0).values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), columns = ['sw'])
+lwupb_df_mod = pd.DataFrame(csv_lwupf.sel(bottom_top = 0).values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), columns = ['lw'])
+lwdnb_df_mod = pd.DataFrame(csv_lwdnf.sel(bottom_top = 0).values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), columns = ['lw'])
 
 
 # ## Clouds
@@ -398,7 +456,7 @@ axs[2].vlines(sounding_ws[sdate:'2015-02-06'].index, 0, 2, color = 'k', alpha = 
 
 plt.tight_layout()
 cbar = fig.colorbar(heatmap, ax=axs[0:2])
-cbar.set_label('Wind Speed ($m/s$)')
+cbar.set_label('Water Vapor Mixing Ratio ($m/s$)')
 
 cbar = fig.colorbar(heatmap_1, ax=axs[2])
 cbar.set_label('Wind Speed Difference ($m/s$)')
@@ -433,9 +491,81 @@ fig.legend(handles, labels, loc='upper right', ncol = 3)
 plt.show()
 
 
-# ## Skin Temperature
+# ## Moisture
 
 # In[10]:
+
+
+fig, axs = plt.subplots(3, figsize=(10,7))
+
+heatmap = axs[0].contourf(qv_df_mod.index, qv_df.columns / 1000, qv_df.T.values[:,:-2] * 1000, levels = 20)
+axs[0].set_ylabel('Height (km)')
+axs[0].set_title('Water Vapor Mixing Ratio (WRF)\nUnmodified')
+axs[0].xaxis.set_major_formatter(myFmt)
+axs[0].set_ylim(0,2)
+axs[0].vlines(sounding_ws[sdate:'2015-02-06'].index, 0, 2, color = 'k', alpha = 0.25, lw = 3)
+
+heatmap = axs[1].contourf(qv_df_mod.index, qv_df_mod.columns / 1000, qv_df_mod.T.values * 1000, levels = 20)
+axs[1].set_ylabel('Height (km)')
+axs[1].set_title('Modified')
+axs[1].xaxis.set_major_formatter(myFmt)
+axs[1].set_ylim(0,2)
+axs[1].vlines(sounding_ws[sdate:'2015-02-06'].index, 0, 2, color = 'k', alpha = 0.25, lw = 3)
+
+heatmap_1 = axs[2].contourf(qv_df_mod.index, qv_df.columns / 1000, 
+                            (qv_df.T.values[:,:-2] * 1000) - (qv_df_mod.T.values * 1000), levels = 20)
+axs[2].set_ylabel('Height (km)')
+axs[2].set_title('Difference in Mixing Ratio (unmod - mod)')
+axs[2].xaxis.set_major_formatter(myFmt)
+axs[2].set_ylim(0,2)
+axs[2].vlines(sounding_ws[sdate:'2015-02-06'].index, 0, 2, color = 'k', alpha = 0.25, lw = 3)
+
+plt.tight_layout()
+cbar = fig.colorbar(heatmap, ax=axs[0:2])
+cbar.set_label('Water Vapor Mixing Ratio ($g/kg$)')
+
+cbar = fig.colorbar(heatmap_1, ax=axs[2])
+cbar.set_label('Mixing Ratio Difference ($g/kg$)')
+
+plt.show()
+
+
+# In[11]:
+
+
+dates = sfc_mixing_ratio[sdate:'2015-02-06'].index
+fig, axs = plt.subplots(ncols = len(dates), figsize=(15,5))
+
+for i in np.arange(0, len(dates), 1):
+    prof = axs[i].plot(sfc_mixing_ratio.loc[dates[i].to_pydatetime()], 
+                       sfc_mixing_ratio.loc[dates[i].to_pydatetime()].index.astype(float) / 1000, 
+                       label = 'Measurements')
+    axs[i].set_ylim(0, 2)
+    axs[i].grid()
+    axs[i].set_xlim(0, 4)
+    axs[i].set_xlabel('Mixing Ratio ($g/kg$)')
+    axs[i].set_title(dates[i].strftime('%m/%d') + '\n' + dates[i].strftime('%H:%M:%S'))
+    
+    axs[i].plot(qv_df.iloc[qv_df.index.get_loc(dates[i].to_pydatetime(), method = 'nearest')] * 1000, 
+                qv_df.iloc[qv_df.index.get_loc(dates[i].to_pydatetime(), method = 'nearest')].index / 1000, 
+                label = 'Unmodified', alpha = 0.75)
+    axs[i].plot(qv_df_mod.iloc[qv_df_mod.index.get_loc(dates[i].to_pydatetime(), method = 'nearest')] * 1000, 
+                qv_df_mod.iloc[qv_df_mod.index.get_loc(dates[i].to_pydatetime(), method = 'nearest')].index / 1000, 
+                '--', label = 'Modified', alpha = 0.75, lw = 2)
+
+axs[0].set_ylabel('Height ($km$)')
+plt.suptitle('Vertical Profiles of Water Vapor Mixing Ratio', fontsize = 15)
+plt.tight_layout()
+
+handles, labels = axs[0].get_legend_handles_labels()
+fig.legend(handles, labels, loc='upper right', ncol = 3)
+
+plt.show()
+
+
+# ## Skin Temperature
+
+# In[12]:
 
 
 plt.figure(figsize = (10,3.5))
@@ -457,7 +587,7 @@ plt.show()
 # ## Summary Table
 # Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
 
-# In[11]:
+# In[13]:
 
 
 edate = '2015-02-06 21:00:00'
@@ -492,7 +622,7 @@ shs['unmodified'] = sh_df[sdate:edate]
 shs['modified'] = sh_df_mod[sdate:edate]
 
 
-# In[12]:
+# In[14]:
 
 
 correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
@@ -507,9 +637,10 @@ rs_1 = r_squared
 r_squared[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(color = 'pink', axis = 0)
 
 
+# ---
 # # Case 2 - Spring Cloudy
 
-# In[13]:
+# In[15]:
 
 
 fns = glob('/Volumes/seagate_desktop/idealized/case4/000101/wrfo*')
@@ -583,7 +714,7 @@ swupb_mod = getvar(wrflist, "SWUPB", timeidx=ALL_TIMES, method="cat").mean('sout
 swupb_df_mod = pd.DataFrame(swupb_mod.values, index = swupb_mod.Time.values)
 
 
-# In[14]:
+# In[16]:
 
 
 wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/case4/000101/wrfstat_d01_2015-05-02_00:00:00')
@@ -595,6 +726,7 @@ cst_time = wrfstat['Times']
 csp_z = wrfstat['CSP_Z']
 csp_u = wrfstat['CSP_U']
 csp_v = wrfstat['CSP_V']
+csv_qv = wrfstat["CSP_QV"]
 qc = pd.DataFrame(cst_qc.values, 
                   index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 19:30:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
@@ -611,6 +743,9 @@ v_df = pd.DataFrame(csp_v.values,
                   index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 19:30:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
 ws_df = np.sqrt(v_df**2 + u_df**2)
+qv_df = pd.DataFrame(csv_qv.values, 
+                  index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 19:30:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
 
 wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/landusetbl_modifications/2CloudySpring_000101/wrfstat_d01_2015-05-02_00:00:00')
 cst_qc = wrfstat['CSP_QC']
@@ -621,6 +756,7 @@ cst_time = wrfstat['Times']
 csp_z = wrfstat['CSP_Z']
 csp_u = wrfstat['CSP_U']
 csp_v = wrfstat['CSP_V']
+csv_qv = wrfstat["CSP_QV"]
 qc_mod = pd.DataFrame(cst_qc.values, 
                   index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 22:30:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
@@ -637,11 +773,14 @@ v_df_mod = pd.DataFrame(csp_v.values,
                   index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 22:30:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
 ws_df_mod = np.sqrt(v_df_mod**2 + u_df_mod**2)
+qv_df_mod = pd.DataFrame(csv_qv.values, 
+                  index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 22:30:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
 
 
 # ## Clouds
 
-# In[15]:
+# In[17]:
 
 
 fig, axs = plt.subplots(2, figsize=(10,7))
@@ -669,7 +808,7 @@ cbar.set_label('Cloud Water Mixing Ratio (g/kg)')
 plt.show()
 
 
-# In[16]:
+# In[18]:
 
 
 fns = ['/Volumes/seagate_desktop/data/MPL/Robert_MPLData/FinalNICELidarData/NICE_MPLDataFinal20150502.cdf',
@@ -714,7 +853,7 @@ plt.show()
 
 # ## Sensible and Latent Heat Flux
 
-# In[17]:
+# In[19]:
 
 
 plt.figure(figsize = (10,7))
@@ -749,7 +888,7 @@ plt.show()
 
 # ## Longwave and Shortwave Radiation
 
-# In[18]:
+# In[20]:
 
 
 plt.figure(figsize = (15,7))
@@ -806,7 +945,7 @@ plt.show()
 
 # ## Wind Speed
 
-# In[19]:
+# In[21]:
 
 
 fig, axs = plt.subplots(3, figsize=(10,7))
@@ -844,7 +983,7 @@ cbar.set_label('Wind Speed Difference ($m/s$)')
 plt.show()
 
 
-# In[20]:
+# In[22]:
 
 
 dates = sounding_ws[sdate:'2015-05-04'].index
@@ -871,9 +1010,81 @@ fig.legend(handles, labels, loc='upper right', ncol = 3)
 plt.show()
 
 
+# ## Moisture
+
+# In[23]:
+
+
+fig, axs = plt.subplots(3, figsize=(10,7))
+
+heatmap = axs[0].contourf(qv_df.index, qv_df.columns / 1000, qv_df.T.values * 1000, levels = 20)
+axs[0].set_ylabel('Height (km)')
+axs[0].set_title('Water Vapor Mixing Ratio (WRF)\nUnmodified')
+axs[0].xaxis.set_major_formatter(myFmt)
+axs[0].set_ylim(0,2)
+axs[0].vlines(sounding_ws[sdate:'2015-05-04'].index, 0, 2, color = 'k', alpha = 0.25, lw = 3)
+
+heatmap = axs[1].contourf(qv_df.index, qv_df_mod.columns / 1000, qv_df_mod.T.values[:,:-6] * 1000, levels = 20)
+axs[1].set_ylabel('Height (km)')
+axs[1].set_title('Modified')
+axs[1].xaxis.set_major_formatter(myFmt)
+axs[1].set_ylim(0,2)
+axs[1].vlines(sounding_ws[sdate:'2015-05-04'].index, 0, 2, color = 'k', alpha = 0.25, lw = 3)
+
+heatmap_1 = axs[2].contourf(qv_df.index, qv_df.columns / 1000, 
+                            (qv_df.T.values * 1000) - (qv_df_mod.T.values[:,:-6] * 1000), levels = 20)
+axs[2].set_ylabel('Height (km)')
+axs[2].set_title('Difference in Mixing Ratio (unmod - mod)')
+axs[2].xaxis.set_major_formatter(myFmt)
+axs[2].set_ylim(0,2)
+axs[2].vlines(sounding_ws[sdate:'2015-05-04'].index, 0, 2, color = 'k', alpha = 0.25, lw = 3)
+
+plt.tight_layout()
+cbar = fig.colorbar(heatmap, ax=axs[0:2])
+cbar.set_label('Water Vapor Mixing Ratio ($g/kg$)')
+
+cbar = fig.colorbar(heatmap_1, ax=axs[2])
+cbar.set_label('Mixing Ratio Difference ($g/kg$)')
+
+plt.show()
+
+
+# In[24]:
+
+
+dates = sfc_mixing_ratio[sdate:'2015-05-02'].index
+fig, axs = plt.subplots(ncols = len(dates) +2, figsize=(15,5))
+
+for i in np.arange(0, len(dates), 1):
+    prof = axs[i].plot(sfc_mixing_ratio.loc[dates[i].to_pydatetime()], 
+                       sfc_mixing_ratio.loc[dates[i].to_pydatetime()].index.astype(float) / 1000, 
+                       label = 'Measurements')
+    axs[i].set_ylim(0, 2)
+    axs[i].grid()
+    axs[i].set_xlim(0, 4)
+    axs[i].set_xlabel('Mixing Ratio ($g/kg$)')
+    axs[i].set_title(dates[i].strftime('%m/%d') + '\n' + dates[i].strftime('%H:%M:%S'))
+    
+    axs[i].plot(qv_df.iloc[qv_df.index.get_loc(dates[i].to_pydatetime(), method = 'nearest')] * 1000, 
+                qv_df.iloc[qv_df.index.get_loc(dates[i].to_pydatetime(), method = 'nearest')].index / 1000, 
+                label = 'Unmodified', alpha = 0.75)
+    axs[i].plot(qv_df_mod.iloc[qv_df_mod.index.get_loc(dates[i].to_pydatetime(), method = 'nearest')] * 1000, 
+                qv_df_mod.iloc[qv_df_mod.index.get_loc(dates[i].to_pydatetime(), method = 'nearest')].index / 1000, 
+                '--', label = 'Modified', alpha = 0.75, lw = 2)
+
+axs[0].set_ylabel('Height ($km$)')
+plt.suptitle('Vertical Profiles of Water Vapor Mixing Ratio', fontsize = 15)
+plt.tight_layout()
+
+handles, labels = axs[0].get_legend_handles_labels()
+fig.legend(handles, labels, loc='upper right', ncol = 3)
+
+plt.show()
+
+
 # ## Skin Temperature
 
-# In[21]:
+# In[25]:
 
 
 plt.figure(figsize = (10,3.5))
@@ -895,7 +1106,7 @@ plt.show()
 # 
 # Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
 
-# In[22]:
+# In[26]:
 
 
 edate = '2015-05-04 19:30:00'
@@ -930,7 +1141,7 @@ shs['unmodified'] = sh_df[sdate:edate]
 shs['modified'] = sh_df_mod[sdate:edate]
 
 
-# In[23]:
+# In[27]:
 
 
 correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
@@ -949,7 +1160,7 @@ r_squared[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(
 
 # # Case 3 - Spring Clear
 
-# In[24]:
+# In[28]:
 
 
 sdate = '2015-05-22'
@@ -1028,7 +1239,7 @@ swupb_mod = getvar(wrflist, "SWUPB", timeidx=ALL_TIMES, method="cat").mean('sout
 swupb_df_mod = pd.DataFrame(swupb_mod.values, index = swupb_mod.Time.values)
 
 
-# In[25]:
+# In[29]:
 
 
 wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/case3/000101/second_try/wrfstat_d01_2015-05-22_00:00:00')
@@ -1040,6 +1251,7 @@ cst_time = wrfstat['Times']
 csp_z = wrfstat['CSP_Z']
 csp_u = wrfstat['CSP_U']
 csp_v = wrfstat['CSP_V']
+csv_qv = wrfstat["CSP_QV"]
 qc = pd.DataFrame(cst_qc.values, 
                   index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
@@ -1056,6 +1268,9 @@ v_df = pd.DataFrame(csp_v.values,
                   index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
 ws_df = np.sqrt(v_df**2 + u_df**2)
+qv_df = pd.DataFrame(csv_qv.values, 
+                  index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
 
 wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/landusetbl_modifications/3ClearSpring_000101/corrected_input/wrfstat_d01_2015-05-22_00:00:00')
 cst_qc = wrfstat['CSP_QC']
@@ -1066,6 +1281,7 @@ cst_time = wrfstat['Times']
 csp_z = wrfstat['CSP_Z']
 csp_u = wrfstat['CSP_U']
 csp_v = wrfstat['CSP_V']
+csv_qv = wrfstat["CSP_QV"]
 qc_mod = pd.DataFrame(cst_qc.values, 
                   index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
@@ -1082,11 +1298,14 @@ v_df_mod = pd.DataFrame(csp_v.values,
                   index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
 ws_df_mod = np.sqrt(v_df_mod**2 + u_df_mod**2)
+qv_df_mod = pd.DataFrame(csv_qv.values, 
+                  index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
 
 
 # ## Clouds
 
-# In[26]:
+# In[30]:
 
 
 fig, axs = plt.subplots(2, figsize=(10,7))
@@ -1113,7 +1332,7 @@ cbar.set_label('Cloud Water Mixing Ratio (g/kg)')
 plt.show()
 
 
-# In[27]:
+# In[31]:
 
 
 fns = ['/Volumes/seagate_desktop/data/MPL/Robert_MPLData/FinalNICELidarData/NICE_MPLDataFinal20150522.cdf',
@@ -1158,7 +1377,7 @@ plt.show()
 
 # ## Sensible and Latent Heat Flux
 
-# In[28]:
+# In[32]:
 
 
 plt.figure(figsize = (10,7))
@@ -1193,7 +1412,7 @@ plt.show()
 
 # ## Longwave and Shortwave Radiation
 
-# In[29]:
+# In[33]:
 
 
 plt.figure(figsize = (15,7))
@@ -1250,7 +1469,7 @@ plt.show()
 
 # ## Wind Speed
 
-# In[30]:
+# In[34]:
 
 
 fig, axs = plt.subplots(3, figsize=(10,7))
@@ -1286,7 +1505,7 @@ cbar.set_label('Wind Speed Difference ($m/s$)')
 plt.show()
 
 
-# In[31]:
+# In[35]:
 
 
 dates = sounding_ws[sdate:'2015-05-25'].index
@@ -1300,8 +1519,12 @@ for i in np.arange(0, len(dates), 1):
     axs[i].set_xlabel('Wind Speed ($m/s$)')
     axs[i].set_title(dates[i].strftime('%m/%d') + '\n' + dates[i].strftime('%H:%M:%S'))
     
-    axs[i].plot(ws_df.iloc[ws_df.index.get_loc(dates[i], method = 'nearest')], ws_df.iloc[ws_df.index.get_loc(dates[0], method = 'nearest')].index / 1000, label = 'Unmodified', alpha = 0.75)
-    axs[i].plot(ws_df_mod.iloc[ws_df_mod.index.get_loc(dates[i], method = 'nearest')], ws_df_mod.iloc[ws_df_mod.index.get_loc(dates[0], method = 'nearest')].index / 1000, '--', label = 'Modified', alpha = 0.75, lw = 2)
+    axs[i].plot(ws_df.iloc[ws_df.index.get_loc(dates[i], method = 'nearest')], 
+                ws_df.iloc[ws_df.index.get_loc(dates[0], method = 'nearest')].index / 1000, 
+                label = 'Unmodified', alpha = 0.75)
+    axs[i].plot(ws_df_mod.iloc[ws_df_mod.index.get_loc(dates[i], method = 'nearest')], 
+                ws_df_mod.iloc[ws_df_mod.index.get_loc(dates[0], method = 'nearest')].index / 1000, 
+                '--', label = 'Modified', alpha = 0.75, lw = 2)
 
 axs[0].set_ylabel('Height ($km$)')
 plt.suptitle('Vertical Wind Profiles', fontsize = 15)
@@ -1313,9 +1536,81 @@ fig.legend(handles, labels, loc='upper right', ncol = 3)
 plt.show()
 
 
+# ## Moisture
+
+# In[36]:
+
+
+fig, axs = plt.subplots(3, figsize=(10,7))
+
+heatmap = axs[0].contourf(qv_df_mod.index, qv_df.columns / 1000, qv_df.T.values * 1000, levels = 20)
+axs[0].set_ylabel('Height (km)')
+axs[0].set_title('Water Vapor Mixing Ratio (WRF)\nUnmodified')
+axs[0].xaxis.set_major_formatter(myFmt)
+axs[0].set_ylim(0,2)
+axs[0].vlines(sounding_ws[sdate:'2015-05-24'].index, 0, 2, color = 'k', alpha = 0.25, lw = 3)
+
+heatmap = axs[1].contourf(qv_df_mod.index, qv_df_mod.columns / 1000, qv_df_mod.T.values * 1000, levels = 20)
+axs[1].set_ylabel('Height (km)')
+axs[1].set_title('Modified')
+axs[1].xaxis.set_major_formatter(myFmt)
+axs[1].set_ylim(0,2)
+axs[1].vlines(sounding_ws[sdate:'2015-02-24'].index, 0, 2, color = 'k', alpha = 0.25, lw = 3)
+
+heatmap_1 = axs[2].contourf(qv_df_mod.index, qv_df.columns / 1000, 
+                            (qv_df.T.values * 1000) - (qv_df_mod.T.values * 1000), levels = 20)
+axs[2].set_ylabel('Height (km)')
+axs[2].set_title('Difference in Mixing Ratio (unmod - mod)')
+axs[2].xaxis.set_major_formatter(myFmt)
+axs[2].set_ylim(0,2)
+axs[2].vlines(sounding_ws[sdate:'2015-05-24'].index, 0, 2, color = 'k', alpha = 0.25, lw = 3)
+
+plt.tight_layout()
+cbar = fig.colorbar(heatmap, ax=axs[0:2])
+cbar.set_label('Water Vapor Mixing Ratio ($g/kg$)')
+
+cbar = fig.colorbar(heatmap_1, ax=axs[2])
+cbar.set_label('Mixing Ratio Difference ($g/kg$)')
+
+plt.show()
+
+
+# In[37]:
+
+
+dates = sfc_mixing_ratio[sdate:'2015-05-24'].index
+fig, axs = plt.subplots(ncols = len(dates), figsize=(15,5))
+
+for i in np.arange(0, len(dates), 1):
+    prof = axs[i].plot(sfc_mixing_ratio.loc[dates[i].to_pydatetime()], 
+                       sfc_mixing_ratio.loc[dates[i].to_pydatetime()].index.astype(float) / 1000, 
+                       label = 'Measurements')
+    axs[i].set_ylim(0, 2)
+    axs[i].grid()
+    axs[i].set_xlim(0, 2)
+    axs[i].set_xlabel('Mixing Ratio ($g/kg$)')
+    axs[i].set_title(dates[i].strftime('%m/%d') + '\n' + dates[i].strftime('%H:%M:%S'))
+    
+    axs[i].plot(qv_df.iloc[qv_df.index.get_loc(dates[i].to_pydatetime(), method = 'nearest')] * 1000, 
+                qv_df.iloc[qv_df.index.get_loc(dates[i].to_pydatetime(), method = 'nearest')].index / 1000, 
+                label = 'Unmodified', alpha = 0.75)
+    axs[i].plot(qv_df_mod.iloc[qv_df_mod.index.get_loc(dates[i].to_pydatetime(), method = 'nearest')] * 1000, 
+                qv_df_mod.iloc[qv_df_mod.index.get_loc(dates[i].to_pydatetime(), method = 'nearest')].index / 1000, 
+                '--', label = 'Modified', alpha = 0.75, lw = 2)
+
+axs[0].set_ylabel('Height ($km$)')
+plt.suptitle('Vertical Profiles of Water Vapor Mixing Ratio', fontsize = 15)
+plt.tight_layout()
+
+handles, labels = axs[0].get_legend_handles_labels()
+fig.legend(handles, labels, loc='upper right', ncol = 3)
+
+plt.show()
+
+
 # ## Temperature
 
-# In[32]:
+# In[38]:
 
 
 plt.figure(figsize = (10,3.5))
@@ -1336,7 +1631,7 @@ plt.show()
 # # Summary Table
 # Red highlighting indicates the lowest correlation of that variable, green indicates the highest.
 
-# In[33]:
+# In[39]:
 
 
 edate = '2015-05-24 22:30:00'
@@ -1371,7 +1666,7 @@ shs['unmodified'] = sh_df[sdate:edate]
 shs['modified'] = sh_df_mod[sdate:edate]
 
 
-# In[34]:
+# In[40]:
 
 
 correlation_coefficients = pd.DataFrame([lhs.corr()['measured'].values, 
@@ -1390,7 +1685,7 @@ r_squared[1:].style.highlight_max(color = 'lightgreen', axis = 0).highlight_min(
 
 # ## Statistics and Summary
 
-# In[35]:
+# In[41]:
 
 
 mean_cc = (cc_3.iloc[:,0:4] + cc_2.iloc[:,0:4] + cc_1)/3
