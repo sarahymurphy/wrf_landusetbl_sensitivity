@@ -206,11 +206,6 @@ csp_z = wrfstat['CSP_Z']
 csp_u = wrfstat['CSP_U']
 csp_v = wrfstat['CSP_V']
 csv_qv = wrfstat["CSP_QV"]
-csv_swupf = wrfstat["CSP_SWUPF"]
-csv_swdnf = wrfstat["CSP_SWDNF"]
-csv_lwupf = wrfstat["CSP_LWUPF"]
-csv_lwdnf = wrfstat["CSP_LWDNF"]
-
 
 qc = pd.DataFrame(cst_qc.values, 
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), 
@@ -232,15 +227,6 @@ qv_df = pd.DataFrame(csv_qv.values,
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
 
-swupb_df = pd.DataFrame(csv_swupf.sel(bottom_top = 0).values, 
-                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), columns = ['sw'])
-swdnb_df = pd.DataFrame(csv_swdnf.sel(bottom_top = 0).values, 
-                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), columns = ['sw'])
-lwupb_df = pd.DataFrame(csv_lwupf.sel(bottom_top = 0).values,
-                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), columns = ['lw'])
-lwdnb_df = pd.DataFrame(csv_lwdnf.sel(bottom_top = 0).values, 
-                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), columns = ['lw'])
-
 wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/landusetbl_modifications/1ClearWinter_000101/wrfstat_d01_2015-02-04_00:00:00')
 cst_qc = wrfstat['CSP_QC']
 cst_tsk = wrfstat['CST_TSK']
@@ -251,10 +237,6 @@ csp_z = wrfstat['CSP_Z']
 csp_u = wrfstat['CSP_U']
 csp_v = wrfstat['CSP_V']
 csv_qv = wrfstat["CSP_QV"]
-csv_swupf = wrfstat["CSP_SWUPF"]
-csv_swdnf = wrfstat["CSP_SWDNF"]
-csv_lwupf = wrfstat["CSP_LWUPF"]
-csv_lwdnf = wrfstat["CSP_LWDNF"]
 
 qc_mod = pd.DataFrame(cst_qc.values, 
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), 
@@ -275,14 +257,6 @@ ws_df_mod = np.sqrt(v_df_mod**2 + u_df_mod**2)
 qv_df_mod = pd.DataFrame(csv_qv.values, 
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
-swupb_df_mod = pd.DataFrame(csv_swupf.sel(bottom_top = 0).values, 
-                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), columns = ['sw'])
-swdnb_df_mod = pd.DataFrame(csv_swdnf.sel(bottom_top = 0).values, 
-                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), columns = ['sw'])
-lwupb_df_mod = pd.DataFrame(csv_lwupf.sel(bottom_top = 0).values, 
-                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), columns = ['lw'])
-lwdnb_df_mod = pd.DataFrame(csv_lwdnf.sel(bottom_top = 0).values, 
-                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), columns = ['lw'])
 
 
 # ## Clouds
