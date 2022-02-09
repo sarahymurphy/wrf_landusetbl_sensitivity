@@ -227,6 +227,11 @@ qv_df = pd.DataFrame(csv_qv.values,
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
 
+cloudmask = wrfstat['CSV_CLDFRAC'].isel(south_north = round(len(wrfstat.south_north) / 2), west_east = round(len(wrfstat.west_east) / 2))
+cloudmask_df = pd.DataFrame(cloudmask.values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 22:00:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+
 wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/landusetbl_modifications/1ClearWinter_000101/wrfstat_d01_2015-02-04_00:00:00')
 cst_qc = wrfstat['CSP_QC']
 cst_tsk = wrfstat['CST_TSK']
@@ -258,6 +263,11 @@ qv_df_mod = pd.DataFrame(csv_qv.values,
                   index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
 
+cloudmask = wrfstat['CSV_CLDFRAC'].isel(south_north = round(len(wrfstat.south_north) / 2), west_east = round(len(wrfstat.west_east) / 2))
+cloudmask_df_mod = pd.DataFrame(cloudmask.values, 
+                  index = pd.date_range(start='2/4/2015 00:00:00', end='2/6/2015 21:00:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+
 
 # ## Clouds
 
@@ -265,27 +275,23 @@ qv_df_mod = pd.DataFrame(csv_qv.values,
 
 
 fig, axs = plt.subplots(2, figsize=(10,7))
-levels = np.arange(0,0.21,0.01)
 
-heatmap = axs[0].contourf(qc.index, qc.columns / 1000, qc.T.values * 1000, levels=levels)
-contourmap = axs[0].contour(qc.index, qc.columns / 1000, qc.T.values * 1000, colors = ['white'], levels = [0.02])
+heatmap = axs[0].contourf(cloudmask_df.index, cloudmask_df.columns / 1000, cloudmask_df.T.values, levels = [-1, 0, 1])
 axs[0].set_ylabel('Height (km)')
 axs[0].set_title('Cloud Fraction (WRF)\nUnmodified')
 axs[0].xaxis.set_major_formatter(myFmt)
 axs[0].set_ylim(0,4)
 
-heatmap = axs[1].contourf(qc_mod.index, qc_mod.columns / 1000, qc_mod.T.values * 1000, levels=levels)
-contourmap = axs[1].contour(qc_mod.index, qc_mod.columns / 1000, qc_mod.T.values * 1000, [0.02], colors = ['white'])
+heatmap = axs[1].contourf(cloudmask_df_mod.index, cloudmask_df_mod.columns / 1000, cloudmask_df_mod.T, levels = [-1, 0, 1])
 axs[1].set_ylabel('Height (km)')
 axs[1].set_title('Modified')
 axs[1].xaxis.set_major_formatter(myFmt)
 axs[1].set_ylim(0,4)
-
 plt.tight_layout()
-cbar = fig.colorbar(heatmap, ax=axs[:])
-cbar.set_ticks(np.arange(0,0.21,0.02))
-cbar.set_label('Cloud Water Mixing Ratio (g/kg)')
 
+cbar = fig.colorbar(heatmap, ax=axs[:], ticks = [-0.5, 0.5], label = "Cloud Mask")
+cbar.ax.set_yticklabels(['Clear','Cloud'], rotation = 90)
+cbar.ax.tick_params(size=0)
 plt.show()
 
 
@@ -721,6 +727,11 @@ qv_df = pd.DataFrame(csv_qv.values,
                   index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 19:30:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
 
+cloudmask = wrfstat['CSV_CLDFRAC'].isel(south_north = round(len(wrfstat.south_north) / 2), west_east = round(len(wrfstat.west_east) / 2))
+cloudmask_df = pd.DataFrame(cloudmask.values, 
+                  index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 19:30:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+
 wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/landusetbl_modifications/2CloudySpring_000101/wrfstat_d01_2015-05-02_00:00:00')
 cst_qc = wrfstat['CSP_QC']
 cst_tsk = wrfstat['CST_TSK']
@@ -751,6 +762,11 @@ qv_df_mod = pd.DataFrame(csv_qv.values,
                   index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 22:30:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
 
+cloudmask = wrfstat['CSV_CLDFRAC'].isel(south_north = round(len(wrfstat.south_north) / 2), west_east = round(len(wrfstat.west_east) / 2))
+cloudmask_df_mod = pd.DataFrame(cloudmask.values, 
+                  index = pd.date_range(start='5/2/2015 00:00:00', end='5/4/2015 22:30:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+
 
 # ## Clouds
 
@@ -758,27 +774,23 @@ qv_df_mod = pd.DataFrame(csv_qv.values,
 
 
 fig, axs = plt.subplots(2, figsize=(10,7))
-levels = np.arange(0,0.21,0.01)
 
-heatmap = axs[0].contourf(qc.index, qc.columns / 1000, qc.T.values * 1000, levels=levels)
-contourmap = axs[0].contour(qc.index, qc.columns / 1000, qc.T.values * 1000, colors = ['white'], levels = [0.02])
+heatmap = axs[0].contourf(cloudmask_df.index, cloudmask_df.columns / 1000, cloudmask_df.T.values, levels = [-1, 0, 1])
 axs[0].set_ylabel('Height (km)')
 axs[0].set_title('Cloud Fraction (WRF)\nUnmodified')
 axs[0].xaxis.set_major_formatter(myFmt)
 axs[0].set_ylim(0,4)
 
-heatmap = axs[1].contourf(qc_mod.index, qc_mod.columns / 1000, qc_mod.T.values * 1000, levels=levels)
-contourmap = axs[1].contour(qc_mod.index, qc_mod.columns / 1000, qc_mod.T.values * 1000, [0.02], colors = ['white'])
+heatmap = axs[1].contourf(cloudmask_df_mod.index, cloudmask_df_mod.columns / 1000, cloudmask_df_mod.T, levels = [-1, 0, 1])
 axs[1].set_ylabel('Height (km)')
 axs[1].set_title('Modified')
 axs[1].xaxis.set_major_formatter(myFmt)
 axs[1].set_ylim(0,4)
-
 plt.tight_layout()
-cbar = fig.colorbar(heatmap, ax=axs[:])
-cbar.set_ticks(np.arange(0,0.21,0.02))
-cbar.set_label('Cloud Water Mixing Ratio (g/kg)')
 
+cbar = fig.colorbar(heatmap, ax=axs[:], ticks = [-0.5, 0.5], label = "Cloud Mask")
+cbar.ax.set_yticklabels(['Clear','Cloud'], rotation = 90)
+cbar.ax.tick_params(size=0)
 plt.show()
 
 
@@ -1246,6 +1258,12 @@ qv_df = pd.DataFrame(csv_qv.values,
                   index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
 
+cloudmask = wrfstat['CSV_CLDFRAC'].isel(south_north = round(len(wrfstat.south_north) / 2), west_east = round(len(wrfstat.west_east) / 2))
+cloudmask_df = pd.DataFrame(cloudmask.values, 
+                  index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+
+
 wrfstat = xr.open_dataset('/Volumes/seagate_desktop/idealized/landusetbl_modifications/3ClearSpring_000101/corrected_input/wrfstat_d01_2015-05-22_00:00:00')
 cst_qc = wrfstat['CSP_QC']
 cst_tsk = wrfstat['CST_TSK']
@@ -1276,6 +1294,11 @@ qv_df_mod = pd.DataFrame(csv_qv.values,
                   index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), 
                   columns = csp_z.isel(Time = 1).values)
 
+cloudmask = wrfstat['CSV_CLDFRAC'].isel(south_north = round(len(wrfstat.south_north) / 2), west_east = round(len(wrfstat.west_east) / 2))
+cloudmask_df_mod = pd.DataFrame(cloudmask.values, 
+                  index = pd.date_range(start='5/22/2015 00:00:00', end='5/24/2015 22:30:00', freq = '30min'), 
+                  columns = csp_z.isel(Time = 1).values)
+
 
 # ## Clouds
 
@@ -1283,26 +1306,23 @@ qv_df_mod = pd.DataFrame(csv_qv.values,
 
 
 fig, axs = plt.subplots(2, figsize=(10,7))
-levels = np.arange(0,0.21,0.01)
 
-heatmap = axs[0].contourf(qc.index, qc.columns / 1000, qc.T.values * 1000, levels=levels)
-contourmap = axs[0].contour(qc.index, qc.columns / 1000, qc.T.values * 1000, colors = ['white'], levels = [0.02])
+heatmap = axs[0].contourf(cloudmask_df.index, cloudmask_df.columns / 1000, cloudmask_df.T.values, levels = [-1, 0, 1])
 axs[0].set_ylabel('Height (km)')
 axs[0].set_title('Cloud Fraction (WRF)\nUnmodified')
 axs[0].xaxis.set_major_formatter(myFmt)
 axs[0].set_ylim(0,4)
 
-heatmap = axs[1].contourf(qc_mod.index, qc_mod.columns / 1000, qc_mod.T.values * 1000, levels=levels)
-contourmap = axs[1].contour(qc_mod.index, qc_mod.columns / 1000, qc_mod.T.values * 1000, [0.02], colors = ['white'])
+heatmap = axs[1].contourf(cloudmask_df_mod.index, cloudmask_df_mod.columns / 1000, cloudmask_df_mod.T, levels = [-1, 0, 1])
 axs[1].set_ylabel('Height (km)')
 axs[1].set_title('Modified')
 axs[1].xaxis.set_major_formatter(myFmt)
 axs[1].set_ylim(0,4)
 plt.tight_layout()
-cbar = fig.colorbar(heatmap, ax=axs[:])
-cbar.set_ticks(np.arange(0,0.21,0.02))
-cbar.set_label('Cloud Water Mixing Ratio (g/kg)')
 
+cbar = fig.colorbar(heatmap, ax=axs[:], ticks = [-0.5, 0.5], label = "Cloud Mask")
+cbar.ax.set_yticklabels(['Clear','Cloud'], rotation = 90)
+cbar.ax.tick_params(size=0)
 plt.show()
 
 
