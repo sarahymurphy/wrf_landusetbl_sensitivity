@@ -1038,8 +1038,8 @@ plt.show()
 # In[24]:
 
 
-dates = sfc_mixing_ratio[sdate:'2015-05-02'].index
-fig, axs = plt.subplots(ncols = len(dates) +2, figsize=(15,5))
+dates = sfc_mixing_ratio[sdate:'2015-05-04'].index
+fig, axs = plt.subplots(ncols = len(dates), figsize=(15,5))
 
 for i in np.arange(0, len(dates), 1):
     prof = axs[i].plot(sfc_mixing_ratio.loc[dates[i].to_pydatetime()], 
