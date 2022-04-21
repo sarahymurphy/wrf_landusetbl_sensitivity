@@ -32,7 +32,7 @@ print(roughness_length)
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mIndexError[0m                                Traceback (most recent call last)
-[0;32m/var/folders/21/bhksj_cn7zz43y8x0m4gsh0h0000gn/T/ipykernel_38148/2827172348.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/var/folders/21/bhksj_cn7zz43y8x0m4gsh0h0000gn/T/ipykernel_54799/2827172348.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      3[0m [0;32mfor[0m [0mmon[0m [0;32min[0m [0;34m[[0m[0;34m'Jan'[0m[0;34m,[0m[0;34m'Feb'[0m[0;34m,[0m[0;34m'Mar'[0m[0;34m,[0m[0;34m'Apr'[0m[0;34m,[0m[0;34m'May'[0m[0;34m,[0m[0;34m'Jun'[0m[0;34m][0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      4[0m     [0mpath[0m [0;34m=[0m [0mglob[0m[0;34m.[0m[0mglob[0m[0;34m([0m[0;34m'/Volumes/509_data/EddyPro/Output/EddyPro_Runs/FDCorrected_Output/20hz/'[0m [0;34m+[0m [0mmon[0m [0;34m+[0m [0;34m'/eddypro_sonic_essentials_*'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0;32m----> 5[0;31m     mean_rl = pd.read_csv(path[0], 
