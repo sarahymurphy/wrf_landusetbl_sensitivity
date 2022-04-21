@@ -52,6 +52,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Summary &amp; Conclusions" href="conclusions.html" />
+    <link rel="prev" title="Idealized Sensitivity Study" href="sensitivity_ideal.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -90,7 +92,7 @@
   </a>
  </li>
 </ul>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="calculations.html">
    Calculations
@@ -109,6 +111,16 @@
  <li class="toctree-l1">
   <a class="reference internal" href="sensitivity_ideal.html">
    Idealized Sensitivity Study
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Comparison with WRF Output
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="conclusions.html">
+   Summary &amp; Conclusions
   </a>
  </li>
  <li class="toctree-l1">
@@ -922,58 +934,25 @@
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">21</span><span class="o">/</span><span class="n">bhksj_cn7zz43y8x0m4gsh0h0000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_54805</span><span class="o">/</span><span class="mf">1352716053.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="mi">21</span><span class="o">/</span><span class="n">bhksj_cn7zz43y8x0m4gsh0h0000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_55136</span><span class="o">/</span><span class="mf">1352716053.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> 
 <span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">fns</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">ncfile</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">19</span>     <span class="n">i</span> <span class="o">=</span> <span class="n">ShipLocs</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">getvar</span><span class="p">(</span><span class="n">ncfile</span><span class="p">,</span> <span class="s1">&#39;times&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+<span class="ne">---&gt; </span><span class="mi">18</span>     <span class="n">ncfile</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span>     <span class="n">i</span> <span class="o">=</span> <span class="n">ShipLocs</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">getvar</span><span class="p">(</span><span class="n">ncfile</span><span class="p">,</span> <span class="s1">&#39;times&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
 <span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="n">ShipLoc</span> <span class="o">=</span> <span class="n">ShipLocs</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ShipLocs</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="n">ShipLoc</span> <span class="o">=</span> <span class="n">ll_to_xy</span><span class="p">(</span><span class="n">ncfile</span><span class="p">,</span> <span class="n">ShipLoc</span><span class="o">.</span><span class="n">Lat</span><span class="p">,</span> <span class="n">ShipLoc</span><span class="o">.</span><span class="n">Lon</span><span class="p">)</span>
 
-<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/wrf/routines.py</span> in <span class="ni">getvar</span><span class="nt">(wrfin, varname, timeidx, method, squeeze, cache, meta, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">345</span>     <span class="n">_check_kargs</span><span class="p">(</span><span class="n">actual_var</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">346</span> 
-<span class="ne">--&gt; </span><span class="mi">347</span>     <span class="k">return</span> <span class="n">_FUNC_MAP</span><span class="p">[</span><span class="n">actual_var</span><span class="p">](</span><span class="n">wrfin</span><span class="p">,</span> <span class="n">timeidx</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">squeeze</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> 
-<span class="g g-Whitespace">    </span><span class="mi">348</span>                                  <span class="n">meta</span><span class="p">,</span> <span class="n">_key</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">349</span> 
+<span class="nn">netCDF4/_netCDF4.pyx</span> in <span class="ni">netCDF4._netCDF4.Dataset.__init__</span><span class="nt">()</span>
 
-<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/wrf/g_times.py</span> in <span class="ni">get_times</span><span class="nt">(wrfin, timeidx, method, squeeze, cache, meta, _key)</span>
-<span class="g g-Whitespace">     </span><span class="mi">56</span> 
-<span class="g g-Whitespace">     </span><span class="mi">57</span>     <span class="sd">&quot;&quot;&quot;</span>
-<span class="ne">---&gt; </span><span class="mi">58</span><span class="sd">     return extract_times(wrfin, timeidx, method, squeeze, cache, </span>
-<span class="g g-Whitespace">     </span><span class="mi">59</span><span class="sd">                          meta=meta, do_xtime=False)</span>
-<span class="g g-Whitespace">     </span><span class="mi">60</span><span class="sd"> </span>
+<span class="nn">netCDF4/_netCDF4.pyx</span> in <span class="ni">netCDF4._netCDF4._get_vars</span><span class="nt">()</span>
 
-<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/wrf/util.py</span> in <span class="ni">extract_times</span><span class="nt">(wrfin, timeidx, method, squeeze, cache, meta, do_xtime)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2452</span><span class="sd">     try:</span>
-<span class="g g-Whitespace">   </span><span class="mi">2453</span><span class="sd">         if method.lower() == &quot;cat&quot;:</span>
-<span class="ne">-&gt; </span><span class="mi">2454</span><span class="sd">             time_list = [file_time </span>
-<span class="g g-Whitespace">   </span><span class="mi">2455</span><span class="sd">                          for wrf_file in wrf_list</span>
-<span class="g g-Whitespace">   </span><span class="mi">2456</span><span class="sd">                          for file_time in _file_times(wrf_file, do_xtime)]</span>
+<span class="nn">netCDF4/_netCDF4.pyx</span> in <span class="ni">netCDF4._netCDF4.Variable.__init__</span><span class="nt">()</span>
 
-<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/wrf/util.py</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2454</span><span class="sd">             time_list = [file_time </span>
-<span class="g g-Whitespace">   </span><span class="mi">2455</span><span class="sd">                          for wrf_file in wrf_list</span>
-<span class="ne">-&gt; </span><span class="mi">2456</span><span class="sd">                          for file_time in _file_times(wrf_file, do_xtime)]</span>
-<span class="g g-Whitespace">   </span><span class="mi">2457</span><span class="sd">             time_arr = np.asarray(time_list, dtype=dt)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2458</span><span class="sd"> </span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/wrf/util.py</span> in <span class="ni">_file_times</span><span class="nt">(wrfin, do_xtime)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2339</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">2340</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">do_xtime</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2341</span>         <span class="n">times</span> <span class="o">=</span> <span class="n">wrfin</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;Times&quot;</span><span class="p">][:,:]</span>
-<span class="g g-Whitespace">   </span><span class="mi">2342</span>         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">py3range</span><span class="p">(</span><span class="n">times</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-<span class="g g-Whitespace">   </span><span class="mi">2343</span>             <span class="k">yield</span> <span class="n">_make_time</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span>
-
-<span class="nn">netCDF4/_netCDF4.pyx</span> in <span class="ni">netCDF4._netCDF4.Variable.__getitem__</span><span class="nt">()</span>
-
-<span class="nn">netCDF4/_netCDF4.pyx</span> in <span class="ni">netCDF4._netCDF4.Variable._toma</span><span class="nt">()</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/numpy/__init__.py</span> in <span class="ni">__getattr__</span><span class="nt">(attr)</span>
-<span class="g g-Whitespace">    </span><span class="mi">267</span>             <span class="c1"># Warn for expired attributes, and return a dummy function</span>
-<span class="g g-Whitespace">    </span><span class="mi">268</span>             <span class="c1"># that always raises an exception.</span>
-<span class="ne">--&gt; </span><span class="mi">269</span>             <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">270</span>                 <span class="n">msg</span> <span class="o">=</span> <span class="n">__expired_functions__</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">271</span>             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/netCDF4/utils.py</span> in <span class="ni">_find_dim</span><span class="nt">(grp, dimname)</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span>     <span class="k">return</span> <span class="p">[</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)),</span> <span class="n">key</span><span class="o">=</span><span class="n">B</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">)]</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> 
+<span class="ne">---&gt; </span><span class="mi">41</span> <span class="k">def</span> <span class="nf">_find_dim</span><span class="p">(</span><span class="n">grp</span><span class="p">,</span> <span class="n">dimname</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>     <span class="c1"># find Dimension instance given group and name.</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span>     <span class="c1"># look in current group, and parents.</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -1790,7 +1769,21 @@
               
             
                 <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="sensitivity_ideal.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Idealized Sensitivity Study</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="conclusions.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Summary &amp; Conclusions</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             
         </div>
