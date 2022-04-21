@@ -12,4 +12,6 @@ parts:
     - file: summary.md
     - file: sensitivity.md
     - file: sensitivity_ideal.ipynb
+    - file: real_sensitivity_study.ipynb
+    - file: conclusions.md
     - file: references.md
