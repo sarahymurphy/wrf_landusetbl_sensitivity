@@ -34,6 +34,6 @@ Here is a preview of the cell contents:
 -------------------
 ["wrf_vars = pd.read_csv('/Volumes/seagate_desktop/nested_2way/no_table_mods/nested2way_notablemods_surfacevars.csv', ", '                       index_col = 0,', '                       parse_dates = True)', '', "variable = 'wspd_wdir10'"]
 ...
-['                               columns = [variable])', '    selected_variable_dfall = pd.concat([selected_variable_dfall, variable_df])', '', 'selected_variable_dfall = selected_variable_dfall.sort_index()', 'wrf_vars = pd.concat([wrf_vars, selected_variable_dfall], axis = 1)']
+['                                   columns = [variable])', '        selected_variable_dfall = pd.concat([selected_variable_dfall, variable_df])', '', 'selected_variable_dfall = selected_variable_dfall.sort_index()', 'wrf_vars = pd.concat([wrf_vars, selected_variable_dfall], axis = 1)']
 -------------------
 
