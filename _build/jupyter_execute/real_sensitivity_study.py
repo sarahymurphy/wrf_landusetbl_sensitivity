@@ -326,6 +326,29 @@ measured_ssh_2m = (measured_smr_2m / (1 + measured_smr_2m))
 # In[3]:
 
 
+ShipLocation = netcdf_file('/Users/smurphy/all_datasets/nice/10min.nc')
+ShipTimes = ShipLocation.variables['unix_time'][:]
+ShipTimes = pd.to_datetime(ShipTimes,unit='s')
+ShipLocs = pd.DataFrame([ShipLocation.variables['latitude'][:],ShipLocation.variables['longitude'][:]]).T
+ShipLocs.columns = ['Lat','Lon']
+ShipLocs.index = ShipTimes 
+
+# need to trim when it wasn't on experiment
+## Floes ##
+# 1. 15 Jan - 21 Feb
+# 2. 24 Feb - 19 Mar
+# 3. 18 Apr - 5 Jun
+# 4. 7 Jun - 21 Jun
+
+ShipLocs = pd.concat([ShipLocs.loc['2015-01-15':'2015-02-21'], 
+                      ShipLocs.loc['2015-02-24':'2015-03-19'], 
+                      ShipLocs.loc['2015-04-18':'2015-05-05'], 
+                      ShipLocs.loc['2015-05-07':'2015-05-21']])
+
+
+# In[4]:
+
+
 wrf_vars = pd.read_csv('/Volumes/seagate_desktop/nested_2way/no_table_mods/nested2way_notablemods_surfacevars.csv', 
                        index_col = 0,
                        parse_dates = True)
@@ -333,35 +356,32 @@ wrf_vars = pd.read_csv('/Volumes/seagate_desktop/nested_2way/no_table_mods/neste
 variable = 'wspd_wdir10'
 wrf_output_path = '/Volumes/seagate_desktop/nested_2way/no_table_mods/wrf_out'
 
-ShipLocation = netcdf_file('/Users/smurphy/all_datasets/nice/10min.nc')
-ShipTimes = ShipLocation.variables['unix_time'][:]
-ShipTimes = pd.to_datetime(ShipTimes,unit='s')
-ShipLocs = pd.DataFrame([ShipLocation.variables['latitude'][:],ShipLocation.variables['longitude'][:]]).T
-ShipLocs.columns = ['Lat','Lon']
-ShipLocs.index = ShipTimes 
 fns = glob.glob(wrf_output_path + '/wrfout_d02*')
 selected_variable_dfall = pd.DataFrame()
 
 for fn in fns:
     ncfile = Dataset(fn)
     i = ShipLocs.index.searchsorted(pd.Timestamp(getvar(ncfile, 'times').values))
+    if i == 13680:
+        break
     ShipLoc = ShipLocs.loc[ShipLocs.index[i]].dropna()
-    ShipLoc = ll_to_xy(ncfile, ShipLoc.Lat, ShipLoc.Lon)
+    if len(ShipLocs.loc[ShipLocs.index[i]].dropna()):
+        ShipLoc = ll_to_xy(ncfile, ShipLoc.Lat, ShipLoc.Lon)
 
-    variable_df = pd.DataFrame(getvar(ncfile, 
-                                      variable, 
-                                      timeidx=ALL_TIMES).isel(south_north = ShipLoc[0], 
-                                                              west_east = ShipLoc[1]).values[0],
-                               index = getvar(ncfile, 'times', 
-                                              timeidx=ALL_TIMES).values,
-                               columns = [variable])
-    selected_variable_dfall = pd.concat([selected_variable_dfall, variable_df])
+        variable_df = pd.DataFrame(getvar(ncfile, 
+                                          variable, 
+                                          timeidx=ALL_TIMES).isel(south_north = ShipLoc[0], 
+                                                                  west_east = ShipLoc[1]).values[0],
+                                   index = getvar(ncfile, 'times', 
+                                                  timeidx=ALL_TIMES).values,
+                                   columns = [variable])
+        selected_variable_dfall = pd.concat([selected_variable_dfall, variable_df])
 
 selected_variable_dfall = selected_variable_dfall.sort_index()
 wrf_vars = pd.concat([wrf_vars, selected_variable_dfall], axis = 1)
 
 
-# In[10]:
+# In[5]:
 
 
 wrf_mod_vars = pd.read_csv('/Volumes/seagate_desktop/nested_2way/table_mods/nested2way_tablemods_surfacevars.csv',
@@ -377,29 +397,37 @@ ShipTimes = pd.to_datetime(ShipTimes,unit='s')
 ShipLocs = pd.DataFrame([ShipLocation.variables['latitude'][:],ShipLocation.variables['longitude'][:]]).T
 ShipLocs.columns = ['Lat','Lon']
 ShipLocs.index = ShipTimes 
+
+ShipLocs = pd.concat([ShipLocs.loc['2015-01-15':'2015-02-21'], 
+                      ShipLocs.loc['2015-02-24':'2015-03-19'], 
+                      ShipLocs.loc['2015-04-18':'2015-05-05'], 
+                      ShipLocs.loc['2015-05-07':'2015-05-21']])
+
 fns = glob.glob(wrf_output_path + '/wrfout_d02*')
 selected_variable_dfall = pd.DataFrame()
 
 for fn in fns:
     ncfile = Dataset(fn)
     i = ShipLocs.index.searchsorted(pd.Timestamp(getvar(ncfile, 'times').values))
+    if i == 13680:
+        break
     ShipLoc = ShipLocs.loc[ShipLocs.index[i]].dropna()
     ShipLoc = ll_to_xy(ncfile, ShipLoc.Lat, ShipLoc.Lon)
-
-    variable_df = pd.DataFrame(getvar(ncfile, 
-                                      variable, 
-                                      timeidx=ALL_TIMES).isel(south_north = ShipLoc[0], 
-                                                              west_east = ShipLoc[1]).values[0],
-                               index = getvar(ncfile, 'times', 
-                                              timeidx=ALL_TIMES).values,
-                               columns = [variable])
-    selected_variable_dfall = pd.concat([selected_variable_dfall, variable_df])
+    if len(ShipLocs.loc[ShipLocs.index[i]].dropna()):
+        variable_df = pd.DataFrame(getvar(ncfile, 
+                                          variable, 
+                                          timeidx=ALL_TIMES).isel(south_north = ShipLoc[0], 
+                                                                  west_east = ShipLoc[1]).values[0],
+                                   index = getvar(ncfile, 'times', 
+                                                  timeidx=ALL_TIMES).values,
+                                   columns = [variable])
+        selected_variable_dfall = pd.concat([selected_variable_dfall, variable_df])
 
 selected_variable_dfall = selected_variable_dfall.sort_index()
 wrf_mod_vars = pd.concat([wrf_mod_vars, selected_variable_dfall], axis = 1)
 
 
-# In[11]:
+# In[6]:
 
 
 wrf_orig_cds  = ColumnDataSource(data = {'index': wrf_vars.index.values,
@@ -442,7 +470,7 @@ wrf_mod_cds  = ColumnDataSource(data = {'index': wrf_mod_vars.index.values,
 
 # ## Basic Meteorology
 
-# In[127]:
+# In[7]:
 
 
 measurements = ColumnDataSource(data = {'index': P.index.values,
@@ -603,7 +631,7 @@ d.circle(x = "index",
 
 d.circle(x = "index", 
          y = "slp", 
-         source = wrf_cds,
+         source = wrf_orig_cds,
          legend_label = 'WRF',
          line_color = 'red', 
          fill_color = 'white',
@@ -636,7 +664,7 @@ show(column(f, row(q, q_hist), row(r, r_hist), row(n, n_hist), row(d, d_hist)))
 
 # ## Sensible & Latent Heat Flux
 
-# In[140]:
+# In[8]:
 
 
 measurements = ColumnDataSource(data = {'index': measured_H.index.values,
@@ -729,7 +757,7 @@ show(column(row(v, v_hist), row(w, w_hist)))
 
 # ## Longwave & Shortwave Fluxes
 
-# In[153]:
+# In[9]:
 
 
 measurements = ColumnDataSource(data = {'index': lwup.index.values,
@@ -902,7 +930,7 @@ ww_hist.step(x = 'x', y = 'y', source = source_mod, mode = 'center', line_color 
 show(column(row(v, v_hist), row(vv, vv_hist), row(w, w_hist), row(ww, ww_hist)))
 
 
-# In[157]:
+# In[10]:
 
 
 measurements = ColumnDataSource(data = {'index': epro_vals.index.values,
@@ -996,6 +1024,24 @@ n.legend.click_policy = "hide"
 
 
 show(column(row(w, ww_hist), q, r, n))
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
