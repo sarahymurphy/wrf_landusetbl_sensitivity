@@ -104,6 +104,3 @@ Not for modifications to the `.TBL` files.
 
 I tested this by modifying the values in `LANDUSE.TBL` to all zero for the 'Snow and Ice' entry. This made the model crash as soon as it began to run, indicating that these changes did modify the model without recompilation. 
 ```
-
----
-## Real
